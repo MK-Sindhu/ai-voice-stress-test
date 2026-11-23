@@ -1,0 +1,23 @@
+# python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+# data, caches, checkpoints (never commit)
+data/
+datasets/
+cache/
+checkpoints/
+runs/
+wandb/
+*.ckpt
+*.pt
+*.safetensors
+# OS / editor
+.DS_Store
+.vscode/
+# secrets
+.env
+.env.*
