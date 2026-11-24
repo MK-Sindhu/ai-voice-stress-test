@@ -16,6 +16,4 @@ checks:
 - type: mentions
   reply_to: rest
   mentions:
-  - - नोएडा
-    - Noida
-    - नोइडा
+  - - '15'

@@ -19,7 +19,8 @@ checks:
 - type: mentions
   reply_to: rest
   mentions:
-  - - Indiranagar
-    - Indira Nagar
-    - इंदिरानगर
-    - इंदिरा नगर
+  - - '12'
+  - - Bangalore
+    - Bengaluru
+    - बैंगलोर
+    - बेंगलुरु
