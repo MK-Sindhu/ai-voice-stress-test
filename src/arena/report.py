@@ -148,7 +148,7 @@ def timeline_svg(call: dict, timeline: dict) -> str:
                f"<title>{esc(title)}</title></rect>"
 
     parts = [
-        f"<text class='lab' x='0' y='31'>Caller</text><text class='lab' x='0' y='63'>Agent</text>",
+        "<text class='lab' x='0' y='31'>Caller</text><text class='lab' x='0' y='63'>Agent</text>",
         f"<line class='axis' x1='{left}' y1='84' x2='{width - right}' y2='84'/>",
     ]
     step = 5 if duration <= 60 else 10
@@ -298,7 +298,8 @@ LEGEND = (
 
 DEFINITIONS = [
     ("Scenarios passed", "A scenario passes when all of its checks pass and the agent replied to every caller turn. "
-     "'Untestable' means a check could not be applied, for example the agent never talked long enough to be interrupted."),
+     "'Untestable' means a check could not be applied, for example the agent never talked long enough to be "
+     "interrupted."),
     ("Response delay", "From the caller's last sound in a turn to the agent's first sound. Turns where the agent "
      "was already talking are left out."),
     ("Talked over a pause", "Mid-thought pauses in which the agent started speaking before the caller had finished."),
@@ -306,7 +307,8 @@ DEFINITIONS = [
     ("Time to stop", "From the start of the caller's interruption to the agent going quiet."),
     ("Dealt with the interruption", "The reply after an interruption mentions what the caller interrupted about."),
     ("Kept talking through 'hmm'", "Filler words during the agent's speech that did not make it stop."),
-    ("Details read back right", "Numbers, dates and similar details found correctly in a transcript of the reply."),
+    ("Details read back right",
+     "Numbers, dates and similar details found correctly in a transcript of the reply."),
     ("Replied in caller's language", "Calls where the reply was in the caller's language. A Hinglish caller should "
      "get Hindi or Hinglish, not pure English."),
     ("Turns with no reply", "Caller turns the agent never answered within the time allowed."),
