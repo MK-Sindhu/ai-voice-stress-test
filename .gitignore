@@ -21,3 +21,6 @@ wandb/
 # secrets
 .env
 .env.*
+# experiment tracking (MLflow keeps runs locally)
+mlruns/
+mlflow.db

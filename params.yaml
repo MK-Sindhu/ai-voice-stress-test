@@ -1,0 +1,110 @@
+# Every setting lives here. The code reads this file; nothing is hard-coded.
+# DVC watches it, so changing a value re-runs only the stages that use it.
+
+caller:
+  voice:
+    engine: kokoro        # open text-to-speech model, runs locally
+    voice: hf_alpha       # a Hindi voice, also used for Indian English lines
+    english_accent: b     # which English sound set that voice reads Latin text with
+    speed: 1.0
+    level_dbfs: -20       # loudness of the caller's speech
+    trim_dbfs: -45        # a line starts and ends where it crosses this loudness
+  agent_threshold_dbfs: -45   # agent audio louder than this counts as "agent is talking"
+  agent_hangover_ms: 500      # the agent has stopped once it is quiet for this long
+  end_silence_ms: 1200        # the agent's reply is over after this much quiet
+  listen_timeout_s: 10        # give up waiting for a reply after this long
+  listen_max_s: 45            # never listen to one reply for longer than this
+  trigger_timeout_s: 20       # give up waiting for the agent to talk long enough to cut into
+
+noise:
+  seconds: 60             # length of each generated noise file
+  seed: 7
+
+intelligibility:
+  model: large-v3-turbo   # speech recogniser used to check the caller's lines
+  max_cer: 0.25           # share of characters that may be misheard in a line
+
+metrics:
+  vad:                    # how agent speech is found in the recording
+    threshold_dbfs: -45
+    min_speech_ms: 60     # shorter sounds are clicks, not speech
+    merge_gap_ms: 500     # sound separated by less than this is one stretch of speech
+  barge_in:
+    stop_silence_ms: 400  # the agent has stopped once it is quiet for this long
+    max_stop_ms: 1500     # stopping later than this counts as not stopping
+  backchannel:
+    stop_silence_ms: 400  # going quiet this long after a "hmm" counts as wrongly stopping
+    window_after_ms: 1000 # ... if it begins within this long of the "hmm" ending
+  transcriber:
+    model: large-v3-turbo # speech recogniser used to read the agent's replies
+    device: auto          # uses the GPU when there is one
+
+# How far a measured value may be from a fake agent's known value.
+tolerance:
+  timing_ms: 30
+
+mlflow:
+  experiment: stress-test-arena
+  tracking_uri: sqlite:///mlflow.db
+
+# Text the oracle and the local agents say when the caller goes quiet.
+checkin_text:
+  en-IN: "Hello, are you still there?"
+  hi: "हेलो, क्या आप लाइन पर हैं?"
+  hinglish: "हेलो, क्या आप लाइन पर हैं?"
+
+agent_voice:              # the voice the oracle and the local agents speak with
+  engine: kokoro
+  voice: hm_omega
+  english_accent: b
+  speed: 1.0
+  level_dbfs: -20
+  trim_dbfs: -45
+
+# Agents under test. `arena run --agent <name>` runs one of these.
+agents:
+  # --- calibration agents: known behaviour, used to check the metrics ---------
+  fake-delay-500:
+    type: fake
+    label: "Fake: replies after exactly 500 ms, stops 200 ms after a barge-in"
+    calibration: true
+    clock: virtual
+    tone_only: true          # it speaks in tones, so there is nothing to transcribe
+    response_delay_ms: 500
+    stop_after_ms: 200
+  fake-delay-1000-never-stops:
+    type: fake
+    label: "Fake: replies after exactly 1000 ms, never stops when interrupted"
+    calibration: true
+    clock: virtual
+    tone_only: true
+    response_delay_ms: 1000
+    stop_after_ms: null
+  oracle:
+    type: oracle
+    label: "Oracle: knows the script, says the right thing"
+    calibration: true
+    clock: virtual
+    variant: good
+  oracle-wrong:
+    type: oracle
+    label: "Oracle (wrong details): knows the script, states wrong details on purpose"
+    calibration: true
+    clock: virtual
+    variant: wrong
+
+  # --- local baseline agents: real leaderboard entries -------------------------
+  local-silence-500: &local
+    type: local
+    label: "Local baseline, 500 ms silence timeout"
+    repeats: 2
+    endpointing: {type: silence, timeout_ms: 500}
+    asr: {model: small, device: auto, compute_type: default, beam_size: 1}
+    llm: {model: "gemma3:4b", temperature: 0.0, max_tokens: 160}
+    voice: {voice: hm_omega, english_accent: b}
+    interrupt_min_ms: 250     # caller speech this long stops the agent
+    idle_checkin_s: 6         # asks "are you there?" after this much silence
+  local-silence-1000:
+    <<: *local
+    label: "Local baseline, 1000 ms silence timeout"
+    endpointing: {type: silence, timeout_ms: 1000}
