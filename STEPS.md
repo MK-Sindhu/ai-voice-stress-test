@@ -124,6 +124,7 @@ Combines the scores of all agents into what people read:
 - `docs/index.html`: the leaderboard, results by scenario, and every failure with a playable recording.
 - `docs/calibration.html`: the results of the fake and oracle agents, which show whether the metrics can be trusted.
 - `docs/audio/`: the failure recordings, compressed to MP3.
+- `web/src/content/arena.json` and `web/public/audio/`: the same results and recordings as data for the Next.js website in `web/`.
 - The leaderboard table in [README.md](README.md), between the `leaderboard:start` and `leaderboard:end` markers.
 
 Calibration agents never appear on the leaderboard. An agent that has not been run does not appear at all.

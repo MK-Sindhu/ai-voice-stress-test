@@ -186,7 +186,15 @@ A run against a live agent is not perfectly repeatable: the language model's wor
 
 ## The website
 
-`arena report` writes the site in [docs/](docs/): the leaderboard, results by scenario, every failure with a playable recording, and a calibration page. Its name, the "Source" link and an optional contact address are set under `site:` in [params.yaml](params.yaml). The look is in [src/arena/site/](src/arena/site/) (`style.css`, `site.js`); the pages are assembled in [report.py](src/arena/report.py). The folder is plain static files and can be served by any static host.
+The site is a Next.js app in [web/](web/). It contains no numbers of its own: `arena report` writes the results to `web/src/content/arena.json` and the failure recordings to `web/public/audio/`, and the site renders those. It has the leaderboard, results by scenario, every failure with a playable recording drawn as a timeline, and a calibration page.
+
+```
+cd web && npm install && npm run dev
+```
+
+To deploy on Vercel, import the repository and set the Root Directory to `web`. The site name, the "Source" link and an optional contact address are set under `site:` in [params.yaml](params.yaml). See [web/README.md](web/README.md).
+
+`arena report` also still writes a plain-HTML copy of the same results to [docs/](docs/), which needs no build and opens straight from disk. The worker's per-job results page uses that same HTML.
 
 ## Testing one agent on request
 
@@ -226,7 +234,8 @@ tests/                metric validation first, then the rest
 params.yaml           every setting
 dvc.yaml, dvc.lock    the pipeline and the fingerprints of what it produced
 results/              scores, leaderboard and validation results (recordings are in DVC)
-docs/                 the generated website, ready for GitHub Pages
+web/                  the Next.js website; its data and audio are written by the report step
+docs/                 a plain-HTML copy of the same results, no build needed
 PLAN.md               the plan this was built from
 COMMERCIAL.md         how to run the commercial adapters
 STEPS.md              what each pipeline step does
