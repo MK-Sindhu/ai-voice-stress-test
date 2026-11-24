@@ -136,3 +136,9 @@ agents:
     label: "Local baseline, 1000 ms silence timeout, larger recogniser"
     endpointing: {type: silence, timeout_ms: 1000}
     asr: {model: large-v3-turbo, device: auto, compute_type: default, beam_size: 1}
+
+# The generated website (docs/).
+site:
+  name: Arena             # the name shown in the header and the page title
+  repo_url: https://github.com/MK-Sindhu/ai-voice-stress-test   # the "Source" button; empty hides it
+  contact_email: ""       # if set, the closing section gets an "Ask about testing your agent" button

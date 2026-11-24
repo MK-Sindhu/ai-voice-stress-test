@@ -121,6 +121,9 @@ stages:
       - results/runs
       - scenarios
       - src/arena/report.py
+      - src/arena/site
+    params:
+      - site
     outs:
       - docs:
           cache: false
