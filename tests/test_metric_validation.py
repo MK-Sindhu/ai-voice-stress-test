@@ -100,7 +100,7 @@ def test_patient_agent_does_not_interrupt_a_pause(run_call):
 
 
 def test_agent_that_stops_on_a_filler_word_is_caught(run_call):
-    call = run_call(FakeAgent(reply_ms=8000, stop_after_ms=200), backchannel())
+    call = run_call(FakeAgent(response_delay_ms=1000, reply_ms=8000, stop_after_ms=200), backchannel())
     assert call["measures"]["backchannels"][0]["agent_stopped"] is True
     assert call["status"] == "fail"
 
