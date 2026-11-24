@@ -1,0 +1,25 @@
+# Runs on every push: lint, scenario schema checks, and the metric-validation
+# tests against the fake agents. None of this needs a speech model, so it
+# installs only the light core of the project and finishes in about a minute.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Install the core project (no speech models)
+        run: uv sync --extra commercial
+      - name: Lint
+        run: uv run ruff check .
+      - name: Check every scenario file against the schema
+        run: uv run arena validate
+      - name: Measure the metrics against fake agents with known behaviour
+        run: uv run arena check-metrics
+      - name: Tests
+        run: uv run pytest -q
