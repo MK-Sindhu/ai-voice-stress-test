@@ -122,10 +122,16 @@ stages:
       - scenarios
       - src/arena/report.py
       - src/arena/site
+      - src/arena/webdata.py
     params:
       - site
     outs:
       - docs:
+          cache: false
+      # The same results as data for the Next.js site in web/.
+      - web/src/content/arena.json:
+          cache: false
+      - web/public/audio:
           cache: false
     metrics:
       - results/leaderboard.json:

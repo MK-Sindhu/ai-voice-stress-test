@@ -7,6 +7,7 @@ Reads the scored runs in results/scores/ and writes:
     docs/calibration.html      the same for the calibration agents (no audio)
     docs/audio/                one compressed recording per failed scenario
     docs/favicon.svg
+    web/src/content/, web/public/audio/   the same results as data for the Next.js site (see webdata.py)
     README.md                  the leaderboard table between its two markers
 
 Only agents with a scored run appear. Nothing is filled in for agents that
@@ -158,22 +159,47 @@ def matrix(scores: list[dict], scenarios: list[dict]) -> str:
 SVG_WIDTH, SVG_LEFT, SVG_RIGHT = 920, 62, 12
 
 
+def call_geometry(call: dict, timeline: dict) -> tuple[list[tuple], list[tuple]]:
+    """What to draw for one call.
+
+    Returns the stretches of sound and silence as (start, end, lane, kind, title),
+    lane 0 being the caller and lane 1 the agent, and the moments something went
+    wrong as (time, label). Both the HTML pages and the Next.js site draw from this.
+    """
+    starts: dict[int, dict] = {}
+    spans = []
+    for event in sorted(timeline["events"], key=lambda e: e["t"]):
+        kind = event["type"]
+        if kind in ("speech_start", "pause_start", "silence_start"):
+            starts[event["step"]] = event
+        elif kind == "speech_end":
+            begin = starts[event["step"]]
+            spans.append((begin["t"], event["t"], 0, event["kind"], begin["text"]))
+        elif kind == "pause_end":
+            begin = starts[event["step"]]
+            spans.append((begin["t"], event["t"], 0, "gap", f"caller pauses {begin['seconds']} s mid-thought"))
+        elif kind == "silence_end":
+            begin = starts[event["step"]]
+            spans.append((begin["t"], event["t"], 0, "gap", f"caller silent for {begin['seconds']} s"))
+    spans += [(start, end, 1, "agent", f"agent speaks {start:.2f}–{end:.2f} s")
+              for start, end in call["measures"]["agent_segments"]]
+    marks = [(p["agent_onset"], "talks over the pause") for p in call["measures"]["pauses"] if p["interrupted"]]
+    marks += [(b["start"], "did not stop") for b in call["measures"]["barge_ins"]
+              if b["agent_was_speaking"] and not b["stopped"]]
+    marks += [(b.get("agent_quiet_at"), "stops for a filler word") for b in call["measures"]["backchannels"]
+              if b["agent_stopped"]]
+    marks += [(t["end"], "no reply") for t in call["measures"]["turns"] if not t["responded"]]
+    return sorted(spans), sorted((t, label) for t, label in marks if t is not None)
+
+
 def timeline_svg(call: dict, timeline: dict) -> str:
     """Draw one call: what the caller did on top, when the agent made sound below."""
     duration = max(timeline["duration_s"], 1.0)
     width, left, right = SVG_WIDTH, SVG_LEFT, SVG_RIGHT
     scale = (width - left - right) / duration
-    drawn = 0
 
     def x(t: float) -> float:
         return left + t * scale
-
-    def bar(start, end, y, cls, title=""):
-        nonlocal drawn
-        drawn += 1
-        w = max((end - start) * scale, 2)
-        return f"<rect class='{cls}' style='--i:{drawn}' x='{x(start):.1f}' y='{y}' width='{w:.1f}' height='22' " \
-               f"rx='5'><title>{esc(title)}</title></rect>"
 
     lane = width - left - right
     parts = [
@@ -185,34 +211,14 @@ def timeline_svg(call: dict, timeline: dict) -> str:
     for t in range(0, int(duration) + 1, step):
         parts.append(f"<line class='axis' x1='{x(t):.1f}' y1='86' x2='{x(t):.1f}' y2='91'/>"
                      f"<text class='tick' x='{x(t):.1f}' y='104'>{t} s</text>")
-    starts: dict[int, dict] = {}
-    events = sorted(timeline["events"], key=lambda e: e["t"])
-    spans = []
-    for event in events:
-        kind = event["type"]
-        if kind in ("speech_start", "pause_start", "silence_start"):
-            starts[event["step"]] = event
-        elif kind == "speech_end":
-            begin = starts[event["step"]]
-            spans.append((begin["t"], event["t"], 22, f"caller {event['kind']}", begin["text"]))
-        elif kind == "pause_end":
-            begin = starts[event["step"]]
-            spans.append((begin["t"], event["t"], 22, "gap", f"caller pauses {begin['seconds']} s mid-thought"))
-        elif kind == "silence_end":
-            begin = starts[event["step"]]
-            spans.append((begin["t"], event["t"], 22, "gap", f"caller silent for {begin['seconds']} s"))
-    spans += [(start, end, 56, "agent", f"agent speaks {start:.2f}–{end:.2f} s")
-              for start, end in call["measures"]["agent_segments"]]
-    parts += [bar(*span) for span in sorted(spans)]
-    # Mark the moment something went wrong.
-    marks = [(p["agent_onset"], "talks over the pause") for p in call["measures"]["pauses"] if p["interrupted"]]
-    marks += [(b["start"], "did not stop") for b in call["measures"]["barge_ins"]
-              if b["agent_was_speaking"] and not b["stopped"]]
-    marks += [(b.get("agent_quiet_at"), "stops for a filler word") for b in call["measures"]["backchannels"]
-              if b["agent_stopped"]]
-    marks += [(t["end"], "no reply") for t in call["measures"]["turns"] if not t["responded"]]
+    spans, marks = call_geometry(call, timeline)
+    for index, (start, end, row, kind, title) in enumerate(spans, 1):
+        cls = kind if kind in ("gap", "agent") else f"caller {kind}"
+        w = max((end - start) * scale, 2)
+        parts.append(f"<rect class='{cls}' style='--i:{index}' x='{x(start):.1f}' y='{22 if row == 0 else 56}' "
+                     f"width='{w:.1f}' height='22' rx='5'><title>{esc(title)}</title></rect>")
     labelled: list[tuple[float, str]] = []
-    for t, label in sorted((t, label) for t, label in marks if t is not None):
+    for t, label in marks:
         if any(label == other and x(t) - at < 200 for at, other in labelled):
             # The same thing again close by: draw the line, not a second label on top of the first.
             parts.append(f"<line class='mark' x1='{x(t):.1f}' y1='18' x2='{x(t):.1f}' y2='84'/>")
@@ -395,6 +401,8 @@ FAMILIES = {
         _r("g-caller", 0, 30, 0) + _r("g-agent", 36, 26, 1) + _r("g-gap", 34, 122, 0) + _r("g-agent", 104, 14, 1)
         + _r("g-caller", 160, 40, 0)),
 }
+
+FAMILIES_TEXT = {key: (does, catches) for key, (does, catches, _) in FAMILIES.items()}
 
 FONTS = ("https://fonts.googleapis.com/css2?family=Anek+Devanagari:wdth,wght@75..125,300..800"
          "&family=Anek+Latin:wdth,wght@75..125,300..800&family=Martian+Mono:wght@400;600&display=swap")
@@ -586,32 +594,38 @@ def family_cards(scores: list[dict], scenarios: list[dict]) -> str:
     return f"<div class='families'>{''.join(cards)}</div>"
 
 
-def proof_cards(calibration: list[dict]) -> str:
+def proof_items(calibration: list[dict]) -> list[dict]:
     """How the measurements were checked, using the calibration agents' own results."""
-    cards = []
+    items = []
     path = REPO_ROOT / "results" / "metric_validation.json"
     if path.exists():
         check = json.loads(path.read_text(encoding="utf-8"))
-        cards.append(
-            f"<div><p class='fig'>{check['max_timing_error_ms']} ms</p><h3>Largest timing error</h3>"
-            f"<p>Fake agents with exactly known delays were run through the same engine. All {check['timing_checks']} "
-            f"timings were measured to within {check['tolerance_ms']} ms, and all {check['outcome_checks']} yes-or-no "
-            "outcomes came out right.</p></div>")
+        items.append({
+            "figure": f"{check['max_timing_error_ms']} ms", "title": "Largest timing error",
+            "text": "Fake agents with exactly known delays were run through the same engine. All "
+                    f"{check['timing_checks']} timings were measured to within {check['tolerance_ms']} ms, and all "
+                    f"{check['outcome_checks']} yes-or-no outcomes came out right."})
     by_name = {s["agent"]: s["summary"] for s in calibration}
     if "oracle" in by_name:
         done, detail = by_name["oracle"]["task_completion"], by_name["oracle"]["detail_accuracy"]
-        cards.append(
-            f"<div><p class='fig'>{done['count']}/{done['of']}</p><h3>Correct answers accepted</h3>"
-            "<p>An agent that is handed the script and says the right reply passed this many scenarios, with "
-            f"{detail['count']} of {detail['of']} details read correctly. A correct agent is not marked down.</p>"
-            "</div>")
+        items.append({
+            "figure": f"{done['count']}/{done['of']}", "title": "Correct answers accepted",
+            "text": "An agent that is handed the script and says the right reply passed this many scenarios, with "
+                    f"{detail['count']} of {detail['of']} details read correctly. A correct agent is not marked "
+                    "down."})
     if "oracle-wrong" in by_name:
         detail = by_name["oracle-wrong"]["detail_accuracy"]
-        cards.append(
-            f"<div><p class='fig'>{detail['of'] - detail['count']}/{detail['of']}</p><h3>Wrong details caught</h3>"
-            "<p>The same agent, made to change one detail in each reply, was caught this many times. "
-            "A wrong number does not slip through.</p></div>")
-    return f"<div class='proof'>{''.join(cards)}</div>" if cards else ""
+        items.append({
+            "figure": f"{detail['of'] - detail['count']}/{detail['of']}", "title": "Wrong details caught",
+            "text": "The same agent, made to change one detail in each reply, was caught this many times. "
+                    "A wrong number does not slip through."})
+    return items
+
+
+def proof_cards(calibration: list[dict]) -> str:
+    cards = "".join(f"<div><p class='fig'>{esc(i['figure'])}</p><h3>{esc(i['title'])}</h3><p>{esc(i['text'])}</p></div>"
+                    for i in proof_items(calibration))
+    return f"<div class='proof'>{cards}</div>" if cards else ""
 
 
 def build_report(params: dict, log=print) -> None:
@@ -746,4 +760,11 @@ def build_report(params: dict, log=print) -> None:
     note = (f"Counts are out of the number of times each situation came up, over all passes. "
             f"Scenario set `{', '.join(versions)}`. Full results with audio: [docs/index.html](docs/index.html).")
     update_readme(readme_table(real, params), note)
+
+    from arena.webdata import export_site_data
+
+    picked = pick_hero(real)
+    hero = f"{picked[0]['agent']}--{picked[2]['scenario']}" if picked else None
+    stamp = {"scenarioSet": ", ".join(versions), "code": ", ".join(commits), "callsPlaced": finished}
+    export_site_data(real, calibration, scenarios, params, audio_files, proof_items(calibration), hero, stamp)
     log(f"leaderboard: {len(real)} agent(s), {len(calibration)} calibration agent(s) -> docs/index.html")

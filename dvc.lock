@@ -1363,13 +1363,17 @@ stages:
       nfiles: 30
     - path: src/arena/report.py
       hash: md5
-      md5: 27433c1f45e2c51ad60455522e1d6d01
-      size: 41178
+      md5: 6279cbb0cd53838c09bf222b7c99f40e
+      size: 42384
     - path: src/arena/site
       hash: md5
       md5: 6ebe1990828d6e475ea5f2ca7e3d70d9.dir
       size: 14780
       nfiles: 2
+    - path: src/arena/webdata.py
+      hash: md5
+      md5: 9db9c8599c8e9bd413bfefd6038a1081
+      size: 6896
     params:
       params.yaml:
         site:
@@ -1386,3 +1390,12 @@ stages:
       hash: md5
       md5: 38acbac320881f6c3e168b227ad0b95e
       size: 7220
+    - path: web/public/audio
+      hash: md5
+      md5: 3d6e818fc4cd688880fd082e8db610c7.dir
+      size: 7472040
+      nfiles: 75
+    - path: web/src/content/arena.json
+      hash: md5
+      md5: b2e103411d11399a2460bbfed12c15a7
+      size: 274867
