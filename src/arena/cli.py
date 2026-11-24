@@ -8,6 +8,7 @@
     arena score           score an agent's saved recordings
     arena check-metrics   measure how far the metrics are from the fake agents' known values
     arena report          build the leaderboard and the website in docs/
+    arena job             run, score and report one agent into one folder (what a worker runs)
 """
 
 import argparse
@@ -225,6 +226,25 @@ def cmd_report(args) -> int:
     return 0
 
 
+def cmd_job(args) -> int:
+    import os
+
+    from arena.job import run_job
+
+    text = os.environ.get("ARENA_JOB_SPEC") if args.spec is None else Path(args.spec).read_text(encoding="utf-8")
+    if not text:
+        print("give the job with --spec FILE or in the ARENA_JOB_SPEC environment variable")
+        return 2
+    try:
+        spec = json.loads(text)
+    except json.JSONDecodeError as error:
+        print(f"the job is not valid JSON: {error}")
+        return 2
+    status = run_job(spec, Path(args.out), load_params(), allow_test_agents=args.allow_test_agents)
+    print(json.dumps(status, indent=1))
+    return 0 if status["state"] == "done" else 1
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(prog="arena", description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -244,6 +264,12 @@ def main() -> None:
     score.set_defaults(func=cmd_score)
     sub.add_parser("check-metrics").set_defaults(func=cmd_check_metrics)
     sub.add_parser("report").set_defaults(func=cmd_report)
+    job = sub.add_parser("job")
+    job.add_argument("--spec", help="JSON file describing the job (default: the ARENA_JOB_SPEC variable)")
+    job.add_argument("--out", required=True, help="folder to write the results into")
+    job.add_argument("--allow-test-agents", action="store_true",
+                     help="also accept the fake agent, for trying the worker without a platform account")
+    job.set_defaults(func=cmd_job)
     args = parser.parse_args()
     sys.exit(args.func(args))
 

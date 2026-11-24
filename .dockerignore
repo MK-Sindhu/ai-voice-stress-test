@@ -1,0 +1,12 @@
+# Send the image build only what the worker needs.
+*
+!pyproject.toml
+!uv.lock
+!README.md
+!params.yaml
+!src
+!prompts
+!scenarios
+!data/caller_audio
+!data/noise
+**/__pycache__

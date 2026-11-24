@@ -34,6 +34,13 @@ commercial = [
     "websockets>=13",
     "httpx",
 ]
+# What the job worker needs (see WORKER.md): the network clients and the
+# speech recogniser that scores replies. No speech synthesis, no local agent.
+worker = [
+    "websockets>=13",
+    "httpx",
+    "faster-whisper>=1.1",
+]
 
 [project.scripts]
 arena = "arena.cli:main"
