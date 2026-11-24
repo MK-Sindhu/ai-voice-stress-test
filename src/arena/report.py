@@ -285,7 +285,8 @@ svg{width:100%;height:auto;margin:6px 0;display:block}audio{width:100%;margin-to
 .legend span{display:inline-block;margin-right:16px;font-size:.8rem;color:var(--mute)}
 .legend i{display:inline-block;width:14px;height:10px;border-radius:2px;margin-right:5px;vertical-align:baseline}
 details{margin-top:8px}summary{cursor:pointer;color:var(--mute);font-size:.85rem}ol{margin:4px 0;padding-left:22px}
-dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;max-width:90ch}dt{font-weight:600}dd{margin:0;color:var(--mute)}
+dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 18px;max-width:90ch}
+dt{font-weight:600}dd{margin:0;color:var(--mute)}
 """
 
 LEGEND = (
