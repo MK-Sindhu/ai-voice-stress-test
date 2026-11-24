@@ -1363,14 +1363,25 @@ stages:
       nfiles: 30
     - path: src/arena/report.py
       hash: md5
-      md5: 23e6ad8de3ebe28da36771e9981d31eb
-      size: 24084
+      md5: 27433c1f45e2c51ad60455522e1d6d01
+      size: 41178
+    - path: src/arena/site
+      hash: md5
+      md5: 6ebe1990828d6e475ea5f2ca7e3d70d9.dir
+      size: 14780
+      nfiles: 2
+    params:
+      params.yaml:
+        site:
+          name: Arena
+          repo_url: https://github.com/MK-Sindhu/ai-voice-stress-test
+          contact_email: ''
     outs:
     - path: docs
       hash: md5
-      md5: b4d967383a61612300d3762871321d7f.dir
-      size: 7824627
-      nfiles: 78
+      md5: b4bcd5079544384ce8ecaec9ba0892fc.dir
+      size: 7943710
+      nfiles: 79
     - path: results/leaderboard.json
       hash: md5
       md5: 38acbac320881f6c3e168b227ad0b95e

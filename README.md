@@ -184,6 +184,14 @@ This holds for one voice. Getting there took rewording: Hindi digit strings and 
 
 A run against a live agent is not perfectly repeatable: the language model's wording and real-time scheduling vary. Each local agent is therefore run through the whole set twice, and the leaderboard shows each pass's number under the total.
 
+## The website
+
+`arena report` writes the site in [docs/](docs/): the leaderboard, results by scenario, every failure with a playable recording, and a calibration page. Its name, the "Source" link and an optional contact address are set under `site:` in [params.yaml](params.yaml). The look is in [src/arena/site/](src/arena/site/) (`style.css`, `site.js`); the pages are assembled in [report.py](src/arena/report.py). The folder is plain static files and can be served by any static host.
+
+## Testing one agent on request
+
+`arena job` runs, scores and reports a single agent into one folder, and there is a container image for it. This is the worker for a future "test my agent" form on the website. See [WORKER.md](WORKER.md) for how to run it and [AWS.md](AWS.md) for the planned hosting and its estimated cost. Nothing has been deployed.
+
 ## Add an agent
 
 1. Write a class with the four methods in [agents/base.py](src/arena/agents/base.py). `receive_audio` must return 20 ms of audio immediately, silence if there is nothing to say. [agents/fake.py](src/arena/agents/fake.py) is the smallest example, [agents/_network.py](src/arena/agents/_network.py) has the buffer a network agent needs.
@@ -221,4 +229,7 @@ results/              scores, leaderboard and validation results (recordings are
 docs/                 the generated website, ready for GitHub Pages
 PLAN.md               the plan this was built from
 COMMERCIAL.md         how to run the commercial adapters
+STEPS.md              what each pipeline step does
+WORKER.md, Dockerfile the worker that tests one agent on request
+AWS.md                planned AWS setup and estimated cost (nothing deployed)
 ```
