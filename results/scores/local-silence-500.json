@@ -1,0 +1,5713 @@
+{
+ "agent": "local-silence-500",
+ "run": {
+  "agent": "local-silence-500",
+  "config": {
+   "type": "local",
+   "label": "Local baseline, 500 ms silence timeout",
+   "repeats": 2,
+   "endpointing": {
+    "type": "silence",
+    "timeout_ms": 500
+   },
+   "asr": {
+    "model": "small",
+    "device": "auto",
+    "compute_type": "default",
+    "beam_size": 1
+   },
+   "llm": {
+    "model": "llama3.2:3b",
+    "temperature": 0.0,
+    "max_tokens": 160
+   },
+   "voice": {
+    "voice": "hm_omega",
+    "english_accent": "b"
+   },
+   "interrupt_min_ms": 250,
+   "idle_checkin_s": 6
+  },
+  "clock": "real",
+  "repeats": 2,
+  "scenarios": [
+   "backchannel_achha_hinglish",
+   "backchannel_haan_hi",
+   "backchannel_mmhmm_en",
+   "backchannel_twice_hinglish",
+   "barge_in_cancel_subscription_hinglish",
+   "barge_in_early_upi_hinglish",
+   "barge_in_late_warranty_hi",
+   "barge_in_replacement_en",
+   "barge_in_sunday_delivery_hi",
+   "change_day_en",
+   "change_item_hinglish",
+   "change_quantity_hi",
+   "noise_crowd_refund_hinglish",
+   "noise_street_order_en",
+   "noise_tv_booking_hi",
+   "noise_tv_pause_hinglish",
+   "numbers_date_time_en",
+   "numbers_email_spelled_en",
+   "numbers_order_double_en",
+   "numbers_phone_hi",
+   "numbers_pincode_hinglish",
+   "numbers_refund_amount_hi",
+   "pause_address_two_pauses_en",
+   "pause_appointment_hinglish",
+   "pause_cancel_order_hi",
+   "pause_long_new_address_hi",
+   "pause_table_booking_en",
+   "silence_after_question_en",
+   "silence_long_hinglish",
+   "silence_mid_call_hi"
+  ],
+  "scenario_set_version": "ea2ee3631ac1",
+  "git_commit": "fd80954-dirty",
+  "detector_commit": null,
+  "started_at": "2026-11-24T04:24:27+00:00",
+  "finished_at": "2026-11-24T04:47:45+00:00"
+ },
+ "content_scored": true,
+ "summary": {
+  "calls": 60,
+  "response_delay_ms": {
+   "median": 2650.0,
+   "p95": 5032.999999999998,
+   "turns": 70
+  },
+  "false_interruptions": {
+   "count": 5,
+   "of": 14,
+   "rate": 0.3571
+  },
+  "barge_in_stopped": {
+   "count": 10,
+   "of": 10,
+   "rate": 1.0
+  },
+  "barge_in_stop_ms": {
+   "median": 270.0,
+   "interruptions": 10
+  },
+  "barge_in_recovery": {
+   "count": 8,
+   "of": 10,
+   "rate": 0.8
+  },
+  "backchannel_ignored": {
+   "count": 0,
+   "of": 10,
+   "rate": 0.0
+  },
+  "detail_accuracy": {
+   "count": 6,
+   "of": 18,
+   "rate": 0.3333
+  },
+  "language_match": {
+   "count": 54,
+   "of": 54,
+   "rate": 1.0
+  },
+  "task_completion": {
+   "count": 21,
+   "of": 60,
+   "rate": 0.35,
+   "untestable": 0
+  },
+  "no_response": {
+   "count": 6,
+   "of": 76,
+   "rate": 0.0789
+  }
+ },
+ "reps": [
+  {
+   "rep": 1,
+   "summary": {
+    "calls": 30,
+    "response_delay_ms": {
+     "median": 2660.0,
+     "p95": 5490.999999999999,
+     "turns": 35
+    },
+    "false_interruptions": {
+     "count": 2,
+     "of": 7,
+     "rate": 0.2857
+    },
+    "barge_in_stopped": {
+     "count": 5,
+     "of": 5,
+     "rate": 1.0
+    },
+    "barge_in_stop_ms": {
+     "median": 260.0,
+     "interruptions": 5
+    },
+    "barge_in_recovery": {
+     "count": 4,
+     "of": 5,
+     "rate": 0.8
+    },
+    "backchannel_ignored": {
+     "count": 0,
+     "of": 5,
+     "rate": 0.0
+    },
+    "detail_accuracy": {
+     "count": 3,
+     "of": 9,
+     "rate": 0.3333
+    },
+    "language_match": {
+     "count": 27,
+     "of": 27,
+     "rate": 1.0
+    },
+    "task_completion": {
+     "count": 11,
+     "of": 30,
+     "rate": 0.3667,
+     "untestable": 0
+    },
+    "no_response": {
+     "count": 3,
+     "of": 38,
+     "rate": 0.0789
+    }
+   },
+   "calls": [
+    {
+     "scenario": "backchannel_achha_hinglish",
+     "family": "backchannel",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "agent stopped talking when the caller said a filler word"
+     ],
+     "checks": [
+      {
+       "type": "backchannel_ignored",
+       "passed": false,
+       "note": "agent stopped talking when the caller said a filler word"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "मैं समझता हूँ, इमाई का प्रोसेस बहुत बहुत है।",
+       "language": "hi",
+       "language_confidence": 0.983,
+       "seconds": 7.92
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.96,
+        9.74
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 4.04,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2920
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [
+       {
+        "id": "filler",
+        "start": 9.48,
+        "end": 10.21,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 9.74
+       }
+      ],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        4.04,
+        11.96
+       ]
+      }
+     },
+     "duration_s": 11.96,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.28,
+      "max": 2.74
+     }
+    },
+    {
+     "scenario": "backchannel_haan_hi",
+     "family": "backchannel",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "agent stopped talking when the caller said a filler word"
+     ],
+     "checks": [
+      {
+       "type": "backchannel_ignored",
+       "passed": false,
+       "note": "agent stopped talking when the caller said a filler word"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "माफ कीजिए मैं समझ नहीं पाई",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 6.57
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.66,
+        8.94
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 4.59,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2070
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [
+       {
+        "id": "filler",
+        "start": 8.68,
+        "end": 9.31,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 8.94
+       }
+      ],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        4.59,
+        11.16
+       ]
+      }
+     },
+     "duration_s": 11.16,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.9,
+      "max": 10.95
+     }
+    },
+    {
+     "scenario": "backchannel_mmhmm_en",
+     "family": "backchannel",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "agent stopped talking when the caller said a filler word"
+     ],
+     "checks": [
+      {
+       "type": "backchannel_ignored",
+       "passed": false,
+       "note": "agent stopped talking when the caller said a filler word"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "I'd be happy to explain the refund process",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 7.04
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        5.9,
+        8.2
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 3.38,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2520
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [
+       {
+        "id": "filler",
+        "start": 7.92,
+        "end": 8.53,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 8.2
+       }
+      ],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        3.38,
+        10.42
+       ]
+      }
+     },
+     "duration_s": 10.42,
+     "clock_lateness_ms": {
+      "median": 2.08,
+      "p99": 4.26,
+      "max": 42.18
+     }
+    },
+    {
+     "scenario": "backchannel_twice_hinglish",
+     "family": "backchannel",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "agent stopped talking when the caller said a filler word"
+     ],
+     "checks": [
+      {
+       "type": "backchannel_ignored",
+       "passed": false,
+       "note": "agent stopped talking when the caller said a filler word"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "बिल्कुल मैं आपकी मदद देखे। कृप्या अपना फोन नंबर, इमेल पर देखे।",
+       "language": "hi",
+       "language_confidence": 0.989,
+       "seconds": 16.65
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.8,
+        8.58
+       ],
+       [
+        16.06,
+        18.4
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 3.97,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2830
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [
+       {
+        "id": "filler_one",
+        "start": 8.32,
+        "end": 8.99,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 8.58
+       },
+       {
+        "id": "filler_two",
+        "start": 18.08,
+        "end": 18.77,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 18.4
+       }
+      ],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        3.97,
+        20.62
+       ]
+      }
+     },
+     "duration_s": 20.62,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.29,
+      "max": 35.57
+     }
+    },
+    {
+     "scenario": "barge_in_cancel_subscription_hinglish",
+     "family": "barge_in",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "did not mention 'कैंसल'"
+     ],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 260 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "कैंसल",
+         "cancel",
+         "रद्द",
+         "कैंसिल",
+         "कैन्सल"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention 'कैंसल'",
+       "heard": "माफ कीजिए मैं समझ गया आपके सबस्क्रिष्चन प्लांस के बारे में बात करने के लिए मैं आपको बता सकता हूँ कि आपके पास एक मिन्नट प्लां है जिसमें आपको कितनी मिन्नट्स मिलती है और आपके पास कितनी मिन्नट्स की सुविधा है"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "आपके सबस्क्रिश्चन, प्लांस के लिए।",
+       "language": "hi",
+       "language_confidence": 0.987,
+       "seconds": 7.35
+      },
+      "cut": {
+       "text": "माफ कीजिए मैं समझ गया आपके सबस्क्रिष्चन प्लांस के बारे में बात करने के लिए मैं आपको बता सकता हूँ कि आपके पास एक मिन्नट प्लां है जिसमें आपको कितनी मिन्नट्स मिलती है और आपके पास कितनी मिन्नट्स की सुविधा है",
+       "language": "hi",
+       "language_confidence": 0.998,
+       "seconds": 21.95
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        9.6,
+        11.88
+       ],
+       [
+        18.12,
+        20.2
+       ],
+       [
+        20.96,
+        24.96
+       ],
+       [
+        25.98,
+        36.1
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 4.27,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 5330
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 16.37,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1750
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 11.62,
+        "agent_was_speaking": true,
+        "stop_ms": 260,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        4.27,
+        11.62
+       ],
+       "cut": [
+        16.37,
+        38.32
+       ]
+      }
+     },
+     "duration_s": 38.32,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.59,
+      "max": 17.68
+     }
+    },
+    {
+     "scenario": "barge_in_early_upi_hinglish",
+     "family": "barge_in",
+     "language": "hinglish",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 260 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "UPI",
+         "यूपीआई",
+         "यू पी आई",
+         "यूपीआइ"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "हाँ, आप सूरी एक चुली का भुगतान UPI से कर सकती हैं. आपको अपने UPI credit slash debit card की जानकारी दर्ज करनी होगी और फिर चुली का भुगतान करना होगा. कृप्या अपने UPI credit slash debit card की जानकारी मुझे बताएं."
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "बिल्ड पे करने के लिए जाएंगे लिए जाएंगे लिए जाएंगे लिए जाएंगे लिए जाएंगे लिए जाएंगे लिए जाएंगे लिए जाएंगे लिए जाएंगे लिए जाएंगे लिए जाएंगे लिए जाएंगे लिए जाएंगे लिए जाएंगे लिए जाएं",
+       "language": "hi",
+       "language_confidence": 0.994,
+       "seconds": 6.4
+      },
+      "cut": {
+       "text": "हाँ, आप सूरी एक चुली का भुगतान UPI से कर सकती हैं. आपको अपने UPI credit slash debit card की जानकारी दर्ज करनी होगी और फिर चुली का भुगतान करना होगा. कृप्या अपने UPI credit slash debit card की जानकारी मुझे बताएं.",
+       "language": "hi",
+       "language_confidence": 0.998,
+       "seconds": 26.5
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        9.0,
+        10.28
+       ],
+       [
+        19.29,
+        37.81
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 3.62,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 5380
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 13.54,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 5750
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 10.02,
+        "agent_was_speaking": true,
+        "stop_ms": 260,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        3.62,
+        10.02
+       ],
+       "cut": [
+        13.54,
+        40.04
+       ]
+      }
+     },
+     "duration_s": 40.04,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.42,
+      "max": 18.72
+     }
+    },
+    {
+     "scenario": "barge_in_late_warranty_hi",
+     "family": "barge_in",
+     "language": "hi",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 70 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "साल",
+         "year",
+         "वर्ष",
+         "महीने",
+         "month"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "वारंती दो साल की है"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "आपकी वारंती की शर्टे में हमारे खिलाड़ी की विशिश्टाएं विशिश्टाएं वारंती की शर्टे में हमारे खिलाड़ी की विशिश्टाएं वारंती की शर्टे में हमारे खिलाड़ी की विशिश्टाएं वारंती की शर्टे में हमारे खिलाड़ी की विशिश्टा�",
+       "language": "hi",
+       "language_confidence": 0.997,
+       "seconds": 9.93
+      },
+      "cut": {
+       "text": "वारंती दो साल की है",
+       "language": "hi",
+       "language_confidence": 0.995,
+       "seconds": 5.82
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        9.16,
+        13.25
+       ],
+       [
+        19.16,
+        20.84
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 3.25,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 5910
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 17.24,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1920
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 13.18,
+        "agent_was_speaking": true,
+        "stop_ms": 70,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        3.25,
+        13.18
+       ],
+       "cut": [
+        17.24,
+        23.06
+       ]
+      }
+     },
+     "duration_s": 23.06,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.29,
+      "max": 7.75
+     }
+    },
+    {
+     "scenario": "barge_in_replacement_en",
+     "family": "barge_in",
+     "language": "en-IN",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 280 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "replacement",
+         "replace"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "In that case, we can replace the item for you. To do this, I'll need to know your order number please. Can you please repeat your order number back to me?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "Our return policy allows you",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 6.69
+      },
+      "cut": {
+       "text": "In that case, we can replace the item for you. To do this, I'll need to know your order number please. Can you please repeat your order number back to me?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 13.1
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        7.62,
+        9.92
+       ],
+       [
+        14.66,
+        23.65
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 2.95,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 4670
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 12.76,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1900
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 9.64,
+        "agent_was_speaking": true,
+        "stop_ms": 280,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        2.95,
+        9.64
+       ],
+       "cut": [
+        12.76,
+        25.86
+       ]
+      }
+     },
+     "duration_s": 25.86,
+     "clock_lateness_ms": {
+      "median": 1.12,
+      "p99": 2.22,
+      "max": 3.92
+     }
+    },
+    {
+     "scenario": "barge_in_sunday_delivery_hi",
+     "family": "barge_in",
+     "language": "hi",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 280 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "रविवार",
+         "Sunday",
+         "संडे",
+         "इतवार"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "यहां, रविवार को भी हमारे द्वारा डिलीवरी की जाती है, लेकिन यह ध्यान रखें कि कुछ स्थानों पर सेवाएं सीमित हो सकती हैं."
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "क्या स्थिदी है, क्रिप्या अपना पता और संप्राइब है।",
+       "language": "hi",
+       "language_confidence": 0.993,
+       "seconds": 6.6
+      },
+      "cut": {
+       "text": "यहां, रविवार को भी हमारे द्वारा डिलीवरी की जाती है, लेकिन यह ध्यान रखें कि कुछ स्थानों पर सेवाएं सीमित हो सकती हैं.",
+       "language": "hi",
+       "language_confidence": 0.998,
+       "seconds": 14.44
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.72,
+        7.78
+       ],
+       [
+        8.88,
+        11.18
+       ],
+       [
+        18.52,
+        28.1
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 4.3,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2420
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 15.86,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2660
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 10.9,
+        "agent_was_speaking": true,
+        "stop_ms": 280,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        4.3,
+        10.9
+       ],
+       "cut": [
+        15.86,
+        30.3
+       ]
+      }
+     },
+     "duration_s": 30.3,
+     "clock_lateness_ms": {
+      "median": 1.07,
+      "p99": 2.74,
+      "max": 46.53
+     }
+    },
+    {
+     "scenario": "change_day_en",
+     "family": "change_of_mind",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "did not mention 'Saturday'"
+     ],
+     "checks": [
+      {
+       "type": "mentions",
+       "reply_to": "request",
+       "mentions": [
+        [
+         "Saturday",
+         "शनिवार",
+         "सैटरडे"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention 'Saturday'",
+       "heard": "I'd be happy to help you book a table. Can you please confirm the date and time you'd like to book for? You said Friday at 8pm. Is that correct?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "request": {
+       "text": "I'd be happy to help you book a table. Can you please confirm the date and time you'd like to book for? You said Friday at 8pm. Is that correct?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 12.64
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.78,
+        15.38
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "request"
+        ],
+        "kind": "turn",
+        "end": 4.96,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1820
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "request": [
+        4.96,
+        17.6
+       ]
+      }
+     },
+     "duration_s": 17.6,
+     "clock_lateness_ms": {
+      "median": 1.1,
+      "p99": 1.31,
+      "max": 5.15
+     }
+    },
+    {
+     "scenario": "change_item_hinglish",
+     "family": "change_of_mind",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "did not mention 'पनीर'"
+     ],
+     "checks": [
+      {
+       "type": "mentions",
+       "reply_to": "request",
+       "mentions": [
+        [
+         "पनीर",
+         "paneer"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention 'पनीर'",
+       "heard": "क्रिप्या अपना नाम और पता बताएं ताकि मैं आपके ओर्डर को सही धंग से प्राप्त कर सकूँ."
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "request": {
+       "text": "क्रिप्या अपना नाम और पता बताएं ताकि मैं आपके ओर्डर को सही धंग से प्राप्त कर सकूँ.",
+       "language": "hi",
+       "language_confidence": 0.997,
+       "seconds": 12.01
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        8.92,
+        15.22
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "request"
+        ],
+        "kind": "turn",
+        "end": 5.43,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3490
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "request": [
+        5.43,
+        17.44
+       ]
+      }
+     },
+     "duration_s": 17.44,
+     "clock_lateness_ms": {
+      "median": 1.1,
+      "p99": 1.94,
+      "max": 15.01
+     }
+    },
+    {
+     "scenario": "change_quantity_hi",
+     "family": "change_of_mind",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "did not mention '5'"
+     ],
+     "checks": [
+      {
+       "type": "mentions",
+       "reply_to": "request",
+       "mentions": [
+        [
+         "5"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention '5'",
+       "heard": "बिल्कुल मैं आपके लिए दो किलो चावल की किताब दूँगा। क्या आप चाहते हैं कि मैं इसे आपके घर बुलाओं या फिर आपको किसी नजदी की स्थान पर ले जाओं।"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "request": {
+       "text": "बिल्कुल मैं आपके लिए दो किलो चावल की किताब दूँगा। क्या आप चाहते हैं कि मैं इसे आपके घर बुलाओं या फिर आपको किसी नजदी की स्थान पर ले जाओं।",
+       "language": "hi",
+       "language_confidence": 0.997,
+       "seconds": 16.54
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        7.9,
+        18.74
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "request"
+        ],
+        "kind": "turn",
+        "end": 4.42,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3480
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "request": [
+        4.42,
+        20.96
+       ]
+      }
+     },
+     "duration_s": 20.96,
+     "clock_lateness_ms": {
+      "median": 1.1,
+      "p99": 1.32,
+      "max": 46.65
+     }
+    },
+    {
+     "scenario": "noise_crowd_refund_hinglish",
+     "family": "background_noise",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "did not say 3381",
+      "agent did not reply to 1 caller turn(s)"
+     ],
+     "checks": [
+      {
+       "type": "silent_during",
+       "during": "lead_in",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "3381",
+       "passed": false,
+       "note": "did not say 3381",
+       "heard": ""
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": {
+      "number": {
+       "text": "",
+       "language": null,
+       "seconds": 0.0
+      }
+     },
+     "measures": {
+      "agent_segments": [],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 8.77,
+        "responded": false,
+        "agent_talking_at_end": false,
+        "response_delay_ms": null
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "lead_in": {
+        "start": 0.0,
+        "end": 4.0,
+        "agent_onsets": [],
+        "agent_made_sound": false
+       }
+      },
+      "reply_windows": {
+       "number": [
+        8.77,
+        19.8
+       ]
+      }
+     },
+     "duration_s": 19.8,
+     "clock_lateness_ms": {
+      "median": 1.1,
+      "p99": 1.6,
+      "max": 3.82
+     }
+    },
+    {
+     "scenario": "noise_street_order_en",
+     "family": "background_noise",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "agent spoke although the caller had not said anything"
+     ],
+     "checks": [
+      {
+       "type": "silent_during",
+       "during": "lead_in",
+       "passed": false,
+       "note": "agent spoke although the caller had not said anything"
+      },
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "61205",
+       "passed": true,
+       "note": "",
+       "heard": "You'd like to check the status of order number 6-1205. Can you please confirm your order date and delivery address for me?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "number": {
+       "text": "You'd like to check the status of order number 6-1205. Can you please confirm your order date and delivery address for me?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 13.18
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        2.9,
+        4.3
+       ],
+       [
+        10.7,
+        18.94
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 7.98,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2720
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "lead_in": {
+        "start": 0.0,
+        "end": 4.0,
+        "agent_onsets": [
+         2.9
+        ],
+        "agent_made_sound": true
+       }
+      },
+      "reply_windows": {
+       "number": [
+        7.98,
+        21.16
+       ]
+      }
+     },
+     "duration_s": 21.16,
+     "clock_lateness_ms": {
+      "median": 1.11,
+      "p99": 1.27,
+      "max": 4.31
+     }
+    },
+    {
+     "scenario": "noise_tv_booking_hi",
+     "family": "background_noise",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "did not mention 'शनिवार'; did not mention '8'",
+      "agent did not reply to 1 caller turn(s)"
+     ],
+     "checks": [
+      {
+       "type": "silent_during",
+       "during": "lead_in",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "detail",
+       "reply_to": "booking",
+       "mentions": [
+        [
+         "शनिवार",
+         "Saturday",
+         "सैटरडे"
+        ],
+        [
+         "8"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention 'शनिवार'; did not mention '8'",
+       "heard": ""
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": {
+      "booking": {
+       "text": "",
+       "language": null,
+       "seconds": 0.0
+      }
+     },
+     "measures": {
+      "agent_segments": [],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "booking"
+        ],
+        "kind": "turn",
+        "end": 8.72,
+        "responded": false,
+        "agent_talking_at_end": false,
+        "response_delay_ms": null
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "lead_in": {
+        "start": 0.0,
+        "end": 4.0,
+        "agent_onsets": [],
+        "agent_made_sound": false
+       }
+      },
+      "reply_windows": {
+       "booking": [
+        8.72,
+        19.74
+       ]
+      }
+     },
+     "duration_s": 19.74,
+     "clock_lateness_ms": {
+      "median": 1.14,
+      "p99": 1.29,
+      "max": 6.13
+     }
+    },
+    {
+     "scenario": "noise_tv_pause_hinglish",
+     "family": "background_noise",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "did not mention 'कल'",
+      "agent did not reply to 1 caller turn(s)"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "कल",
+         "tomorrow",
+         "सुबह",
+         "morning"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention 'कल'",
+       "heard": ""
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": {
+      "first": {
+       "text": "",
+       "language": null,
+       "seconds": 0.0
+      },
+      "rest": {
+       "text": "",
+       "language": null,
+       "seconds": 0.0
+      }
+     },
+     "measures": {
+      "agent_segments": [],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 6.45,
+        "responded": false,
+        "agent_talking_at_end": false,
+        "response_delay_ms": null
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 2.93,
+        "end": 4.94,
+        "interrupted": false,
+        "agent_onset": null
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        6.45,
+        17.48
+       ],
+       "rest": [
+        6.45,
+        17.48
+       ]
+      }
+     },
+     "duration_s": 17.48,
+     "clock_lateness_ms": {
+      "median": 1.11,
+      "p99": 1.35,
+      "max": 3.79
+     }
+    },
+    {
+     "scenario": "numbers_date_time_en",
+     "family": "numbers_details",
+     "language": "en-IN",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "date",
+       "mentions": [
+        [
+         "23"
+        ],
+        [
+         "March",
+         "मार्च"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "I'd be happy to help you reschedule your appointment. Can you please confirm the new appointment details, including the date and time, which you'd like to reschedule to? You'd like to reschedule to 23rd March at 4, 30 p.m. Is that correct?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "date": {
+       "text": "I'd be happy to help you reschedule your appointment. Can you please confirm the new appointment details, including the date and time, which you'd like to reschedule to? You'd like to reschedule to 23rd March at 4, 30 p.m. Is that correct?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 20.58
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        7.26,
+        23.2
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "date"
+        ],
+        "kind": "turn",
+        "end": 4.84,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2420
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "date": [
+        4.84,
+        25.42
+       ]
+      }
+     },
+     "duration_s": 25.42,
+     "clock_lateness_ms": {
+      "median": 1.13,
+      "p99": 1.33,
+      "max": 5.38
+     }
+    },
+    {
+     "scenario": "numbers_email_spelled_en",
+     "family": "numbers_details",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "did not mention 'ravi'"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "email",
+       "mentions": [
+        [
+         "ravi"
+        ],
+        [
+         "gmail"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention 'ravi'",
+       "heard": "Your email address is avi.kgmail.com Can I help you with something regarding your order or account?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "email": {
+       "text": "Your email address is avi.kgmail.com Can I help you with something regarding your order or account?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 10.76
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.06,
+        12.43
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "email"
+        ],
+        "kind": "turn",
+        "end": 3.9,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2160
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "email": [
+        3.9,
+        14.66
+       ]
+      }
+     },
+     "duration_s": 14.66,
+     "clock_lateness_ms": {
+      "median": 1.15,
+      "p99": 1.27,
+      "max": 1.83
+     }
+    },
+    {
+     "scenario": "numbers_order_double_en",
+     "family": "numbers_details",
+     "language": "en-IN",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "47993",
+       "passed": true,
+       "note": "",
+       "heard": "I've located your order number 47993. Can you please tell me what you'd like to do with your order?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "number": {
+       "text": "I've located your order number 47993. Can you please tell me what you'd like to do with your order?",
+       "language": "en",
+       "language_confidence": 0.999,
+       "seconds": 12.21
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        5.44,
+        12.93
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 2.95,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2490
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "number": [
+        2.95,
+        15.16
+       ]
+      }
+     },
+     "duration_s": 15.16,
+     "clock_lateness_ms": {
+      "median": 1.12,
+      "p99": 1.42,
+      "max": 13.76
+     }
+    },
+    {
+     "scenario": "numbers_phone_hi",
+     "family": "numbers_details",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "did not say 9876543210"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "9876543210",
+       "passed": false,
+       "note": "did not say 9876543210",
+       "heard": "आपका मोबाइल नमबर है 54310, आज साथ चे नमबर है नो आज साथ चे है, मैं इसे नोट कर लूँगा, क्या आप किसी विशेश सेवा की सुविधा लेना चाहते हैं या कुछ पूछना चाहते हैं?"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "number": {
+       "text": "आपका मोबाइल नमबर है 54310, आज साथ चे नमबर है नो आज साथ चे है, मैं इसे नोट कर लूँगा, क्या आप किसी विशेश सेवा की सुविधा लेना चाहते हैं या कुछ पूछना चाहते हैं?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 20.1
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        8.66,
+        22.64
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 4.76,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3900
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "number": [
+        4.76,
+        24.86
+       ]
+      }
+     },
+     "duration_s": 24.86,
+     "clock_lateness_ms": {
+      "median": 1.12,
+      "p99": 1.33,
+      "max": 4.15
+     }
+    },
+    {
+     "scenario": "numbers_pincode_hinglish",
+     "family": "numbers_details",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "did not say 560038"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "560038",
+       "passed": false,
+       "note": "did not say 560038",
+       "heard": "आपका पिंकोर है 56-03-1. मैं इसे फिर से देख रहा हूँ. क्या आप अपने पिंकोर के बारे में कुछ और जानकारी चाहते हैं या किसी अन्य सहाईता की आवश्यक्ता है?"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "number": {
+       "text": "आपका पिंकोर है 56-03-1. मैं इसे फिर से देख रहा हूँ. क्या आप अपने पिंकोर के बारे में कुछ और जानकारी चाहते हैं या किसी अन्य सहाईता की आवश्यक्ता है?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 18.64
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.48,
+        19.83
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 3.42,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3060
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "number": [
+        3.42,
+        22.06
+       ]
+      }
+     },
+     "duration_s": 22.06,
+     "clock_lateness_ms": {
+      "median": 1.14,
+      "p99": 1.28,
+      "max": 2.54
+     }
+    },
+    {
+     "scenario": "numbers_refund_amount_hi",
+     "family": "numbers_details",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "did not mention '2500'; did not mention '1500'"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "amount",
+       "mentions": [
+        [
+         "2500",
+         "ढाई हज़ार"
+        ],
+        [
+         "1500",
+         "डेढ़ हज़ार"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention '2500'; did not mention '1500'",
+       "heard": "बिल्कुल मैं आपकी मदद करूँगा, क्या आप दो 500 रूपी का रिफेंड किस रेस तरह में मिलना चाहते हैं?"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "amount": {
+       "text": "बिल्कुल मैं आपकी मदद करूँगा, क्या आप दो 500 रूपी का रिफेंड किस रेस तरह में मिलना चाहते हैं?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 11.53
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        8.52,
+        16.04
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "amount"
+        ],
+        "kind": "turn",
+        "end": 6.73,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1790
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "amount": [
+        6.73,
+        18.26
+       ]
+      }
+     },
+     "duration_s": 18.26,
+     "clock_lateness_ms": {
+      "median": 1.13,
+      "p99": 1.25,
+      "max": 1.6
+     }
+    },
+    {
+     "scenario": "pause_address_two_pauses_en",
+     "family": "mid_thought_pause",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "agent started talking 1.97 s into the caller's pause",
+      "did not mention '12'"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": false,
+       "note": "agent started talking 1.97 s into the caller's pause"
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "12"
+        ],
+        [
+         "Bangalore",
+         "Bengaluru",
+         "बैंगलोर",
+         "बेंगलुरु"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention '12'",
+       "heard": "You'd like me to deliver the order to Indira Nagar in Bangalore. Can you please confirm the order number so I can look it up for you?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "first": {
+       "text": "You'd like me to deliver the order to Indira Nagar in Bangalore. Can you please confirm the order number so I can look it up for you?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 12.56
+      },
+      "second": {
+       "text": "You'd like me to deliver the order to Indira Nagar in Bangalore. Can you please confirm the order number so I can look it up for you?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 12.56
+      },
+      "rest": {
+       "text": "You'd like me to deliver the order to Indira Nagar in Bangalore. Can you please confirm the order number so I can look it up for you?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 12.56
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.92,
+        7.24
+       ],
+       [
+        10.96,
+        19.18
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "second",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 8.84,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2120
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 1.44,
+        "end": 2.94,
+        "interrupted": false,
+        "agent_onset": null
+       },
+       {
+        "turn": 0,
+        "start": 4.95,
+        "end": 6.96,
+        "interrupted": true,
+        "agent_onset": 6.92
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        8.84,
+        21.4
+       ],
+       "second": [
+        8.84,
+        21.4
+       ],
+       "rest": [
+        8.84,
+        21.4
+       ]
+      }
+     },
+     "duration_s": 21.4,
+     "clock_lateness_ms": {
+      "median": 1.09,
+      "p99": 1.27,
+      "max": 5.28
+     }
+    },
+    {
+     "scenario": "pause_appointment_hinglish",
+     "family": "mid_thought_pause",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "did not mention '11'"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "11"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention '11'",
+       "heard": "आपके लिए दोहर आया गया है। दो कार्याले शर्मा के साथ अपूइंट में चाही है। कल सुबह नौ बजे बजी का है। क्या आप किसी विशेश कार्याले की अपूइंट की जानकारी चाहते हैं या कोई अन्य सहाइता चाहेंगे।"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "first": {
+       "text": "आपके लिए दोहर आया गया है। दो कार्याले शर्मा के साथ अपूइंट में चाही है। कल सुबह नौ बजे बजी का है। क्या आप किसी विशेश कार्याले की अपूइंट की जानकारी चाहते हैं या कोई अन्य सहाइता चाहेंगे।",
+       "language": "hi",
+       "language_confidence": 0.998,
+       "seconds": 20.11
+      },
+      "rest": {
+       "text": "आपके लिए दोहर आया गया है। दो कार्याले शर्मा के साथ अपूइंट में चाही है। कल सुबह नौ बजे बजी का है। क्या आप किसी विशेश कार्याले की अपूइंट की जानकारी चाहते हैं या कोई अन्य सहाइता चाहेंगे।",
+       "language": "hi",
+       "language_confidence": 0.998,
+       "seconds": 20.11
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        9.48,
+        24.58
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 6.69,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2790
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 3.38,
+        "end": 4.88,
+        "interrupted": false,
+        "agent_onset": null
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        6.69,
+        26.8
+       ],
+       "rest": [
+        6.69,
+        26.8
+       ]
+      }
+     },
+     "duration_s": 26.8,
+     "clock_lateness_ms": {
+      "median": 1.12,
+      "p99": 1.25,
+      "max": 4.17
+     }
+    },
+    {
+     "scenario": "pause_cancel_order_hi",
+     "family": "mid_thought_pause",
+     "language": "hi",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "कैंसल",
+         "रद्द",
+         "cancel",
+         "कैंसिल",
+         "कैन्सल"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "क्रिप्या अपना order number बताएं ता कि मैं इसे cancel कर सकूँ."
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "first": {
+       "text": "क्रिप्या अपना order number बताएं ता कि मैं इसे cancel कर सकूँ.",
+       "language": "hi",
+       "language_confidence": 0.995,
+       "seconds": 9.97
+      },
+      "rest": {
+       "text": "क्रिप्या अपना order number बताएं ता कि मैं इसे cancel कर सकूँ.",
+       "language": "hi",
+       "language_confidence": 0.995,
+       "seconds": 9.97
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        11.18,
+        15.83
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 8.09,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3090
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 3.79,
+        "end": 6.3,
+        "interrupted": false,
+        "agent_onset": null
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        8.09,
+        18.06
+       ],
+       "rest": [
+        8.09,
+        18.06
+       ]
+      }
+     },
+     "duration_s": 18.06,
+     "clock_lateness_ms": {
+      "median": 1.1,
+      "p99": 1.27,
+      "max": 1.9
+     }
+    },
+    {
+     "scenario": "pause_long_new_address_hi",
+     "family": "mid_thought_pause",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "agent started talking 2.59 s into the caller's pause"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": false,
+       "note": "agent started talking 2.59 s into the caller's pause"
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "15"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "सेक्टर 15 नुईदा तो सही है, लेकिन क्या आपका नया पता सेक्टर 15 नुईदा ही है?"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "first": {
+       "text": "सेक्टर 15 नुईदा तो सही है, लेकिन क्या आपका नया पता सेक्टर 15 नुईदा ही है?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 10.86
+      },
+      "rest": {
+       "text": "सेक्टर 15 नुईदा तो सही है, लेकिन क्या आपका नया पता सेक्टर 15 नुईदा ही है?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 10.86
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        5.54,
+        6.34
+       ],
+       [
+        9.96,
+        16.28
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 7.64,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2320
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 2.95,
+        "end": 5.96,
+        "interrupted": true,
+        "agent_onset": 5.54
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        7.64,
+        18.5
+       ],
+       "rest": [
+        7.64,
+        18.5
+       ]
+      }
+     },
+     "duration_s": 18.5,
+     "clock_lateness_ms": {
+      "median": 1.11,
+      "p99": 1.26,
+      "max": 10.33
+     }
+    },
+    {
+     "scenario": "pause_table_booking_en",
+     "family": "mid_thought_pause",
+     "language": "en-IN",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "Friday",
+         "फ्राइडे",
+         "शुक्रवार"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "Can you please confirm the date and time you'd like to book for Friday evening?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "first": {
+       "text": "Can you please confirm the date and time you'd like to book for Friday evening?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 8.69
+      },
+      "rest": {
+       "text": "Can you please confirm the date and time you'd like to book for Friday evening?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 8.69
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        7.9,
+        12.23
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 5.77,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2130
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 1.72,
+        "end": 3.72,
+        "interrupted": false,
+        "agent_onset": null
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        5.77,
+        14.46
+       ],
+       "rest": [
+        5.77,
+        14.46
+       ]
+      }
+     },
+     "duration_s": 14.46,
+     "clock_lateness_ms": {
+      "median": 1.12,
+      "p99": 1.29,
+      "max": 1.86
+     }
+    },
+    {
+     "scenario": "silence_after_question_en",
+     "family": "long_silence",
+     "language": "en-IN",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "checks_in",
+       "during": "quiet",
+       "passed": true,
+       "note": ""
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "open": {
+       "text": "I'd be happy to help you with your internet connection. Can you please tell me a little bit about the issue you're experiencing? Is it not turning on or is it not working properly? Hello, are you still there?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 26.16
+      },
+      "back": {
+       "text": "Yes, I'm still here. It seems like your internet connection was not working and now it's turned on. Can you please confirm your order number so I can look into this further for you.",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 15.03
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        4.92,
+        15.57
+       ],
+       [
+        22.15,
+        23.64
+       ],
+       [
+        32.8,
+        44.02
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "open"
+        ],
+        "kind": "turn",
+        "end": 2.62,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2300
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "back"
+        ],
+        "kind": "turn",
+        "end": 31.21,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1590
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "quiet": {
+        "start": 16.78,
+        "end": 28.78,
+        "agent_onsets": [
+         22.15
+        ],
+        "agent_made_sound": true
+       }
+      },
+      "reply_windows": {
+       "open": [
+        2.62,
+        28.78
+       ],
+       "back": [
+        31.21,
+        46.24
+       ]
+      }
+     },
+     "duration_s": 46.24,
+     "clock_lateness_ms": {
+      "median": 1.13,
+      "p99": 1.25,
+      "max": 1.58
+     }
+    },
+    {
+     "scenario": "silence_long_hinglish",
+     "family": "long_silence",
+     "language": "hinglish",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "checks_in",
+       "during": "quiet",
+       "passed": true,
+       "note": ""
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "open": {
+       "text": "बिल्कुल मैं आपकी मदद करूँगा। कृप्या अपना रेस्तरा का नाम बताए और आप किस रेस्तरा में प्लाइत तिकत रिशेडिल करना चाहते हैं। हेलो क्या आप लाइन पर हैं?",
+       "language": "hi",
+       "language_confidence": 0.995,
+       "seconds": 28.37
+      },
+      "back": {
+       "text": "आपको अपना खाता या ओर्डर नमबर बताना होगा। फिर मैं आपको बताऊंगा कि आपके पास कितने ब्लॉक्स हैं और आप उनमें से कितने ब्लॉक्स का उप्योग करना चाहते हैं।",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 17.04
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.18,
+        15.71
+       ],
+       [
+        22.34,
+        24.0
+       ],
+       [
+        30.64,
+        32.24
+       ],
+       [
+        37.38,
+        49.42
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "open"
+        ],
+        "kind": "turn",
+        "end": 3.53,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2650
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "back"
+        ],
+        "kind": "turn",
+        "end": 34.6,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2780
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "quiet": {
+        "start": 16.9,
+        "end": 31.9,
+        "agent_onsets": [
+         22.34,
+         30.64
+        ],
+        "agent_made_sound": true
+       }
+      },
+      "reply_windows": {
+       "open": [
+        3.53,
+        31.9
+       ],
+       "back": [
+        34.6,
+        51.64
+       ]
+      }
+     },
+     "duration_s": 51.64,
+     "clock_lateness_ms": {
+      "median": 1.2,
+      "p99": 2.26,
+      "max": 27.57
+     }
+    },
+    {
+     "scenario": "silence_mid_call_hi",
+     "family": "long_silence",
+     "language": "hi",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "checks_in",
+       "during": "quiet",
+       "passed": true,
+       "note": ""
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "open": {
+       "text": "माफ कीजिए, मैं आपकी मदद करने के लिए तैयार हूँ. कृपिया अपने भिल का नाम, पता और फोन नंबर बताए ताकि मैं आपको सही जानकारी प्रदान कर सकूँ. हेलो क्या आप लाइन पर हैं?",
+       "language": "hi",
+       "language_confidence": 0.995,
+       "seconds": 27.46
+      },
+      "back": {
+       "text": "माफ कीजिए मैं समझ गया हूँ आपके भिल का नाम क्या है?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 9.66
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.82,
+        18.13
+       ],
+       [
+        24.74,
+        26.4
+       ],
+       [
+        36.4,
+        40.44
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "open"
+        ],
+        "kind": "turn",
+        "end": 3.88,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2940
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "back"
+        ],
+        "kind": "turn",
+        "end": 33.0,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3400
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "quiet": {
+        "start": 19.34,
+        "end": 31.34,
+        "agent_onsets": [
+         24.74
+        ],
+        "agent_made_sound": true
+       }
+      },
+      "reply_windows": {
+       "open": [
+        3.88,
+        31.34
+       ],
+       "back": [
+        33.0,
+        42.66
+       ]
+      }
+     },
+     "duration_s": 42.66,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.26,
+      "max": 5.67
+     }
+    }
+   ]
+  },
+  {
+   "rep": 2,
+   "summary": {
+    "calls": 30,
+    "response_delay_ms": {
+     "median": 2560.0,
+     "p95": 3539.0,
+     "turns": 35
+    },
+    "false_interruptions": {
+     "count": 3,
+     "of": 7,
+     "rate": 0.4286
+    },
+    "barge_in_stopped": {
+     "count": 5,
+     "of": 5,
+     "rate": 1.0
+    },
+    "barge_in_stop_ms": {
+     "median": 280.0,
+     "interruptions": 5
+    },
+    "barge_in_recovery": {
+     "count": 4,
+     "of": 5,
+     "rate": 0.8
+    },
+    "backchannel_ignored": {
+     "count": 0,
+     "of": 5,
+     "rate": 0.0
+    },
+    "detail_accuracy": {
+     "count": 3,
+     "of": 9,
+     "rate": 0.3333
+    },
+    "language_match": {
+     "count": 27,
+     "of": 27,
+     "rate": 1.0
+    },
+    "task_completion": {
+     "count": 10,
+     "of": 30,
+     "rate": 0.3333,
+     "untestable": 0
+    },
+    "no_response": {
+     "count": 3,
+     "of": 38,
+     "rate": 0.0789
+    }
+   },
+   "calls": [
+    {
+     "scenario": "backchannel_achha_hinglish",
+     "family": "backchannel",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "agent stopped talking when the caller said a filler word"
+     ],
+     "checks": [
+      {
+       "type": "backchannel_ignored",
+       "passed": false,
+       "note": "agent stopped talking when the caller said a filler word"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "मैं समझता हूँ, MI का प्रोसेस बहुत है।",
+       "language": "hi",
+       "language_confidence": 0.987,
+       "seconds": 7.24
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.26,
+        9.06
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 4.04,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2220
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [
+       {
+        "id": "filler",
+        "start": 8.78,
+        "end": 9.51,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 9.06
+       }
+      ],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        4.04,
+        11.28
+       ]
+      }
+     },
+     "duration_s": 11.28,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.23,
+      "max": 2.41
+     }
+    },
+    {
+     "scenario": "backchannel_haan_hi",
+     "family": "backchannel",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "agent stopped talking when the caller said a filler word"
+     ],
+     "checks": [
+      {
+       "type": "backchannel_ignored",
+       "passed": false,
+       "note": "agent stopped talking when the caller said a filler word"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "माफ कीजिए, मैं समझ नहीं पाया.",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 6.35
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.38,
+        8.72
+       ],
+       [
+        10.68,
+        10.9
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 4.59,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1790
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [
+       {
+        "id": "filler",
+        "start": 8.4,
+        "end": 9.03,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 8.72
+       }
+      ],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        4.59,
+        10.94
+       ]
+      }
+     },
+     "duration_s": 10.94,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.23,
+      "max": 8.73
+     }
+    },
+    {
+     "scenario": "backchannel_mmhmm_en",
+     "family": "backchannel",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "agent stopped talking when the caller said a filler word"
+     ],
+     "checks": [
+      {
+       "type": "backchannel_ignored",
+       "passed": false,
+       "note": "agent stopped talking when the caller said a filler word"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "I'd be happy to explain the refund process.",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 7.24
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.1,
+        8.4
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 3.38,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2720
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [
+       {
+        "id": "filler",
+        "start": 8.12,
+        "end": 8.73,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 8.4
+       }
+      ],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        3.38,
+        10.62
+       ]
+      }
+     },
+     "duration_s": 10.62,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.48,
+      "max": 5.18
+     }
+    },
+    {
+     "scenario": "backchannel_twice_hinglish",
+     "family": "backchannel",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "agent stopped talking when the caller said a filler word"
+     ],
+     "checks": [
+      {
+       "type": "backchannel_ignored",
+       "passed": false,
+       "note": "agent stopped talking when the caller said a filler word"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "बिल्कुल मैं आपकी मदद पता और फोन नंबर जैसी ज़िए ज़िए पता और फोन नंबर जैसी ज़िए पता और पता और फोन नंबर जैसी ज़िए पता और पता और पता और पता और पता और पता और पता और पता और पता और पता और पता और पता और पता और पता और �",
+       "language": "hi",
+       "language_confidence": 0.989,
+       "seconds": 12.09
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.62,
+        8.41
+       ],
+       [
+        11.48,
+        13.84
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 3.97,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2650
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [
+       {
+        "id": "filler_one",
+        "start": 8.14,
+        "end": 8.81,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 8.41
+       },
+       {
+        "id": "filler_two",
+        "start": 13.5,
+        "end": 14.19,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 13.84
+       }
+      ],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        3.97,
+        16.06
+       ]
+      }
+     },
+     "duration_s": 16.06,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.22,
+      "max": 8.08
+     }
+    },
+    {
+     "scenario": "barge_in_cancel_subscription_hinglish",
+     "family": "barge_in",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "did not mention 'कैंसल'"
+     ],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 280 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "कैंसल",
+         "cancel",
+         "रद्द",
+         "कैंसिल",
+         "कैन्सल"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention 'कैंसल'",
+       "heard": "बिल्कुल मैं समझे गया, आपके सबस्क्रिष्चन प्लांस में एक मिन्नट की सुविधा नहीं है। मैं आपको बता दू कि हमारे सबस्क्रिष्चन प्लांस में एक, दो, तीन, छह, बारह और चौबिस मिन्नट की सुविधा है। क्या आप किसी एक मिन्नट की सुविधा चा"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "आपके सबस्क्रिष्चन प्लान्स के लिए रहे हैं।",
+       "language": "hi",
+       "language_confidence": 0.987,
+       "seconds": 5.35
+      },
+      "cut": {
+       "text": "बिल्कुल मैं समझे गया, आपके सबस्क्रिष्चन प्लांस में एक मिन्नट की सुविधा नहीं है। मैं आपको बता दू कि हमारे सबस्क्रिष्चन प्लांस में एक, दो, तीन, छह, बारह और चौबिस मिन्नट की सुविधा है। क्या आप किसी एक मिन्नट की सुविधा चा",
+       "language": "hi",
+       "language_confidence": 0.997,
+       "seconds": 21.05
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        7.6,
+        9.9
+       ],
+       [
+        15.92,
+        33.2
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 4.27,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3330
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 14.37,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1550
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 9.62,
+        "agent_was_speaking": true,
+        "stop_ms": 280,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        4.27,
+        9.62
+       ],
+       "cut": [
+        14.37,
+        35.42
+       ]
+      }
+     },
+     "duration_s": 35.42,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.27,
+      "max": 2.79
+     }
+    },
+    {
+     "scenario": "barge_in_early_upi_hinglish",
+     "family": "barge_in",
+     "language": "hinglish",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 320 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "UPI",
+         "यूपीआई",
+         "यू पी आई",
+         "यूपीआइ"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "हाँ, आप सूरी एक चुली का भुगतान UPI से कर सकती हैं. आपको अपने UPI credit slash debit card का उप्योग करके बिल पे करना होगा. कृप्या अपने UPI credit slash debit card की जानकारी मुझे बताएं."
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "बिल्द पे करने के लिए बिल्द पे करने के लिए बिल्द पे करने के लिए बिल्द पे करने के लिए बिल्द पे करने के लिए।",
+       "language": "hi",
+       "language_confidence": 0.995,
+       "seconds": 3.82
+      },
+      "cut": {
+       "text": "हाँ, आप सूरी एक चुली का भुगतान UPI से कर सकती हैं. आपको अपने UPI credit slash debit card का उप्योग करके बिल पे करना होगा. कृप्या अपने UPI credit slash debit card की जानकारी मुझे बताएं.",
+       "language": "hi",
+       "language_confidence": 0.998,
+       "seconds": 21.38
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.42,
+        7.76
+       ],
+       [
+        13.94,
+        30.11
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 3.62,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2800
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 10.96,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2980
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 7.44,
+        "agent_was_speaking": true,
+        "stop_ms": 320,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        3.62,
+        7.44
+       ],
+       "cut": [
+        10.96,
+        32.34
+       ]
+      }
+     },
+     "duration_s": 32.34,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.29,
+      "max": 4.72
+     }
+    },
+    {
+     "scenario": "barge_in_late_warranty_hi",
+     "family": "barge_in",
+     "language": "hi",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 60 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "साल",
+         "year",
+         "वर्ष",
+         "महीने",
+         "month"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "वारंती दो साल की है"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "आपकी वारंती की शर्टे में हमारे खिलाडी की विशिश्टाएं",
+       "language": "hi",
+       "language_confidence": 0.997,
+       "seconds": 7.55
+      },
+      "cut": {
+       "text": "वारंती दो साल की है",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 5.82
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.78,
+        10.86
+       ],
+       [
+        16.78,
+        18.46
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 3.25,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3530
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 14.86,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1920
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 10.8,
+        "agent_was_speaking": true,
+        "stop_ms": 60,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        3.25,
+        10.8
+       ],
+       "cut": [
+        14.86,
+        20.68
+       ]
+      }
+     },
+     "duration_s": 20.68,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.25,
+      "max": 3.09
+     }
+    },
+    {
+     "scenario": "barge_in_replacement_en",
+     "family": "barge_in",
+     "language": "en-IN",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 280 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "replacement",
+         "replace"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "In that case, we can replace the item for you. To do this, I'll need to know your order number please. Can you please repeat your order number back to me?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "Our return policy allows you to",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 5.13
+      },
+      "cut": {
+       "text": "In that case, we can replace the item for you. To do this, I'll need to know your order number please. Can you please repeat your order number back to me?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 13.12
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.06,
+        8.36
+       ],
+       [
+        13.1,
+        22.11
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 2.95,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3110
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 11.2,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1900
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 8.08,
+        "agent_was_speaking": true,
+        "stop_ms": 280,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        2.95,
+        8.08
+       ],
+       "cut": [
+        11.2,
+        24.32
+       ]
+      }
+     },
+     "duration_s": 24.32,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.29,
+      "max": 6.99
+     }
+    },
+    {
+     "scenario": "barge_in_sunday_delivery_hi",
+     "family": "barge_in",
+     "language": "hi",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 260 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "रविवार",
+         "Sunday",
+         "संडे",
+         "इतवार"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "यहां, रविवार को भी हमारे द्वारा डिलीवरी की जाती हैं, लेकिन यह ध्यान रखें कि कुछ स्थानों पर सेवाएं सीमित हो सकती हैं."
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "ask": {
+       "text": "क्या स्थिदी है, क्रिप्या अपना स्थिदी है,",
+       "language": "hi",
+       "language_confidence": 0.984,
+       "seconds": 4.12
+      },
+      "cut": {
+       "text": "यहां, रविवार को भी हमारे द्वारा डिलीवरी की जाती हैं, लेकिन यह ध्यान रखें कि कुछ स्थानों पर सेवाएं सीमित हो सकती हैं.",
+       "language": "hi",
+       "language_confidence": 0.998,
+       "seconds": 14.14
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.4,
+        8.68
+       ],
+       [
+        15.78,
+        25.32
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 4.3,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2100
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 13.38,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2400
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 8.42,
+        "agent_was_speaking": true,
+        "stop_ms": 260,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        4.3,
+        8.42
+       ],
+       "cut": [
+        13.38,
+        27.52
+       ]
+      }
+     },
+     "duration_s": 27.52,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.23,
+      "max": 2.49
+     }
+    },
+    {
+     "scenario": "change_day_en",
+     "family": "change_of_mind",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "did not mention 'Saturday'"
+     ],
+     "checks": [
+      {
+       "type": "mentions",
+       "reply_to": "request",
+       "mentions": [
+        [
+         "Saturday",
+         "शनिवार",
+         "सैटरडे"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention 'Saturday'",
+       "heard": "I'd be happy to help you book a table. Can you please confirm the date and time you'd like to book for? You said Friday at 8 p.m. Is that correct?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "request": {
+       "text": "I'd be happy to help you book a table. Can you please confirm the date and time you'd like to book for? You said Friday at 8 p.m. Is that correct?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 12.44
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.58,
+        15.18
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "request"
+        ],
+        "kind": "turn",
+        "end": 4.96,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1620
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "request": [
+        4.96,
+        17.4
+       ]
+      }
+     },
+     "duration_s": 17.4,
+     "clock_lateness_ms": {
+      "median": 2.11,
+      "p99": 2.26,
+      "max": 2.41
+     }
+    },
+    {
+     "scenario": "change_item_hinglish",
+     "family": "change_of_mind",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "did not mention 'पनीर'"
+     ],
+     "checks": [
+      {
+       "type": "mentions",
+       "reply_to": "request",
+       "mentions": [
+        [
+         "पनीर",
+         "paneer"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention 'पनीर'",
+       "heard": "क्रिप्या अपना नाम और पता बताएं ताकि मैं आपके ओर्डर को सही धंग से प्राप्त कर सकूँ."
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "request": {
+       "text": "क्रिप्या अपना नाम और पता बताएं ताकि मैं आपके ओर्डर को सही धंग से प्राप्त कर सकूँ.",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 11.51
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        8.42,
+        14.72
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "request"
+        ],
+        "kind": "turn",
+        "end": 5.43,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2990
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "request": [
+        5.43,
+        16.94
+       ]
+      }
+     },
+     "duration_s": 16.94,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.28,
+      "max": 4.61
+     }
+    },
+    {
+     "scenario": "change_quantity_hi",
+     "family": "change_of_mind",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "did not mention '5'"
+     ],
+     "checks": [
+      {
+       "type": "mentions",
+       "reply_to": "request",
+       "mentions": [
+        [
+         "5"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention '5'",
+       "heard": "बिल्कुल मैं आपके लिए दो किलो चावल की किताब दूँगा. क्या आप चाहते हैं कि मैं इसे आपके घर बुलाओं या फिर आपको किसी नजदी की स्थान पर ले जाओं?"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "request": {
+       "text": "बिल्कुल मैं आपके लिए दो किलो चावल की किताब दूँगा. क्या आप चाहते हैं कि मैं इसे आपके घर बुलाओं या फिर आपको किसी नजदी की स्थान पर ले जाओं?",
+       "language": "hi",
+       "language_confidence": 0.997,
+       "seconds": 15.46
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.82,
+        17.66
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "request"
+        ],
+        "kind": "turn",
+        "end": 4.42,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2400
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "request": [
+        4.42,
+        19.88
+       ]
+      }
+     },
+     "duration_s": 19.88,
+     "clock_lateness_ms": {
+      "median": 2.1,
+      "p99": 2.26,
+      "max": 2.45
+     }
+    },
+    {
+     "scenario": "noise_crowd_refund_hinglish",
+     "family": "background_noise",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "did not say 3381",
+      "agent did not reply to 1 caller turn(s)"
+     ],
+     "checks": [
+      {
+       "type": "silent_during",
+       "during": "lead_in",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "3381",
+       "passed": false,
+       "note": "did not say 3381",
+       "heard": ""
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": {
+      "number": {
+       "text": "",
+       "language": null,
+       "seconds": 0.0
+      }
+     },
+     "measures": {
+      "agent_segments": [],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 8.77,
+        "responded": false,
+        "agent_talking_at_end": false,
+        "response_delay_ms": null
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "lead_in": {
+        "start": 0.0,
+        "end": 4.0,
+        "agent_onsets": [],
+        "agent_made_sound": false
+       }
+      },
+      "reply_windows": {
+       "number": [
+        8.77,
+        19.8
+       ]
+      }
+     },
+     "duration_s": 19.8,
+     "clock_lateness_ms": {
+      "median": 2.11,
+      "p99": 2.34,
+      "max": 24.13
+     }
+    },
+    {
+     "scenario": "noise_street_order_en",
+     "family": "background_noise",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "agent spoke although the caller had not said anything"
+     ],
+     "checks": [
+      {
+       "type": "silent_during",
+       "during": "lead_in",
+       "passed": false,
+       "note": "agent spoke although the caller had not said anything"
+      },
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "61205",
+       "passed": true,
+       "note": "",
+       "heard": "You'd like to check the status of order number 6-1205. Can you please confirm your order date and delivery address for me?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "number": {
+       "text": "You'd like to check the status of order number 6-1205. Can you please confirm your order date and delivery address for me?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 13.16
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        2.76,
+        4.3
+       ],
+       [
+        10.68,
+        18.92
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 7.98,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2700
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "lead_in": {
+        "start": 0.0,
+        "end": 4.0,
+        "agent_onsets": [
+         2.76
+        ],
+        "agent_made_sound": true
+       }
+      },
+      "reply_windows": {
+       "number": [
+        7.98,
+        21.14
+       ]
+      }
+     },
+     "duration_s": 21.14,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.36,
+      "max": 10.73
+     }
+    },
+    {
+     "scenario": "noise_tv_booking_hi",
+     "family": "background_noise",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "did not mention 'शनिवार'; did not mention '8'",
+      "agent did not reply to 1 caller turn(s)"
+     ],
+     "checks": [
+      {
+       "type": "silent_during",
+       "during": "lead_in",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "detail",
+       "reply_to": "booking",
+       "mentions": [
+        [
+         "शनिवार",
+         "Saturday",
+         "सैटरडे"
+        ],
+        [
+         "8"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention 'शनिवार'; did not mention '8'",
+       "heard": ""
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": {
+      "booking": {
+       "text": "",
+       "language": null,
+       "seconds": 0.0
+      }
+     },
+     "measures": {
+      "agent_segments": [],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "booking"
+        ],
+        "kind": "turn",
+        "end": 8.72,
+        "responded": false,
+        "agent_talking_at_end": false,
+        "response_delay_ms": null
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "lead_in": {
+        "start": 0.0,
+        "end": 4.0,
+        "agent_onsets": [],
+        "agent_made_sound": false
+       }
+      },
+      "reply_windows": {
+       "booking": [
+        8.72,
+        19.74
+       ]
+      }
+     },
+     "duration_s": 19.74,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.28,
+      "max": 3.99
+     }
+    },
+    {
+     "scenario": "noise_tv_pause_hinglish",
+     "family": "background_noise",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "did not mention 'कल'",
+      "agent did not reply to 1 caller turn(s)"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "कल",
+         "tomorrow",
+         "सुबह",
+         "morning"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention 'कल'",
+       "heard": ""
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": {
+      "first": {
+       "text": "",
+       "language": null,
+       "seconds": 0.0
+      },
+      "rest": {
+       "text": "",
+       "language": null,
+       "seconds": 0.0
+      }
+     },
+     "measures": {
+      "agent_segments": [],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 6.45,
+        "responded": false,
+        "agent_talking_at_end": false,
+        "response_delay_ms": null
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 2.93,
+        "end": 4.94,
+        "interrupted": false,
+        "agent_onset": null
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        6.45,
+        17.48
+       ],
+       "rest": [
+        6.45,
+        17.48
+       ]
+      }
+     },
+     "duration_s": 17.48,
+     "clock_lateness_ms": {
+      "median": 2.08,
+      "p99": 2.25,
+      "max": 6.5
+     }
+    },
+    {
+     "scenario": "numbers_date_time_en",
+     "family": "numbers_details",
+     "language": "en-IN",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "date",
+       "mentions": [
+        [
+         "23"
+        ],
+        [
+         "March",
+         "मार्च"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "I'd be happy to help you reschedule your appointment. Can you please confirm the new appointment details, including the date and time, which you'd like to reschedule to? You'd like to reschedule to 23rd March at 4, 30 p.m. Is that correct?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "date": {
+       "text": "I'd be happy to help you reschedule your appointment. Can you please confirm the new appointment details, including the date and time, which you'd like to reschedule to? You'd like to reschedule to 23rd March at 4, 30 p.m. Is that correct?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 20.72
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        7.4,
+        23.34
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "date"
+        ],
+        "kind": "turn",
+        "end": 4.84,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2560
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "date": [
+        4.84,
+        25.56
+       ]
+      }
+     },
+     "duration_s": 25.56,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.46,
+      "max": 12.06
+     }
+    },
+    {
+     "scenario": "numbers_email_spelled_en",
+     "family": "numbers_details",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "did not mention 'ravi'"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "email",
+       "mentions": [
+        [
+         "ravi"
+        ],
+        [
+         "gmail"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention 'ravi'",
+       "heard": "Your email address is avi.kgmail.com Can I help you with something regarding your order or account?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "email": {
+       "text": "Your email address is avi.kgmail.com Can I help you with something regarding your order or account?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 10.78
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.08,
+        12.45
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "email"
+        ],
+        "kind": "turn",
+        "end": 3.9,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2180
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "email": [
+        3.9,
+        14.68
+       ]
+      }
+     },
+     "duration_s": 14.68,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.43,
+      "max": 7.22
+     }
+    },
+    {
+     "scenario": "numbers_order_double_en",
+     "family": "numbers_details",
+     "language": "en-IN",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "47993",
+       "passed": true,
+       "note": "",
+       "heard": "I've located your order number 47993. Can you please tell me what you'd like to do with your order?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "number": {
+       "text": "I've located your order number 47993. Can you please tell me what you'd like to do with your order?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 12.47
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        5.7,
+        13.19
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 2.95,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2750
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "number": [
+        2.95,
+        15.42
+       ]
+      }
+     },
+     "duration_s": 15.42,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.28,
+      "max": 55.27
+     }
+    },
+    {
+     "scenario": "numbers_phone_hi",
+     "family": "numbers_details",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "did not say 9876543210"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "9876543210",
+       "passed": false,
+       "note": "did not say 9876543210",
+       "heard": "आपका मोबाइल नमबर है 54310, आज साथ चे नमबर है नो आज साथ चे है, मैं इसे नोट कर लूँगा, क्या आप किसी विशेश सेवा की सुविधा लेना चाहते हैं या कुछ पूछना चाहते हैं?"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "number": {
+       "text": "आपका मोबाइल नमबर है 54310, आज साथ चे नमबर है नो आज साथ चे है, मैं इसे नोट कर लूँगा, क्या आप किसी विशेश सेवा की सुविधा लेना चाहते हैं या कुछ पूछना चाहते हैं?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 19.76
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        8.32,
+        22.3
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 4.76,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3560
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "number": [
+        4.76,
+        24.52
+       ]
+      }
+     },
+     "duration_s": 24.52,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.27,
+      "max": 2.46
+     }
+    },
+    {
+     "scenario": "numbers_pincode_hinglish",
+     "family": "numbers_details",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "did not say 560038"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "560038",
+       "passed": false,
+       "note": "did not say 560038",
+       "heard": "आपका पिंकोर है 56-03-A. मैं इसे फिर से देख रहा हूँ. क्या आप अपने पिंकोर के बारे में कुछ और जानकारी चाहते हैं या किसी अन्य सहाईता की आवश्यक्ता है?"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "number": {
+       "text": "आपका पिंकोर है 56-03-A. मैं इसे फिर से देख रहा हूँ. क्या आप अपने पिंकोर के बारे में कुछ और जानकारी चाहते हैं या किसी अन्य सहाईता की आवश्यक्ता है?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 18.68
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.52,
+        19.87
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 3.42,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3100
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "number": [
+        3.42,
+        22.1
+       ]
+      }
+     },
+     "duration_s": 22.1,
+     "clock_lateness_ms": {
+      "median": 2.08,
+      "p99": 2.3,
+      "max": 5.09
+     }
+    },
+    {
+     "scenario": "numbers_refund_amount_hi",
+     "family": "numbers_details",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "did not mention '2500'; did not mention '1500'"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "amount",
+       "mentions": [
+        [
+         "2500",
+         "ढाई हज़ार"
+        ],
+        [
+         "1500",
+         "डेढ़ हज़ार"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention '2500'; did not mention '1500'",
+       "heard": "बिलकुल मैं आपकी मदद करूँगा, क्या आप दो 500 रूपी का रिफेंड किस रेस तरह में मिलना चाहते हैं?"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "amount": {
+       "text": "बिलकुल मैं आपकी मदद करूँगा, क्या आप दो 500 रूपी का रिफेंड किस रेस तरह में मिलना चाहते हैं?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 11.69
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        8.68,
+        16.2
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "amount"
+        ],
+        "kind": "turn",
+        "end": 6.73,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1950
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "amount": [
+        6.73,
+        18.42
+       ]
+      }
+     },
+     "duration_s": 18.42,
+     "clock_lateness_ms": {
+      "median": 2.09,
+      "p99": 2.31,
+      "max": 13.8
+     }
+    },
+    {
+     "scenario": "pause_address_two_pauses_en",
+     "family": "mid_thought_pause",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "agent started talking 1.81 s into the caller's pause",
+      "did not mention '12'"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": false,
+       "note": "agent started talking 1.81 s into the caller's pause"
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "12"
+        ],
+        [
+         "Bangalore",
+         "Bengaluru",
+         "बैंगलोर",
+         "बेंगलुरु"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention '12'",
+       "heard": "You'd like me to deliver the order to Indira Nagar in Bangalore. Can you please confirm the order number so I can look it up for you?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "first": {
+       "text": "You'd like me to deliver the order to Indira Nagar in Bangalore. Can you please confirm the order number so I can look it up for you?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 12.6
+      },
+      "second": {
+       "text": "You'd like me to deliver the order to Indira Nagar in Bangalore. Can you please confirm the order number so I can look it up for you?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 12.6
+      },
+      "rest": {
+       "text": "You'd like me to deliver the order to Indira Nagar in Bangalore. Can you please confirm the order number so I can look it up for you?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 12.6
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.76,
+        7.24
+       ],
+       [
+        11.02,
+        19.21
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "second",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 8.84,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2180
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 1.44,
+        "end": 2.94,
+        "interrupted": false,
+        "agent_onset": null
+       },
+       {
+        "turn": 0,
+        "start": 4.95,
+        "end": 6.96,
+        "interrupted": true,
+        "agent_onset": 6.76
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        8.84,
+        21.44
+       ],
+       "second": [
+        8.84,
+        21.44
+       ],
+       "rest": [
+        8.84,
+        21.44
+       ]
+      }
+     },
+     "duration_s": 21.44,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.28,
+      "max": 10.04
+     }
+    },
+    {
+     "scenario": "pause_appointment_hinglish",
+     "family": "mid_thought_pause",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "did not mention '11'"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "11"
+        ]
+       ],
+       "passed": false,
+       "note": "did not mention '11'",
+       "heard": "आपके लिए दोहर आया गया है। दो कार्याले शर्मा के साथ अपूइंट में चाही है। कल सुबह 9 बजे बजी का है। क्या आप किसी विशेश कार्याले की अपूइंट की जानकारी चाहते हैं या कोई अन्य सहाइता चाहेंगे।"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "first": {
+       "text": "आपके लिए दोहर आया गया है। दो कार्याले शर्मा के साथ अपूइंट में चाही है। कल सुबह 9 बजे बजी का है। क्या आप किसी विशेश कार्याले की अपूइंट की जानकारी चाहते हैं या कोई अन्य सहाइता चाहेंगे।",
+       "language": "hi",
+       "language_confidence": 0.998,
+       "seconds": 20.11
+      },
+      "rest": {
+       "text": "आपके लिए दोहर आया गया है। दो कार्याले शर्मा के साथ अपूइंट में चाही है। कल सुबह 9 बजे बजी का है। क्या आप किसी विशेश कार्याले की अपूइंट की जानकारी चाहते हैं या कोई अन्य सहाइता चाहेंगे।",
+       "language": "hi",
+       "language_confidence": 0.998,
+       "seconds": 20.11
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        9.48,
+        24.58
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 6.69,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2790
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 3.38,
+        "end": 4.88,
+        "interrupted": false,
+        "agent_onset": null
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        6.69,
+        26.8
+       ],
+       "rest": [
+        6.69,
+        26.8
+       ]
+      }
+     },
+     "duration_s": 26.8,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.24,
+      "max": 2.57
+     }
+    },
+    {
+     "scenario": "pause_cancel_order_hi",
+     "family": "mid_thought_pause",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "agent started talking 2.51 s into the caller's pause"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": false,
+       "note": "agent started talking 2.51 s into the caller's pause"
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "कैंसल",
+         "रद्द",
+         "cancel",
+         "कैंसिल",
+         "कैन्सल"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "मैं आपकी अर्टर की booking को cancel कर दूँगा. क्या आप चाहते हैं कि मैं आपको एक नया समय और स्थान प्रदान करूँ?"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "first": {
+       "text": "मैं आपकी अर्टर की booking को cancel कर दूँगा. क्या आप चाहते हैं कि मैं आपको एक नया समय और स्थान प्रदान करूँ?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 12.93
+      },
+      "rest": {
+       "text": "मैं आपकी अर्टर की booking को cancel कर दूँगा. क्या आप चाहते हैं कि मैं आपको एक नया समय और स्थान प्रदान करूँ?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 12.93
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.3,
+        6.56
+       ],
+       [
+        10.4,
+        18.8
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 8.09,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2310
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 3.79,
+        "end": 6.3,
+        "interrupted": true,
+        "agent_onset": 6.3
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        8.09,
+        21.02
+       ],
+       "rest": [
+        8.09,
+        21.02
+       ]
+      }
+     },
+     "duration_s": 21.02,
+     "clock_lateness_ms": {
+      "median": 2.07,
+      "p99": 2.28,
+      "max": 3.41
+     }
+    },
+    {
+     "scenario": "pause_long_new_address_hi",
+     "family": "mid_thought_pause",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "agent started talking 2.37 s into the caller's pause"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": false,
+       "note": "agent started talking 2.37 s into the caller's pause"
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "15"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "सेक्टर 15 नुईदा तो सही है, लेकिन क्या आपका नया पता सेक्टर 15 नुईदा ही है?"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "first": {
+       "text": "सेक्टर 15 नुईदा तो सही है, लेकिन क्या आपका नया पता सेक्टर 15 नुईदा ही है?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 10.78
+      },
+      "rest": {
+       "text": "सेक्टर 15 नुईदा तो सही है, लेकिन क्या आपका नया पता सेक्टर 15 नुईदा ही है?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 10.78
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        5.32,
+        6.27
+       ],
+       [
+        9.88,
+        16.2
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 7.64,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2240
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 2.95,
+        "end": 5.96,
+        "interrupted": true,
+        "agent_onset": 5.32
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        7.64,
+        18.42
+       ],
+       "rest": [
+        7.64,
+        18.42
+       ]
+      }
+     },
+     "duration_s": 18.42,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.24,
+      "max": 6.0
+     }
+    },
+    {
+     "scenario": "pause_table_booking_en",
+     "family": "mid_thought_pause",
+     "language": "en-IN",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "Friday",
+         "फ्राइडे",
+         "शुक्रवार"
+        ]
+       ],
+       "passed": true,
+       "note": "",
+       "heard": "Can you please confirm the date and time you'd like to book for Friday evening?"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "first": {
+       "text": "Can you please confirm the date and time you'd like to book for Friday evening?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 8.69
+      },
+      "rest": {
+       "text": "Can you please confirm the date and time you'd like to book for Friday evening?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 8.69
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        7.9,
+        12.23
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 5.77,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2130
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 1.72,
+        "end": 3.72,
+        "interrupted": false,
+        "agent_onset": null
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        5.77,
+        14.46
+       ],
+       "rest": [
+        5.77,
+        14.46
+       ]
+      }
+     },
+     "duration_s": 14.46,
+     "clock_lateness_ms": {
+      "median": 2.06,
+      "p99": 2.25,
+      "max": 2.29
+     }
+    },
+    {
+     "scenario": "silence_after_question_en",
+     "family": "long_silence",
+     "language": "en-IN",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "checks_in",
+       "during": "quiet",
+       "passed": true,
+       "note": ""
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": "en",
+      "match": true
+     },
+     "replies": {
+      "open": {
+       "text": "I'd be happy to help you with your internet connection. Can you please tell me a little bit about the issue you're experiencing? Is it not turning on or is it not working properly? Hello, are you still there?",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 26.16
+      },
+      "back": {
+       "text": "yes I'm still here it seems like your internet connection was not working and now it's turned on can you please confirm your order number so I can look into this further for you",
+       "language": "en",
+       "language_confidence": 1.0,
+       "seconds": 15.07
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        4.92,
+        15.57
+       ],
+       [
+        22.18,
+        23.67
+       ],
+       [
+        32.84,
+        44.06
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "open"
+        ],
+        "kind": "turn",
+        "end": 2.62,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2300
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "back"
+        ],
+        "kind": "turn",
+        "end": 31.21,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 1630
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "quiet": {
+        "start": 16.78,
+        "end": 28.78,
+        "agent_onsets": [
+         22.18
+        ],
+        "agent_made_sound": true
+       }
+      },
+      "reply_windows": {
+       "open": [
+        2.62,
+        28.78
+       ],
+       "back": [
+        31.21,
+        46.28
+       ]
+      }
+     },
+     "duration_s": 46.28,
+     "clock_lateness_ms": {
+      "median": 2.08,
+      "p99": 2.28,
+      "max": 50.88
+     }
+    },
+    {
+     "scenario": "silence_long_hinglish",
+     "family": "long_silence",
+     "language": "hinglish",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "checks_in",
+       "during": "quiet",
+       "passed": true,
+       "note": ""
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "open": {
+       "text": "बिल्कुल मैं आपकी मदद करूँगा, कृप्या अपना रेस्तरा का नाम बताएं और आप किस रेस्तरा में प्लाई तिकत रिशेडिल करना चाहते हैं, हेलो क्या आप लाइन पर हैं?",
+       "language": "hi",
+       "language_confidence": 0.995,
+       "seconds": 28.51
+      },
+      "back": {
+       "text": "आपको अपना खाता या ओर्डर नमबर बताना होगा। फिर मैं आपको बताऊंगा कि आपके पास कितने ब्लॉक्स हैं और आप उनमें से कितने ब्लॉक्स का उप्योग करना चाहते हैं।",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 17.04
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.32,
+        15.85
+       ],
+       [
+        22.48,
+        24.14
+       ],
+       [
+        30.74,
+        32.36
+       ],
+       [
+        37.52,
+        49.56
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "open"
+        ],
+        "kind": "turn",
+        "end": 3.53,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2790
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "back"
+        ],
+        "kind": "turn",
+        "end": 34.74,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 2780
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "quiet": {
+        "start": 17.04,
+        "end": 32.04,
+        "agent_onsets": [
+         22.48,
+         30.74
+        ],
+        "agent_made_sound": true
+       }
+      },
+      "reply_windows": {
+       "open": [
+        3.53,
+        32.04
+       ],
+       "back": [
+        34.74,
+        51.78
+       ]
+      }
+     },
+     "duration_s": 51.78,
+     "clock_lateness_ms": {
+      "median": 2.09,
+      "p99": 2.27,
+      "max": 15.74
+     }
+    },
+    {
+     "scenario": "silence_mid_call_hi",
+     "family": "long_silence",
+     "language": "hi",
+     "status": "pass",
+     "reasons": [],
+     "checks": [
+      {
+       "type": "checks_in",
+       "during": "quiet",
+       "passed": true,
+       "note": ""
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": "hi",
+      "match": true
+     },
+     "replies": {
+      "open": {
+       "text": "माफ कीजिए, मैं आपकी मदद करने के लिए तैयार हूँ. कृपिया अपने भिल का नाम, पता और फोन नंबर बताए ताकि मैं आपको सही जानकारी प्रदान कर सकूँ. हेलो क्या आप लाइन पर हैं?",
+       "language": "hi",
+       "language_confidence": 0.996,
+       "seconds": 27.56
+      },
+      "back": {
+       "text": "माफ कीजिए मैं समझ गया हूँ आपके भिल का नाम क्या है?",
+       "language": "hi",
+       "language_confidence": 0.995,
+       "seconds": 10.06
+      }
+     },
+     "measures": {
+      "agent_segments": [
+       [
+        6.92,
+        18.23
+       ],
+       [
+        24.86,
+        26.52
+       ],
+       [
+        36.9,
+        40.94
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "open"
+        ],
+        "kind": "turn",
+        "end": 3.88,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3040
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "back"
+        ],
+        "kind": "turn",
+        "end": 33.1,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 3800
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "quiet": {
+        "start": 19.44,
+        "end": 31.44,
+        "agent_onsets": [
+         24.86
+        ],
+        "agent_made_sound": true
+       }
+      },
+      "reply_windows": {
+       "open": [
+        3.88,
+        31.44
+       ],
+       "back": [
+        33.1,
+        43.16
+       ]
+      }
+     },
+     "duration_s": 43.16,
+     "clock_lateness_ms": {
+      "median": 2.09,
+      "p99": 2.33,
+      "max": 5.68
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,2560 @@
+{
+ "agent": "fake-delay-500",
+ "run": {
+  "agent": "fake-delay-500",
+  "config": {
+   "type": "fake",
+   "label": "Fake: replies after exactly 500 ms, stops 200 ms after a barge-in",
+   "calibration": true,
+   "clock": "virtual",
+   "tone_only": true,
+   "response_delay_ms": 500,
+   "stop_after_ms": 200
+  },
+  "clock": "virtual",
+  "repeats": 1,
+  "scenarios": [
+   "backchannel_achha_hinglish",
+   "backchannel_haan_hi",
+   "backchannel_mmhmm_en",
+   "backchannel_twice_hinglish",
+   "barge_in_cancel_subscription_hinglish",
+   "barge_in_early_upi_hinglish",
+   "barge_in_late_warranty_hi",
+   "barge_in_replacement_en",
+   "barge_in_sunday_delivery_hi",
+   "change_day_en",
+   "change_item_hinglish",
+   "change_quantity_hi",
+   "noise_crowd_refund_hinglish",
+   "noise_street_order_en",
+   "noise_tv_booking_hi",
+   "noise_tv_pause_hinglish",
+   "numbers_date_time_en",
+   "numbers_email_spelled_en",
+   "numbers_order_double_en",
+   "numbers_phone_hi",
+   "numbers_pincode_hinglish",
+   "numbers_refund_amount_hi",
+   "pause_address_two_pauses_en",
+   "pause_appointment_hinglish",
+   "pause_cancel_order_hi",
+   "pause_long_new_address_hi",
+   "pause_table_booking_en",
+   "silence_after_question_en",
+   "silence_long_hinglish",
+   "silence_mid_call_hi"
+  ],
+  "scenario_set_version": "ea2ee3631ac1",
+  "git_commit": "fd80954-dirty",
+  "detector_commit": null,
+  "started_at": "2026-11-24T04:24:12+00:00",
+  "finished_at": "2026-11-24T04:24:12+00:00"
+ },
+ "content_scored": false,
+ "summary": {
+  "calls": 30,
+  "response_delay_ms": {
+   "median": 500.0,
+   "p95": 510.0,
+   "turns": 33
+  },
+  "false_interruptions": {
+   "count": 6,
+   "of": 7,
+   "rate": 0.8571
+  },
+  "barge_in_stopped": {
+   "count": 4,
+   "of": 4,
+   "rate": 1.0
+  },
+  "barge_in_stop_ms": {
+   "median": 200.0,
+   "interruptions": 4
+  },
+  "barge_in_recovery": {
+   "count": 0,
+   "of": 0,
+   "rate": null
+  },
+  "backchannel_ignored": {
+   "count": 0,
+   "of": 5,
+   "rate": 0.0
+  },
+  "detail_accuracy": {
+   "count": 0,
+   "of": 0,
+   "rate": null
+  },
+  "language_match": {
+   "count": 0,
+   "of": 0,
+   "rate": null
+  },
+  "task_completion": {
+   "count": 0,
+   "of": 30,
+   "rate": 0.0,
+   "untestable": 14
+  },
+  "no_response": {
+   "count": 4,
+   "of": 37,
+   "rate": 0.1081
+  }
+ },
+ "reps": [
+  {
+   "rep": 1,
+   "summary": {
+    "calls": 30,
+    "response_delay_ms": {
+     "median": 500.0,
+     "p95": 510.0,
+     "turns": 33
+    },
+    "false_interruptions": {
+     "count": 6,
+     "of": 7,
+     "rate": 0.8571
+    },
+    "barge_in_stopped": {
+     "count": 4,
+     "of": 4,
+     "rate": 1.0
+    },
+    "barge_in_stop_ms": {
+     "median": 200.0,
+     "interruptions": 4
+    },
+    "barge_in_recovery": {
+     "count": 0,
+     "of": 0,
+     "rate": null
+    },
+    "backchannel_ignored": {
+     "count": 0,
+     "of": 5,
+     "rate": 0.0
+    },
+    "detail_accuracy": {
+     "count": 0,
+     "of": 0,
+     "rate": null
+    },
+    "language_match": {
+     "count": 0,
+     "of": 0,
+     "rate": null
+    },
+    "task_completion": {
+     "count": 0,
+     "of": 30,
+     "rate": 0.0,
+     "untestable": 14
+    },
+    "no_response": {
+     "count": 4,
+     "of": 37,
+     "rate": 0.1081
+    }
+   },
+   "calls": [
+    {
+     "scenario": "backchannel_achha_hinglish",
+     "family": "backchannel",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "agent stopped talking when the caller said a filler word"
+     ],
+     "checks": [
+      {
+       "type": "backchannel_ignored",
+       "passed": false,
+       "note": "agent stopped talking when the caller said a filler word"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        4.54,
+        7.26
+       ],
+       [
+        8.28,
+        11.28
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 4.04,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [
+       {
+        "id": "filler",
+        "start": 7.06,
+        "end": 7.79,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 7.26
+       }
+      ],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        4.04,
+        13.5
+       ]
+      }
+     },
+     "duration_s": 13.5,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "backchannel_haan_hi",
+     "family": "backchannel",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "agent stopped talking when the caller said a filler word"
+     ],
+     "checks": [
+      {
+       "type": "backchannel_ignored",
+       "passed": false,
+       "note": "agent stopped talking when the caller said a filler word"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        5.1,
+        7.32
+       ],
+       [
+        8.24,
+        11.24
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 4.59,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 510
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [
+       {
+        "id": "filler",
+        "start": 7.12,
+        "end": 7.75,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 7.32
+       }
+      ],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        4.59,
+        13.46
+       ]
+      }
+     },
+     "duration_s": 13.46,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "backchannel_mmhmm_en",
+     "family": "backchannel",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "agent stopped talking when the caller said a filler word"
+     ],
+     "checks": [
+      {
+       "type": "backchannel_ignored",
+       "passed": false,
+       "note": "agent stopped talking when the caller said a filler word"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        3.88,
+        6.1
+       ],
+       [
+        7.02,
+        10.02
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 3.38,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [
+       {
+        "id": "filler",
+        "start": 5.9,
+        "end": 6.51,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 6.1
+       }
+      ],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        3.38,
+        12.24
+       ]
+      }
+     },
+     "duration_s": 12.24,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "backchannel_twice_hinglish",
+     "family": "backchannel",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "agent stopped talking when the caller said a filler word"
+     ],
+     "checks": [
+      {
+       "type": "backchannel_ignored",
+       "passed": false,
+       "note": "agent stopped talking when the caller said a filler word"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        4.48,
+        6.2
+       ],
+       [
+        7.18,
+        9.4
+       ],
+       [
+        10.4,
+        13.4
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 3.97,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 510
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [
+       {
+        "id": "filler_one",
+        "start": 6.0,
+        "end": 6.67,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 6.2
+       },
+       {
+        "id": "filler_two",
+        "start": 9.2,
+        "end": 9.89,
+        "agent_was_speaking": true,
+        "agent_stopped": true,
+        "agent_quiet_at": 9.4
+       }
+      ],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        3.97,
+        15.62
+       ]
+      }
+     },
+     "duration_s": 15.62,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "barge_in_cancel_subscription_hinglish",
+     "family": "barge_in",
+     "language": "hinglish",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 200 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "कैंसल",
+         "cancel",
+         "रद्द",
+         "कैंसिल",
+         "कैन्सल"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        4.78,
+        7.0
+       ],
+       [
+        12.06,
+        15.06
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 4.27,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 510
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 11.55,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 510
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 6.8,
+        "agent_was_speaking": true,
+        "stop_ms": 200,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        4.27,
+        6.8
+       ],
+       "cut": [
+        11.55,
+        17.28
+       ]
+      }
+     },
+     "duration_s": 17.28,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "barge_in_early_upi_hinglish",
+     "family": "barge_in",
+     "language": "hinglish",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 200 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "UPI",
+         "यूपीआई",
+         "यू पी आई",
+         "यूपीआइ"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        4.12,
+        5.34
+       ],
+       [
+        9.16,
+        12.16
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 3.62,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 8.66,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 5.14,
+        "agent_was_speaking": true,
+        "stop_ms": 200,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        3.62,
+        5.14
+       ],
+       "cut": [
+        8.66,
+        14.38
+       ]
+      }
+     },
+     "duration_s": 14.38,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "barge_in_late_warranty_hi",
+     "family": "barge_in",
+     "language": "hi",
+     "status": "untestable",
+     "reasons": [
+      "agent was not talking, so it could not be interrupted",
+      "no interruption took place"
+     ],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": null,
+       "note": "agent was not talking, so it could not be interrupted"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "साल",
+         "year",
+         "वर्ष",
+         "महीने",
+         "month"
+        ]
+       ],
+       "passed": null,
+       "note": "no interruption took place"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        3.76,
+        6.76
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 3.25,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 510
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        3.25,
+        24.28
+       ]
+      }
+     },
+     "duration_s": 24.28,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "barge_in_replacement_en",
+     "family": "barge_in",
+     "language": "en-IN",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 200 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "replacement",
+         "replace"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        3.46,
+        5.68
+       ],
+       [
+        9.1,
+        12.1
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 2.95,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 510
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 8.6,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 5.48,
+        "agent_was_speaking": true,
+        "stop_ms": 200,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        2.95,
+        5.48
+       ],
+       "cut": [
+        8.6,
+        14.32
+       ]
+      }
+     },
+     "duration_s": 14.32,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "barge_in_sunday_delivery_hi",
+     "family": "barge_in",
+     "language": "hi",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "barge_in_stops",
+       "passed": true,
+       "note": "agent went quiet after 200 ms"
+      },
+      {
+       "type": "recovery",
+       "reply_to": "cut",
+       "mentions": [
+        [
+         "रविवार",
+         "Sunday",
+         "संडे",
+         "इतवार"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        4.8,
+        7.02
+       ],
+       [
+        12.28,
+        15.28
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "ask"
+        ],
+        "kind": "turn",
+        "end": 4.3,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "kind": "barge_in",
+        "end": 11.78,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [
+       {
+        "turn": 1,
+        "ids": [
+         "cut"
+        ],
+        "start": 6.82,
+        "agent_was_speaking": true,
+        "stop_ms": 200,
+        "stopped": true
+       }
+      ],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "ask": [
+        4.3,
+        6.82
+       ],
+       "cut": [
+        11.78,
+        17.5
+       ]
+      }
+     },
+     "duration_s": 17.5,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "change_day_en",
+     "family": "change_of_mind",
+     "language": "en-IN",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "mentions",
+       "reply_to": "request",
+       "mentions": [
+        [
+         "Saturday",
+         "शनिवार",
+         "सैटरडे"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        5.46,
+        8.46
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "request"
+        ],
+        "kind": "turn",
+        "end": 4.96,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "request": [
+        4.96,
+        10.68
+       ]
+      }
+     },
+     "duration_s": 10.68,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "change_item_hinglish",
+     "family": "change_of_mind",
+     "language": "hinglish",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "mentions",
+       "reply_to": "request",
+       "mentions": [
+        [
+         "पनीर",
+         "paneer"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        5.92,
+        8.92
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "request"
+        ],
+        "kind": "turn",
+        "end": 5.43,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 490
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "request": [
+        5.43,
+        11.14
+       ]
+      }
+     },
+     "duration_s": 11.14,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "change_quantity_hi",
+     "family": "change_of_mind",
+     "language": "hi",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "mentions",
+       "reply_to": "request",
+       "mentions": [
+        [
+         "5"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        4.92,
+        7.92
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "request"
+        ],
+        "kind": "turn",
+        "end": 4.42,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "request": [
+        4.42,
+        10.14
+       ]
+      }
+     },
+     "duration_s": 10.14,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "noise_crowd_refund_hinglish",
+     "family": "background_noise",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "agent did not reply to 1 caller turn(s)"
+     ],
+     "checks": [
+      {
+       "type": "silent_during",
+       "during": "lead_in",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "3381",
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 8.77,
+        "responded": false,
+        "agent_talking_at_end": false,
+        "response_delay_ms": null
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "lead_in": {
+        "start": 0.0,
+        "end": 4.0,
+        "agent_onsets": [],
+        "agent_made_sound": false
+       }
+      },
+      "reply_windows": {
+       "number": [
+        8.77,
+        19.8
+       ]
+      }
+     },
+     "duration_s": 19.8,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "noise_street_order_en",
+     "family": "background_noise",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "agent did not reply to 1 caller turn(s)"
+     ],
+     "checks": [
+      {
+       "type": "silent_during",
+       "during": "lead_in",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "61205",
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 7.98,
+        "responded": false,
+        "agent_talking_at_end": false,
+        "response_delay_ms": null
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "lead_in": {
+        "start": 0.0,
+        "end": 4.0,
+        "agent_onsets": [],
+        "agent_made_sound": false
+       }
+      },
+      "reply_windows": {
+       "number": [
+        7.98,
+        19.0
+       ]
+      }
+     },
+     "duration_s": 19.0,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "noise_tv_booking_hi",
+     "family": "background_noise",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "agent did not reply to 1 caller turn(s)"
+     ],
+     "checks": [
+      {
+       "type": "silent_during",
+       "during": "lead_in",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "detail",
+       "reply_to": "booking",
+       "mentions": [
+        [
+         "शनिवार",
+         "Saturday",
+         "सैटरडे"
+        ],
+        [
+         "8"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "booking"
+        ],
+        "kind": "turn",
+        "end": 8.72,
+        "responded": false,
+        "agent_talking_at_end": false,
+        "response_delay_ms": null
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "lead_in": {
+        "start": 0.0,
+        "end": 4.0,
+        "agent_onsets": [],
+        "agent_made_sound": false
+       }
+      },
+      "reply_windows": {
+       "booking": [
+        8.72,
+        19.74
+       ]
+      }
+     },
+     "duration_s": 19.74,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "noise_tv_pause_hinglish",
+     "family": "background_noise",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "agent did not reply to 1 caller turn(s)"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": true,
+       "note": ""
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "कल",
+         "tomorrow",
+         "सुबह",
+         "morning"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 6.45,
+        "responded": false,
+        "agent_talking_at_end": false,
+        "response_delay_ms": null
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 2.93,
+        "end": 4.94,
+        "interrupted": false,
+        "agent_onset": null
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        6.45,
+        17.48
+       ],
+       "rest": [
+        6.45,
+        17.48
+       ]
+      }
+     },
+     "duration_s": 17.48,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "numbers_date_time_en",
+     "family": "numbers_details",
+     "language": "en-IN",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "date",
+       "mentions": [
+        [
+         "23"
+        ],
+        [
+         "March",
+         "मार्च"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        5.34,
+        8.34
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "date"
+        ],
+        "kind": "turn",
+        "end": 4.84,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "date": [
+        4.84,
+        10.56
+       ]
+      }
+     },
+     "duration_s": 10.56,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "numbers_email_spelled_en",
+     "family": "numbers_details",
+     "language": "en-IN",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "email",
+       "mentions": [
+        [
+         "ravi"
+        ],
+        [
+         "gmail"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        4.4,
+        7.4
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "email"
+        ],
+        "kind": "turn",
+        "end": 3.9,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "email": [
+        3.9,
+        9.62
+       ]
+      }
+     },
+     "duration_s": 9.62,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "numbers_order_double_en",
+     "family": "numbers_details",
+     "language": "en-IN",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "47993",
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        3.46,
+        6.46
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 2.95,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 510
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "number": [
+        2.95,
+        8.68
+       ]
+      }
+     },
+     "duration_s": 8.68,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "numbers_phone_hi",
+     "family": "numbers_details",
+     "language": "hi",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "9876543210",
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        5.24,
+        8.24
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 4.76,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 480
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "number": [
+        4.76,
+        10.46
+       ]
+      }
+     },
+     "duration_s": 10.46,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "numbers_pincode_hinglish",
+     "family": "numbers_details",
+     "language": "hinglish",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "number",
+       "digits": "560038",
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        3.92,
+        6.92
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "number"
+        ],
+        "kind": "turn",
+        "end": 3.42,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "number": [
+        3.42,
+        9.14
+       ]
+      }
+     },
+     "duration_s": 9.14,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "numbers_refund_amount_hi",
+     "family": "numbers_details",
+     "language": "hi",
+     "status": "untestable",
+     "reasons": [
+      "replies were not transcribed"
+     ],
+     "checks": [
+      {
+       "type": "detail",
+       "reply_to": "amount",
+       "mentions": [
+        [
+         "2500",
+         "ढाई हज़ार"
+        ],
+        [
+         "1500",
+         "डेढ़ हज़ार"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        7.24,
+        10.24
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "amount"
+        ],
+        "kind": "turn",
+        "end": 6.73,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 510
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "amount": [
+        6.73,
+        12.46
+       ]
+      }
+     },
+     "duration_s": 12.46,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "pause_address_two_pauses_en",
+     "family": "mid_thought_pause",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "agent started talking 0.50 s into the caller's pause"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": false,
+       "note": "agent started talking 0.50 s into the caller's pause"
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "12"
+        ],
+        [
+         "Bangalore",
+         "Bengaluru",
+         "बैंगलोर",
+         "बेंगलुरु"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        1.94,
+        3.14
+       ],
+       [
+        5.44,
+        7.16
+       ],
+       [
+        9.34,
+        12.34
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "second",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 8.84,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 1.44,
+        "end": 2.94,
+        "interrupted": true,
+        "agent_onset": 1.94
+       },
+       {
+        "turn": 0,
+        "start": 4.95,
+        "end": 6.96,
+        "interrupted": true,
+        "agent_onset": 5.44
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        8.84,
+        14.56
+       ],
+       "second": [
+        8.84,
+        14.56
+       ],
+       "rest": [
+        8.84,
+        14.56
+       ]
+      }
+     },
+     "duration_s": 14.56,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "pause_appointment_hinglish",
+     "family": "mid_thought_pause",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "agent started talking 0.50 s into the caller's pause"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": false,
+       "note": "agent started talking 0.50 s into the caller's pause"
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "11"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        3.88,
+        5.08
+       ],
+       [
+        7.18,
+        10.18
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 6.69,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 490
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 3.38,
+        "end": 4.88,
+        "interrupted": true,
+        "agent_onset": 3.88
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        6.69,
+        12.4
+       ],
+       "rest": [
+        6.69,
+        12.4
+       ]
+      }
+     },
+     "duration_s": 12.4,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "pause_cancel_order_hi",
+     "family": "mid_thought_pause",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "agent started talking 0.51 s into the caller's pause"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": false,
+       "note": "agent started talking 0.51 s into the caller's pause"
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "कैंसल",
+         "रद्द",
+         "cancel",
+         "कैंसिल",
+         "कैन्सल"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        4.3,
+        6.5
+       ],
+       [
+        8.6,
+        11.6
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 8.09,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 510
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 3.79,
+        "end": 6.3,
+        "interrupted": true,
+        "agent_onset": 4.3
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        8.09,
+        13.82
+       ],
+       "rest": [
+        8.09,
+        13.82
+       ]
+      }
+     },
+     "duration_s": 13.82,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "pause_long_new_address_hi",
+     "family": "mid_thought_pause",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "agent started talking 0.51 s into the caller's pause"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": false,
+       "note": "agent started talking 0.51 s into the caller's pause"
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "15"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        3.46,
+        6.16
+       ],
+       [
+        8.14,
+        11.14
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 7.64,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 2.95,
+        "end": 5.96,
+        "interrupted": true,
+        "agent_onset": 3.46
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        7.64,
+        13.36
+       ],
+       "rest": [
+        7.64,
+        13.36
+       ]
+      }
+     },
+     "duration_s": 13.36,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "pause_table_booking_en",
+     "family": "mid_thought_pause",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "agent started talking 0.50 s into the caller's pause"
+     ],
+     "checks": [
+      {
+       "type": "no_false_interruption",
+       "passed": false,
+       "note": "agent started talking 0.50 s into the caller's pause"
+      },
+      {
+       "type": "mentions",
+       "reply_to": "rest",
+       "mentions": [
+        [
+         "Friday",
+         "फ्राइडे",
+         "शुक्रवार"
+        ]
+       ],
+       "passed": null,
+       "note": "replies were not transcribed"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        2.22,
+        3.92
+       ],
+       [
+        6.26,
+        9.26
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "first",
+         "rest"
+        ],
+        "kind": "turn",
+        "end": 5.77,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 490
+       }
+      ],
+      "pauses": [
+       {
+        "turn": 0,
+        "start": 1.72,
+        "end": 3.72,
+        "interrupted": true,
+        "agent_onset": 2.22
+       }
+      ],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {},
+      "reply_windows": {
+       "first": [
+        5.77,
+        11.48
+       ],
+       "rest": [
+        5.77,
+        11.48
+       ]
+      }
+     },
+     "duration_s": 11.48,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "silence_after_question_en",
+     "family": "long_silence",
+     "language": "en-IN",
+     "status": "fail",
+     "reasons": [
+      "agent said nothing while the caller was silent"
+     ],
+     "checks": [
+      {
+       "type": "checks_in",
+       "during": "quiet",
+       "passed": false,
+       "note": "agent said nothing while the caller was silent"
+      }
+     ],
+     "language_match": {
+      "expected": "en",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        3.12,
+        6.12
+       ],
+       [
+        22.24,
+        25.24
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "open"
+        ],
+        "kind": "turn",
+        "end": 2.62,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "back"
+        ],
+        "kind": "turn",
+        "end": 21.75,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 490
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "quiet": {
+        "start": 7.32,
+        "end": 19.32,
+        "agent_onsets": [],
+        "agent_made_sound": false
+       }
+      },
+      "reply_windows": {
+       "open": [
+        2.62,
+        19.32
+       ],
+       "back": [
+        21.75,
+        27.46
+       ]
+      }
+     },
+     "duration_s": 27.46,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "silence_long_hinglish",
+     "family": "long_silence",
+     "language": "hinglish",
+     "status": "fail",
+     "reasons": [
+      "agent said nothing while the caller was silent"
+     ],
+     "checks": [
+      {
+       "type": "checks_in",
+       "during": "quiet",
+       "passed": false,
+       "note": "agent said nothing while the caller was silent"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        4.04,
+        7.04
+       ],
+       [
+        26.44,
+        29.44
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "open"
+        ],
+        "kind": "turn",
+        "end": 3.53,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 510
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "back"
+        ],
+        "kind": "turn",
+        "end": 25.94,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "quiet": {
+        "start": 8.24,
+        "end": 23.24,
+        "agent_onsets": [],
+        "agent_made_sound": false
+       }
+      },
+      "reply_windows": {
+       "open": [
+        3.53,
+        23.24
+       ],
+       "back": [
+        25.94,
+        31.66
+       ]
+      }
+     },
+     "duration_s": 31.66,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    },
+    {
+     "scenario": "silence_mid_call_hi",
+     "family": "long_silence",
+     "language": "hi",
+     "status": "fail",
+     "reasons": [
+      "agent said nothing while the caller was silent"
+     ],
+     "checks": [
+      {
+       "type": "checks_in",
+       "during": "quiet",
+       "passed": false,
+       "note": "agent said nothing while the caller was silent"
+      }
+     ],
+     "language_match": {
+      "expected": "hi",
+      "detected": null,
+      "match": null
+     },
+     "replies": null,
+     "measures": {
+      "agent_segments": [
+       [
+        4.38,
+        7.38
+       ],
+       [
+        22.74,
+        25.74
+       ]
+      ],
+      "turns": [
+       {
+        "turn": 0,
+        "ids": [
+         "open"
+        ],
+        "kind": "turn",
+        "end": 3.88,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       },
+       {
+        "turn": 1,
+        "ids": [
+         "back"
+        ],
+        "kind": "turn",
+        "end": 22.24,
+        "responded": true,
+        "agent_talking_at_end": false,
+        "response_delay_ms": 500
+       }
+      ],
+      "pauses": [],
+      "barge_ins": [],
+      "backchannels": [],
+      "windows": {
+       "quiet": {
+        "start": 8.58,
+        "end": 20.58,
+        "agent_onsets": [],
+        "agent_made_sound": false
+       }
+      },
+      "reply_windows": {
+       "open": [
+        3.88,
+        20.58
+       ],
+       "back": [
+        22.24,
+        27.96
+       ]
+      }
+     },
+     "duration_s": 27.96,
+     "clock_lateness_ms": {
+      "median": 0.0,
+      "p99": 0.0,
+      "max": 0.0
+     }
+    }
+   ]
+  }
+ ]
+}

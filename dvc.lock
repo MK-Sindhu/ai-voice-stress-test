@@ -1,0 +1,1377 @@
+schema: '2.0'
+stages:
+  validate_scenarios:
+    cmd: arena validate
+    deps:
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/scenario.py
+      hash: md5
+      md5: 38957e9a456f5ec15b53b2784a37944d
+      size: 5858
+    - path: src/arena/schema/scenario.schema.json
+      hash: md5
+      md5: f9db9fc4ed7d457b6566ee240ab66d09
+      size: 4293
+    outs:
+    - path: results/validation.json
+      hash: md5
+      md5: 8de206b0234eeb4de63d85c7ae8f2c7f
+      size: 333
+  check_metrics:
+    cmd: arena check-metrics
+    deps:
+    - path: src/arena/agents/fake.py
+      hash: md5
+      md5: 8130894a1b846f0d11bb83e5b2732e71
+      size: 8554
+    - path: src/arena/audio.py
+      hash: md5
+      md5: 5c16ba880f8098e899ffc276e9792dcf
+      size: 5713
+    - path: src/arena/caller.py
+      hash: md5
+      md5: 8c85c4119dcb382a5340730afbf29bd8
+      size: 8785
+    - path: src/arena/engine.py
+      hash: md5
+      md5: a83c831941121ce5d174d1c11fa99a01
+      size: 3271
+    - path: src/arena/metrics.py
+      hash: md5
+      md5: d9cc60620d1ddfba14c8cc66f8545878
+      size: 6154
+    - path: src/arena/validation.py
+      hash: md5
+      md5: 876a3c2637bfdbd1e9b966427134cb19
+      size: 4853
+    params:
+      params.yaml:
+        metrics:
+          vad:
+            threshold_dbfs: -45
+            min_speech_ms: 60
+            merge_gap_ms: 500
+          barge_in:
+            stop_silence_ms: 700
+            max_stop_ms: 1500
+          backchannel:
+            stop_silence_ms: 700
+            window_after_ms: 1000
+          transcriber:
+            model: large-v3-turbo
+            device: auto
+        tolerance:
+          timing_ms: 30
+    outs:
+    - path: results/metric_validation.json
+      hash: md5
+      md5: 763f81b3ac6878ee4d12029c57fa7b72
+      size: 3367
+  noise:
+    cmd: arena noise
+    deps:
+    - path: src/arena/noise.py
+      hash: md5
+      md5: 58304dd4a9c9f76c9801ef6d38095c89
+      size: 5900
+    params:
+      params.yaml:
+        noise:
+          seconds: 60
+          seed: 7
+    outs:
+    - path: data/noise
+      hash: md5
+      md5: 9d3c1f635c86d73a50c102d286ae11ee.dir
+      size: 5760132
+      nfiles: 3
+  render:
+    cmd: arena render
+    deps:
+    - path: results/validation.json
+      hash: md5
+      md5: 8de206b0234eeb4de63d85c7ae8f2c7f
+      size: 333
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/voices.py
+      hash: md5
+      md5: 3c468027406f2583994ecba704479cdc
+      size: 7058
+    params:
+      params.yaml:
+        agent_voice:
+          engine: kokoro
+          voice: hm_omega
+          english_accent: b
+          speed: 1.0
+          level_dbfs: -20
+          trim_dbfs: -45
+        caller.voice:
+          engine: kokoro
+          voice: hf_alpha
+          english_accent: b
+          speed: 1.0
+          level_dbfs: -20
+          trim_dbfs: -45
+        checkin_text:
+          en-IN: Hello, are you still there?
+          hi: हेलो, क्या आप लाइन पर हैं?
+          hinglish: हेलो, क्या आप लाइन पर हैं?
+    outs:
+    - path: data/agent_audio
+      hash: md5
+      md5: 43ff02799c2b53f9ad60cf202a7d4e0c.dir
+      size: 8787656
+      nfiles: 54
+    - path: data/caller_audio
+      hash: md5
+      md5: 41c719af37b87428a5c2490c0163e1b1.dir
+      size: 5291888
+      nfiles: 52
+    - path: results/render.json
+      hash: md5
+      md5: 7ebdd2be8fe11df4ce1d747f88a35254
+      size: 15518
+  check_audio:
+    cmd: arena check-audio
+    deps:
+    - path: data/caller_audio
+      hash: md5
+      md5: 41c719af37b87428a5c2490c0163e1b1.dir
+      size: 5291888
+      nfiles: 52
+    - path: results/render.json
+      hash: md5
+      md5: 7ebdd2be8fe11df4ce1d747f88a35254
+      size: 15518
+    - path: src/arena/content.py
+      hash: md5
+      md5: 66d0794dc1d3ee986ae94cc27f6198c7
+      size: 10926
+    - path: src/arena/transcribe.py
+      hash: md5
+      md5: acd988cd010e1df078cf152f606dfff3
+      size: 2280
+    params:
+      params.yaml:
+        intelligibility:
+          model: large-v3-turbo
+          max_cer: 0.25
+    outs:
+    - path: results/intelligibility.json
+      hash: md5
+      md5: ea8f00775faa07d7d06d37a923704643
+      size: 24715
+  run@fake-delay-500:
+    cmd: arena run --agent fake-delay-500
+    deps:
+    - path: data/agent_audio
+      hash: md5
+      md5: 43ff02799c2b53f9ad60cf202a7d4e0c.dir
+      size: 8787656
+      nfiles: 54
+    - path: data/caller_audio
+      hash: md5
+      md5: 41c719af37b87428a5c2490c0163e1b1.dir
+      size: 5291888
+      nfiles: 52
+    - path: data/noise
+      hash: md5
+      md5: 9d3c1f635c86d73a50c102d286ae11ee.dir
+      size: 5760132
+      nfiles: 3
+    - path: prompts
+      hash: md5
+      md5: 0abb6f09c562c5ab73fcd1f04fa38a34.dir
+      size: 1273
+      nfiles: 1
+    - path: results/intelligibility.json
+      hash: md5
+      md5: ea8f00775faa07d7d06d37a923704643
+      size: 24715
+    - path: results/metric_validation.json
+      hash: md5
+      md5: 763f81b3ac6878ee4d12029c57fa7b72
+      size: 3367
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/agents/base.py
+      hash: md5
+      md5: a5082d251a32a60376dd70ccbecca821
+      size: 2785
+    - path: src/arena/agents/fake.py
+      hash: md5
+      md5: 8130894a1b846f0d11bb83e5b2732e71
+      size: 8554
+    - path: src/arena/agents/local.py
+      hash: md5
+      md5: c30044cd01f097119eaa2531f5a8ec5b
+      size: 19071
+    - path: src/arena/caller.py
+      hash: md5
+      md5: 8c85c4119dcb382a5340730afbf29bd8
+      size: 8785
+    - path: src/arena/engine.py
+      hash: md5
+      md5: a83c831941121ce5d174d1c11fa99a01
+      size: 3271
+    - path: src/arena/runner.py
+      hash: md5
+      md5: ad1e29aa0d313300e2ea39281f2e97cd
+      size: 5516
+    params:
+      params.yaml:
+        agents.fake-delay-500:
+          type: fake
+          label: 'Fake: replies after exactly 500 ms, stops 200 ms after a barge-in'
+          calibration: true
+          clock: virtual
+          tone_only: true
+          response_delay_ms: 500
+          stop_after_ms: 200
+        caller:
+          voice:
+            engine: kokoro
+            voice: hf_alpha
+            english_accent: b
+            speed: 1.0
+            level_dbfs: -20
+            trim_dbfs: -45
+          agent_threshold_dbfs: -45
+          agent_hangover_ms: 500
+          end_silence_ms: 1200
+          listen_timeout_s: 10
+          listen_max_s: 45
+          trigger_timeout_s: 20
+    outs:
+    - path: results/runs/fake-delay-500
+      hash: md5
+      md5: 7c8e4786131454387306ab7641d55504.dir
+      size: 29748960
+      nfiles: 61
+  run@fake-delay-1000-never-stops:
+    cmd: arena run --agent fake-delay-1000-never-stops
+    deps:
+    - path: data/agent_audio
+      hash: md5
+      md5: 43ff02799c2b53f9ad60cf202a7d4e0c.dir
+      size: 8787656
+      nfiles: 54
+    - path: data/caller_audio
+      hash: md5
+      md5: 41c719af37b87428a5c2490c0163e1b1.dir
+      size: 5291888
+      nfiles: 52
+    - path: data/noise
+      hash: md5
+      md5: 9d3c1f635c86d73a50c102d286ae11ee.dir
+      size: 5760132
+      nfiles: 3
+    - path: prompts
+      hash: md5
+      md5: 0abb6f09c562c5ab73fcd1f04fa38a34.dir
+      size: 1273
+      nfiles: 1
+    - path: results/intelligibility.json
+      hash: md5
+      md5: ea8f00775faa07d7d06d37a923704643
+      size: 24715
+    - path: results/metric_validation.json
+      hash: md5
+      md5: 763f81b3ac6878ee4d12029c57fa7b72
+      size: 3367
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/agents/base.py
+      hash: md5
+      md5: a5082d251a32a60376dd70ccbecca821
+      size: 2785
+    - path: src/arena/agents/fake.py
+      hash: md5
+      md5: 8130894a1b846f0d11bb83e5b2732e71
+      size: 8554
+    - path: src/arena/agents/local.py
+      hash: md5
+      md5: c30044cd01f097119eaa2531f5a8ec5b
+      size: 19071
+    - path: src/arena/caller.py
+      hash: md5
+      md5: 8c85c4119dcb382a5340730afbf29bd8
+      size: 8785
+    - path: src/arena/engine.py
+      hash: md5
+      md5: a83c831941121ce5d174d1c11fa99a01
+      size: 3271
+    - path: src/arena/runner.py
+      hash: md5
+      md5: ad1e29aa0d313300e2ea39281f2e97cd
+      size: 5516
+    params:
+      params.yaml:
+        agents.fake-delay-1000-never-stops:
+          type: fake
+          label: 'Fake: replies after exactly 1000 ms, never stops when interrupted'
+          calibration: true
+          clock: virtual
+          tone_only: true
+          response_delay_ms: 1000
+          stop_after_ms:
+        caller:
+          voice:
+            engine: kokoro
+            voice: hf_alpha
+            english_accent: b
+            speed: 1.0
+            level_dbfs: -20
+            trim_dbfs: -45
+          agent_threshold_dbfs: -45
+          agent_hangover_ms: 500
+          end_silence_ms: 1200
+          listen_timeout_s: 10
+          listen_max_s: 45
+          trigger_timeout_s: 20
+    outs:
+    - path: results/runs/fake-delay-1000-never-stops
+      hash: md5
+      md5: 536db1e8d432d1e85907f93a5ade881d.dir
+      size: 30340728
+      nfiles: 61
+  run@oracle:
+    cmd: arena run --agent oracle
+    deps:
+    - path: data/agent_audio
+      hash: md5
+      md5: 43ff02799c2b53f9ad60cf202a7d4e0c.dir
+      size: 8787656
+      nfiles: 54
+    - path: data/caller_audio
+      hash: md5
+      md5: 41c719af37b87428a5c2490c0163e1b1.dir
+      size: 5291888
+      nfiles: 52
+    - path: data/noise
+      hash: md5
+      md5: 9d3c1f635c86d73a50c102d286ae11ee.dir
+      size: 5760132
+      nfiles: 3
+    - path: prompts
+      hash: md5
+      md5: 0abb6f09c562c5ab73fcd1f04fa38a34.dir
+      size: 1273
+      nfiles: 1
+    - path: results/intelligibility.json
+      hash: md5
+      md5: ea8f00775faa07d7d06d37a923704643
+      size: 24715
+    - path: results/metric_validation.json
+      hash: md5
+      md5: 763f81b3ac6878ee4d12029c57fa7b72
+      size: 3367
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/agents/base.py
+      hash: md5
+      md5: a5082d251a32a60376dd70ccbecca821
+      size: 2785
+    - path: src/arena/agents/fake.py
+      hash: md5
+      md5: 8130894a1b846f0d11bb83e5b2732e71
+      size: 8554
+    - path: src/arena/agents/local.py
+      hash: md5
+      md5: c30044cd01f097119eaa2531f5a8ec5b
+      size: 19071
+    - path: src/arena/caller.py
+      hash: md5
+      md5: 8c85c4119dcb382a5340730afbf29bd8
+      size: 8785
+    - path: src/arena/engine.py
+      hash: md5
+      md5: a83c831941121ce5d174d1c11fa99a01
+      size: 3271
+    - path: src/arena/runner.py
+      hash: md5
+      md5: ad1e29aa0d313300e2ea39281f2e97cd
+      size: 5516
+    params:
+      params.yaml:
+        agents.oracle:
+          type: oracle
+          label: 'Oracle: knows the script, says the right thing'
+          calibration: true
+          clock: virtual
+          variant: good
+        caller:
+          voice:
+            engine: kokoro
+            voice: hf_alpha
+            english_accent: b
+            speed: 1.0
+            level_dbfs: -20
+            trim_dbfs: -45
+          agent_threshold_dbfs: -45
+          agent_hangover_ms: 500
+          end_silence_ms: 1200
+          listen_timeout_s: 10
+          listen_max_s: 45
+          trigger_timeout_s: 20
+    outs:
+    - path: results/runs/oracle
+      hash: md5
+      md5: 673c82e652676f9065e1f5ef7da87744.dir
+      size: 34030810
+      nfiles: 61
+  run@oracle-wrong:
+    cmd: arena run --agent oracle-wrong
+    deps:
+    - path: data/agent_audio
+      hash: md5
+      md5: 43ff02799c2b53f9ad60cf202a7d4e0c.dir
+      size: 8787656
+      nfiles: 54
+    - path: data/caller_audio
+      hash: md5
+      md5: 41c719af37b87428a5c2490c0163e1b1.dir
+      size: 5291888
+      nfiles: 52
+    - path: data/noise
+      hash: md5
+      md5: 9d3c1f635c86d73a50c102d286ae11ee.dir
+      size: 5760132
+      nfiles: 3
+    - path: prompts
+      hash: md5
+      md5: 0abb6f09c562c5ab73fcd1f04fa38a34.dir
+      size: 1273
+      nfiles: 1
+    - path: results/intelligibility.json
+      hash: md5
+      md5: ea8f00775faa07d7d06d37a923704643
+      size: 24715
+    - path: results/metric_validation.json
+      hash: md5
+      md5: 763f81b3ac6878ee4d12029c57fa7b72
+      size: 3367
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/agents/base.py
+      hash: md5
+      md5: a5082d251a32a60376dd70ccbecca821
+      size: 2785
+    - path: src/arena/agents/fake.py
+      hash: md5
+      md5: 8130894a1b846f0d11bb83e5b2732e71
+      size: 8554
+    - path: src/arena/agents/local.py
+      hash: md5
+      md5: c30044cd01f097119eaa2531f5a8ec5b
+      size: 19071
+    - path: src/arena/caller.py
+      hash: md5
+      md5: 8c85c4119dcb382a5340730afbf29bd8
+      size: 8785
+    - path: src/arena/engine.py
+      hash: md5
+      md5: a83c831941121ce5d174d1c11fa99a01
+      size: 3271
+    - path: src/arena/runner.py
+      hash: md5
+      md5: ad1e29aa0d313300e2ea39281f2e97cd
+      size: 5516
+    params:
+      params.yaml:
+        agents.oracle-wrong:
+          type: oracle
+          label: 'Oracle (wrong details): knows the script, states wrong details on
+            purpose'
+          calibration: true
+          clock: virtual
+          variant: wrong
+        caller:
+          voice:
+            engine: kokoro
+            voice: hf_alpha
+            english_accent: b
+            speed: 1.0
+            level_dbfs: -20
+            trim_dbfs: -45
+          agent_threshold_dbfs: -45
+          agent_hangover_ms: 500
+          end_silence_ms: 1200
+          listen_timeout_s: 10
+          listen_max_s: 45
+          trigger_timeout_s: 20
+    outs:
+    - path: results/runs/oracle-wrong
+      hash: md5
+      md5: 871dc25623c76bcdd0b635d96183f364.dir
+      size: 34037429
+      nfiles: 61
+  run@local-silence-500:
+    cmd: arena run --agent local-silence-500
+    deps:
+    - path: data/agent_audio
+      hash: md5
+      md5: 43ff02799c2b53f9ad60cf202a7d4e0c.dir
+      size: 8787656
+      nfiles: 54
+    - path: data/caller_audio
+      hash: md5
+      md5: 41c719af37b87428a5c2490c0163e1b1.dir
+      size: 5291888
+      nfiles: 52
+    - path: data/noise
+      hash: md5
+      md5: 9d3c1f635c86d73a50c102d286ae11ee.dir
+      size: 5760132
+      nfiles: 3
+    - path: prompts
+      hash: md5
+      md5: 0abb6f09c562c5ab73fcd1f04fa38a34.dir
+      size: 1273
+      nfiles: 1
+    - path: results/intelligibility.json
+      hash: md5
+      md5: ea8f00775faa07d7d06d37a923704643
+      size: 24715
+    - path: results/metric_validation.json
+      hash: md5
+      md5: 763f81b3ac6878ee4d12029c57fa7b72
+      size: 3367
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/agents/base.py
+      hash: md5
+      md5: a5082d251a32a60376dd70ccbecca821
+      size: 2785
+    - path: src/arena/agents/fake.py
+      hash: md5
+      md5: 8130894a1b846f0d11bb83e5b2732e71
+      size: 8554
+    - path: src/arena/agents/local.py
+      hash: md5
+      md5: c30044cd01f097119eaa2531f5a8ec5b
+      size: 19071
+    - path: src/arena/caller.py
+      hash: md5
+      md5: 8c85c4119dcb382a5340730afbf29bd8
+      size: 8785
+    - path: src/arena/engine.py
+      hash: md5
+      md5: a83c831941121ce5d174d1c11fa99a01
+      size: 3271
+    - path: src/arena/runner.py
+      hash: md5
+      md5: ad1e29aa0d313300e2ea39281f2e97cd
+      size: 5516
+    params:
+      params.yaml:
+        agents.local-silence-500:
+          type: local
+          label: Local baseline, 500 ms silence timeout
+          repeats: 2
+          endpointing:
+            type: silence
+            timeout_ms: 500
+          asr:
+            model: small
+            device: auto
+            compute_type: default
+            beam_size: 1
+          llm:
+            model: llama3.2:3b
+            temperature: 0.0
+            max_tokens: 160
+          voice:
+            voice: hm_omega
+            english_accent: b
+          interrupt_min_ms: 250
+          idle_checkin_s: 6
+        caller:
+          voice:
+            engine: kokoro
+            voice: hf_alpha
+            english_accent: b
+            speed: 1.0
+            level_dbfs: -20
+            trim_dbfs: -45
+          agent_threshold_dbfs: -45
+          agent_hangover_ms: 500
+          end_silence_ms: 1200
+          listen_timeout_s: 10
+          listen_max_s: 45
+          trigger_timeout_s: 20
+    outs:
+    - path: results/runs/local-silence-500
+      hash: md5
+      md5: d213a888024b17428d3b7649b3715b1f.dir
+      size: 89219026
+      nfiles: 121
+  run@local-silence-1000:
+    cmd: arena run --agent local-silence-1000
+    deps:
+    - path: data/agent_audio
+      hash: md5
+      md5: 43ff02799c2b53f9ad60cf202a7d4e0c.dir
+      size: 8787656
+      nfiles: 54
+    - path: data/caller_audio
+      hash: md5
+      md5: 41c719af37b87428a5c2490c0163e1b1.dir
+      size: 5291888
+      nfiles: 52
+    - path: data/noise
+      hash: md5
+      md5: 9d3c1f635c86d73a50c102d286ae11ee.dir
+      size: 5760132
+      nfiles: 3
+    - path: prompts
+      hash: md5
+      md5: 0abb6f09c562c5ab73fcd1f04fa38a34.dir
+      size: 1273
+      nfiles: 1
+    - path: results/intelligibility.json
+      hash: md5
+      md5: ea8f00775faa07d7d06d37a923704643
+      size: 24715
+    - path: results/metric_validation.json
+      hash: md5
+      md5: 763f81b3ac6878ee4d12029c57fa7b72
+      size: 3367
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/agents/base.py
+      hash: md5
+      md5: a5082d251a32a60376dd70ccbecca821
+      size: 2785
+    - path: src/arena/agents/fake.py
+      hash: md5
+      md5: 8130894a1b846f0d11bb83e5b2732e71
+      size: 8554
+    - path: src/arena/agents/local.py
+      hash: md5
+      md5: c30044cd01f097119eaa2531f5a8ec5b
+      size: 19071
+    - path: src/arena/caller.py
+      hash: md5
+      md5: 8c85c4119dcb382a5340730afbf29bd8
+      size: 8785
+    - path: src/arena/engine.py
+      hash: md5
+      md5: a83c831941121ce5d174d1c11fa99a01
+      size: 3271
+    - path: src/arena/runner.py
+      hash: md5
+      md5: ad1e29aa0d313300e2ea39281f2e97cd
+      size: 5516
+    params:
+      params.yaml:
+        agents.local-silence-1000:
+          type: local
+          label: Local baseline, 1000 ms silence timeout
+          repeats: 2
+          endpointing:
+            type: silence
+            timeout_ms: 1000
+          asr:
+            model: small
+            device: auto
+            compute_type: default
+            beam_size: 1
+          llm:
+            model: llama3.2:3b
+            temperature: 0.0
+            max_tokens: 160
+          voice:
+            voice: hm_omega
+            english_accent: b
+          interrupt_min_ms: 250
+          idle_checkin_s: 6
+        caller:
+          voice:
+            engine: kokoro
+            voice: hf_alpha
+            english_accent: b
+            speed: 1.0
+            level_dbfs: -20
+            trim_dbfs: -45
+          agent_threshold_dbfs: -45
+          agent_hangover_ms: 500
+          end_silence_ms: 1200
+          listen_timeout_s: 10
+          listen_max_s: 45
+          trigger_timeout_s: 20
+    outs:
+    - path: results/runs/local-silence-1000
+      hash: md5
+      md5: c01e09adce5f0a81d60518794fd74b1f.dir
+      size: 87925852
+      nfiles: 121
+  run@local-detector:
+    cmd: arena run --agent local-detector
+    deps:
+    - path: data/agent_audio
+      hash: md5
+      md5: 43ff02799c2b53f9ad60cf202a7d4e0c.dir
+      size: 8787656
+      nfiles: 54
+    - path: data/caller_audio
+      hash: md5
+      md5: 41c719af37b87428a5c2490c0163e1b1.dir
+      size: 5291888
+      nfiles: 52
+    - path: data/noise
+      hash: md5
+      md5: 9d3c1f635c86d73a50c102d286ae11ee.dir
+      size: 5760132
+      nfiles: 3
+    - path: prompts
+      hash: md5
+      md5: 0abb6f09c562c5ab73fcd1f04fa38a34.dir
+      size: 1273
+      nfiles: 1
+    - path: results/intelligibility.json
+      hash: md5
+      md5: ea8f00775faa07d7d06d37a923704643
+      size: 24715
+    - path: results/metric_validation.json
+      hash: md5
+      md5: 763f81b3ac6878ee4d12029c57fa7b72
+      size: 3367
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/agents/base.py
+      hash: md5
+      md5: a5082d251a32a60376dd70ccbecca821
+      size: 2785
+    - path: src/arena/agents/fake.py
+      hash: md5
+      md5: 8130894a1b846f0d11bb83e5b2732e71
+      size: 8554
+    - path: src/arena/agents/local.py
+      hash: md5
+      md5: c30044cd01f097119eaa2531f5a8ec5b
+      size: 19071
+    - path: src/arena/caller.py
+      hash: md5
+      md5: 8c85c4119dcb382a5340730afbf29bd8
+      size: 8785
+    - path: src/arena/engine.py
+      hash: md5
+      md5: a83c831941121ce5d174d1c11fa99a01
+      size: 3271
+    - path: src/arena/runner.py
+      hash: md5
+      md5: ad1e29aa0d313300e2ea39281f2e97cd
+      size: 5516
+    params:
+      params.yaml:
+        agents.local-detector:
+          type: local
+          label: Local baseline, end-of-turn detector (Hindi audio model, 
+            threshold 0.9)
+          repeats: 2
+          endpointing:
+            type: detector
+            repo: ../End-of-turn-detector
+            threshold: 0.9
+            ask_after_ms: 200
+            fallback_ms: 1500
+          asr:
+            model: small
+            device: auto
+            compute_type: default
+            beam_size: 1
+          llm:
+            model: llama3.2:3b
+            temperature: 0.0
+            max_tokens: 160
+          voice:
+            voice: hm_omega
+            english_accent: b
+          interrupt_min_ms: 250
+          idle_checkin_s: 6
+        caller:
+          voice:
+            engine: kokoro
+            voice: hf_alpha
+            english_accent: b
+            speed: 1.0
+            level_dbfs: -20
+            trim_dbfs: -45
+          agent_threshold_dbfs: -45
+          agent_hangover_ms: 500
+          end_silence_ms: 1200
+          listen_timeout_s: 10
+          listen_max_s: 45
+          trigger_timeout_s: 20
+    outs:
+    - path: results/runs/local-detector
+      hash: md5
+      md5: dcc25c66761e1eec41a3ad20526c5e51.dir
+      size: 89428878
+      nfiles: 121
+  run@local-turbo-1000:
+    cmd: arena run --agent local-turbo-1000
+    deps:
+    - path: data/agent_audio
+      hash: md5
+      md5: 43ff02799c2b53f9ad60cf202a7d4e0c.dir
+      size: 8787656
+      nfiles: 54
+    - path: data/caller_audio
+      hash: md5
+      md5: 41c719af37b87428a5c2490c0163e1b1.dir
+      size: 5291888
+      nfiles: 52
+    - path: data/noise
+      hash: md5
+      md5: 9d3c1f635c86d73a50c102d286ae11ee.dir
+      size: 5760132
+      nfiles: 3
+    - path: prompts
+      hash: md5
+      md5: 0abb6f09c562c5ab73fcd1f04fa38a34.dir
+      size: 1273
+      nfiles: 1
+    - path: results/intelligibility.json
+      hash: md5
+      md5: ea8f00775faa07d7d06d37a923704643
+      size: 24715
+    - path: results/metric_validation.json
+      hash: md5
+      md5: 763f81b3ac6878ee4d12029c57fa7b72
+      size: 3367
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/agents/base.py
+      hash: md5
+      md5: a5082d251a32a60376dd70ccbecca821
+      size: 2785
+    - path: src/arena/agents/fake.py
+      hash: md5
+      md5: 8130894a1b846f0d11bb83e5b2732e71
+      size: 8554
+    - path: src/arena/agents/local.py
+      hash: md5
+      md5: c30044cd01f097119eaa2531f5a8ec5b
+      size: 19071
+    - path: src/arena/caller.py
+      hash: md5
+      md5: 8c85c4119dcb382a5340730afbf29bd8
+      size: 8785
+    - path: src/arena/engine.py
+      hash: md5
+      md5: a83c831941121ce5d174d1c11fa99a01
+      size: 3271
+    - path: src/arena/runner.py
+      hash: md5
+      md5: ad1e29aa0d313300e2ea39281f2e97cd
+      size: 5516
+    params:
+      params.yaml:
+        agents.local-turbo-1000:
+          type: local
+          label: Local baseline, 1000 ms silence timeout, larger recogniser
+          repeats: 2
+          endpointing:
+            type: silence
+            timeout_ms: 1000
+          asr:
+            model: large-v3-turbo
+            device: auto
+            compute_type: default
+            beam_size: 1
+          llm:
+            model: llama3.2:3b
+            temperature: 0.0
+            max_tokens: 160
+          voice:
+            voice: hm_omega
+            english_accent: b
+          interrupt_min_ms: 250
+          idle_checkin_s: 6
+        caller:
+          voice:
+            engine: kokoro
+            voice: hf_alpha
+            english_accent: b
+            speed: 1.0
+            level_dbfs: -20
+            trim_dbfs: -45
+          agent_threshold_dbfs: -45
+          agent_hangover_ms: 500
+          end_silence_ms: 1200
+          listen_timeout_s: 10
+          listen_max_s: 45
+          trigger_timeout_s: 20
+    outs:
+    - path: results/runs/local-turbo-1000
+      hash: md5
+      md5: a8fde89f14cbb7f05e07b46155589bbd.dir
+      size: 92118379
+      nfiles: 121
+  score@fake-delay-500:
+    cmd: arena score --agent fake-delay-500
+    deps:
+    - path: results/runs/fake-delay-500
+      hash: md5
+      md5: 7c8e4786131454387306ab7641d55504.dir
+      size: 29748960
+      nfiles: 61
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/content.py
+      hash: md5
+      md5: 66d0794dc1d3ee986ae94cc27f6198c7
+      size: 10926
+    - path: src/arena/metrics.py
+      hash: md5
+      md5: d9cc60620d1ddfba14c8cc66f8545878
+      size: 6154
+    - path: src/arena/score.py
+      hash: md5
+      md5: 191797300617969ca0c51281809ef378
+      size: 10317
+    - path: src/arena/transcribe.py
+      hash: md5
+      md5: acd988cd010e1df078cf152f606dfff3
+      size: 2280
+    params:
+      params.yaml:
+        metrics:
+          vad:
+            threshold_dbfs: -45
+            min_speech_ms: 60
+            merge_gap_ms: 500
+          barge_in:
+            stop_silence_ms: 700
+            max_stop_ms: 1500
+          backchannel:
+            stop_silence_ms: 700
+            window_after_ms: 1000
+          transcriber:
+            model: large-v3-turbo
+            device: auto
+    outs:
+    - path: results/scores/fake-delay-500.json
+      hash: md5
+      md5: 57fddfc20d57a6a3d11e8ba16c4ef8c9
+      size: 49113
+  score@fake-delay-1000-never-stops:
+    cmd: arena score --agent fake-delay-1000-never-stops
+    deps:
+    - path: results/runs/fake-delay-1000-never-stops
+      hash: md5
+      md5: 536db1e8d432d1e85907f93a5ade881d.dir
+      size: 30340728
+      nfiles: 61
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/content.py
+      hash: md5
+      md5: 66d0794dc1d3ee986ae94cc27f6198c7
+      size: 10926
+    - path: src/arena/metrics.py
+      hash: md5
+      md5: d9cc60620d1ddfba14c8cc66f8545878
+      size: 6154
+    - path: src/arena/score.py
+      hash: md5
+      md5: 191797300617969ca0c51281809ef378
+      size: 10317
+    - path: src/arena/transcribe.py
+      hash: md5
+      md5: acd988cd010e1df078cf152f606dfff3
+      size: 2280
+    params:
+      params.yaml:
+        metrics:
+          vad:
+            threshold_dbfs: -45
+            min_speech_ms: 60
+            merge_gap_ms: 500
+          barge_in:
+            stop_silence_ms: 700
+            max_stop_ms: 1500
+          backchannel:
+            stop_silence_ms: 700
+            window_after_ms: 1000
+          transcriber:
+            model: large-v3-turbo
+            device: auto
+    outs:
+    - path: results/scores/fake-delay-1000-never-stops.json
+      hash: md5
+      md5: 18be66e6ba1adfa4883309feb9ef9341
+      size: 48671
+  score@oracle:
+    cmd: arena score --agent oracle
+    deps:
+    - path: results/runs/oracle
+      hash: md5
+      md5: 673c82e652676f9065e1f5ef7da87744.dir
+      size: 34030810
+      nfiles: 61
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/content.py
+      hash: md5
+      md5: 66d0794dc1d3ee986ae94cc27f6198c7
+      size: 10926
+    - path: src/arena/metrics.py
+      hash: md5
+      md5: d9cc60620d1ddfba14c8cc66f8545878
+      size: 6154
+    - path: src/arena/score.py
+      hash: md5
+      md5: 191797300617969ca0c51281809ef378
+      size: 10317
+    - path: src/arena/transcribe.py
+      hash: md5
+      md5: acd988cd010e1df078cf152f606dfff3
+      size: 2280
+    params:
+      params.yaml:
+        metrics:
+          vad:
+            threshold_dbfs: -45
+            min_speech_ms: 60
+            merge_gap_ms: 500
+          barge_in:
+            stop_silence_ms: 700
+            max_stop_ms: 1500
+          backchannel:
+            stop_silence_ms: 700
+            window_after_ms: 1000
+          transcriber:
+            model: large-v3-turbo
+            device: auto
+    outs:
+    - path: results/scores/oracle.json
+      hash: md5
+      md5: b160f14962893905361ce35920590862
+      size: 61187
+  score@oracle-wrong:
+    cmd: arena score --agent oracle-wrong
+    deps:
+    - path: results/runs/oracle-wrong
+      hash: md5
+      md5: 871dc25623c76bcdd0b635d96183f364.dir
+      size: 34037429
+      nfiles: 61
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/content.py
+      hash: md5
+      md5: 66d0794dc1d3ee986ae94cc27f6198c7
+      size: 10926
+    - path: src/arena/metrics.py
+      hash: md5
+      md5: d9cc60620d1ddfba14c8cc66f8545878
+      size: 6154
+    - path: src/arena/score.py
+      hash: md5
+      md5: 191797300617969ca0c51281809ef378
+      size: 10317
+    - path: src/arena/transcribe.py
+      hash: md5
+      md5: acd988cd010e1df078cf152f606dfff3
+      size: 2280
+    params:
+      params.yaml:
+        metrics:
+          vad:
+            threshold_dbfs: -45
+            min_speech_ms: 60
+            merge_gap_ms: 500
+          barge_in:
+            stop_silence_ms: 700
+            max_stop_ms: 1500
+          backchannel:
+            stop_silence_ms: 700
+            window_after_ms: 1000
+          transcriber:
+            model: large-v3-turbo
+            device: auto
+    outs:
+    - path: results/scores/oracle-wrong.json
+      hash: md5
+      md5: 01ccf48e7c7bf25a51e8285aafb908b6
+      size: 61988
+  score@local-silence-500:
+    cmd: arena score --agent local-silence-500
+    deps:
+    - path: results/runs/local-silence-500
+      hash: md5
+      md5: d213a888024b17428d3b7649b3715b1f.dir
+      size: 89219026
+      nfiles: 121
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/content.py
+      hash: md5
+      md5: 66d0794dc1d3ee986ae94cc27f6198c7
+      size: 10926
+    - path: src/arena/metrics.py
+      hash: md5
+      md5: d9cc60620d1ddfba14c8cc66f8545878
+      size: 6154
+    - path: src/arena/score.py
+      hash: md5
+      md5: 191797300617969ca0c51281809ef378
+      size: 10317
+    - path: src/arena/transcribe.py
+      hash: md5
+      md5: acd988cd010e1df078cf152f606dfff3
+      size: 2280
+    params:
+      params.yaml:
+        metrics:
+          vad:
+            threshold_dbfs: -45
+            min_speech_ms: 60
+            merge_gap_ms: 500
+          barge_in:
+            stop_silence_ms: 700
+            max_stop_ms: 1500
+          backchannel:
+            stop_silence_ms: 700
+            window_after_ms: 1000
+          transcriber:
+            model: large-v3-turbo
+            device: auto
+    outs:
+    - path: results/scores/local-silence-500.json
+      hash: md5
+      md5: aa28d30e68a865539b607fbe726c7258
+      size: 135855
+  score@local-silence-1000:
+    cmd: arena score --agent local-silence-1000
+    deps:
+    - path: results/runs/local-silence-1000
+      hash: md5
+      md5: c01e09adce5f0a81d60518794fd74b1f.dir
+      size: 87925852
+      nfiles: 121
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/content.py
+      hash: md5
+      md5: 66d0794dc1d3ee986ae94cc27f6198c7
+      size: 10926
+    - path: src/arena/metrics.py
+      hash: md5
+      md5: d9cc60620d1ddfba14c8cc66f8545878
+      size: 6154
+    - path: src/arena/score.py
+      hash: md5
+      md5: 191797300617969ca0c51281809ef378
+      size: 10317
+    - path: src/arena/transcribe.py
+      hash: md5
+      md5: acd988cd010e1df078cf152f606dfff3
+      size: 2280
+    params:
+      params.yaml:
+        metrics:
+          vad:
+            threshold_dbfs: -45
+            min_speech_ms: 60
+            merge_gap_ms: 500
+          barge_in:
+            stop_silence_ms: 700
+            max_stop_ms: 1500
+          backchannel:
+            stop_silence_ms: 700
+            window_after_ms: 1000
+          transcriber:
+            model: large-v3-turbo
+            device: auto
+    outs:
+    - path: results/scores/local-silence-1000.json
+      hash: md5
+      md5: 7cfaa0bee8fba41f8f55ab66125b909b
+      size: 134137
+  score@local-detector:
+    cmd: arena score --agent local-detector
+    deps:
+    - path: results/runs/local-detector
+      hash: md5
+      md5: dcc25c66761e1eec41a3ad20526c5e51.dir
+      size: 89428878
+      nfiles: 121
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/content.py
+      hash: md5
+      md5: 66d0794dc1d3ee986ae94cc27f6198c7
+      size: 10926
+    - path: src/arena/metrics.py
+      hash: md5
+      md5: d9cc60620d1ddfba14c8cc66f8545878
+      size: 6154
+    - path: src/arena/score.py
+      hash: md5
+      md5: 191797300617969ca0c51281809ef378
+      size: 10317
+    - path: src/arena/transcribe.py
+      hash: md5
+      md5: acd988cd010e1df078cf152f606dfff3
+      size: 2280
+    params:
+      params.yaml:
+        metrics:
+          vad:
+            threshold_dbfs: -45
+            min_speech_ms: 60
+            merge_gap_ms: 500
+          barge_in:
+            stop_silence_ms: 700
+            max_stop_ms: 1500
+          backchannel:
+            stop_silence_ms: 700
+            window_after_ms: 1000
+          transcriber:
+            model: large-v3-turbo
+            device: auto
+    outs:
+    - path: results/scores/local-detector.json
+      hash: md5
+      md5: c2813019775689ca3867c8bab1b0956a
+      size: 135139
+  score@local-turbo-1000:
+    cmd: arena score --agent local-turbo-1000
+    deps:
+    - path: results/runs/local-turbo-1000
+      hash: md5
+      md5: a8fde89f14cbb7f05e07b46155589bbd.dir
+      size: 92118379
+      nfiles: 121
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/content.py
+      hash: md5
+      md5: 66d0794dc1d3ee986ae94cc27f6198c7
+      size: 10926
+    - path: src/arena/metrics.py
+      hash: md5
+      md5: d9cc60620d1ddfba14c8cc66f8545878
+      size: 6154
+    - path: src/arena/score.py
+      hash: md5
+      md5: 191797300617969ca0c51281809ef378
+      size: 10317
+    - path: src/arena/transcribe.py
+      hash: md5
+      md5: acd988cd010e1df078cf152f606dfff3
+      size: 2280
+    params:
+      params.yaml:
+        metrics:
+          vad:
+            threshold_dbfs: -45
+            min_speech_ms: 60
+            merge_gap_ms: 500
+          barge_in:
+            stop_silence_ms: 700
+            max_stop_ms: 1500
+          backchannel:
+            stop_silence_ms: 700
+            window_after_ms: 1000
+          transcriber:
+            model: large-v3-turbo
+            device: auto
+    outs:
+    - path: results/scores/local-turbo-1000.json
+      hash: md5
+      md5: 5358e82f3139a8c69280a50e5042404e
+      size: 132108
+  report:
+    cmd: arena report
+    deps:
+    - path: results/runs
+      hash: md5
+      md5: 61abf41a27f036ea13957befb4c670cf.dir
+      size: 486850062
+      nfiles: 728
+    - path: results/scores
+      hash: md5
+      md5: 37abe7439414f386f78a815ce1bdfb94.dir
+      size: 758198
+      nfiles: 8
+    - path: scenarios
+      hash: md5
+      md5: c671f7ebaf00ab088644372df2703223.dir
+      size: 32776
+      nfiles: 30
+    - path: src/arena/report.py
+      hash: md5
+      md5: 23e6ad8de3ebe28da36771e9981d31eb
+      size: 24084
+    outs:
+    - path: docs
+      hash: md5
+      md5: b4d967383a61612300d3762871321d7f.dir
+      size: 7824627
+      nfiles: 78
+    - path: results/leaderboard.json
+      hash: md5
+      md5: 38acbac320881f6c3e168b227ad0b95e
+      size: 7220

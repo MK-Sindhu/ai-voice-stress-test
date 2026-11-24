@@ -1,0 +1,164 @@
+{
+ "tolerance_ms": 30,
+ "timing_checks": 14,
+ "max_timing_error_ms": 0,
+ "mean_timing_error_ms": 0.0,
+ "outcome_checks": 8,
+ "all_ok": true,
+ "rows": [
+  {
+   "metric": "response delay, agent set to 200 ms",
+   "expected": 200,
+   "measured": 200,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "response delay, agent set to 300 ms",
+   "expected": 300,
+   "measured": 300,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "response delay, agent set to 500 ms",
+   "expected": 500,
+   "measured": 500,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "response delay, agent set to 700 ms",
+   "expected": 700,
+   "measured": 700,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "response delay, agent set to 1000 ms",
+   "expected": 1000,
+   "measured": 1000,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "response delay, agent set to 1500 ms",
+   "expected": 1500,
+   "measured": 1500,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "response delay, agent set to 2000 ms",
+   "expected": 2000,
+   "measured": 2000,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "response delay on a real clock, agent set to 500 ms",
+   "expected": 500,
+   "measured": 500,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "barge-in stop time, agent set to 100 ms",
+   "expected": 100,
+   "measured": 100,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "barge-in stop time, agent set to 200 ms",
+   "expected": 200,
+   "measured": 200,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "barge-in stop time, agent set to 300 ms",
+   "expected": 300,
+   "measured": 300,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "barge-in stop time, agent set to 500 ms",
+   "expected": 500,
+   "measured": 500,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "barge-in stop time, agent set to 800 ms",
+   "expected": 800,
+   "measured": 800,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "barge-in stop time, agent set to 1200 ms",
+   "expected": 1200,
+   "measured": 1200,
+   "error_ms": 0,
+   "ok": true
+  },
+  {
+   "metric": "agent that never stops is reported as not stopping",
+   "expected": false,
+   "measured": false,
+   "error_ms": null,
+   "ok": true
+  },
+  {
+   "metric": "false interruption: agent replies after 500 ms, caller pauses 2.0 s",
+   "expected": true,
+   "measured": true,
+   "error_ms": null,
+   "ok": true
+  },
+  {
+   "metric": "false interruption: agent replies after 1000 ms, caller pauses 2.0 s",
+   "expected": true,
+   "measured": true,
+   "error_ms": null,
+   "ok": true
+  },
+  {
+   "metric": "false interruption: agent replies after 1500 ms, caller pauses 1.0 s",
+   "expected": false,
+   "measured": false,
+   "error_ms": null,
+   "ok": true
+  },
+  {
+   "metric": "false interruption: agent replies after 2500 ms, caller pauses 2.0 s",
+   "expected": false,
+   "measured": false,
+   "error_ms": null,
+   "ok": true
+  },
+  {
+   "metric": "agent that stops on 'hmm' is reported as stopping",
+   "expected": true,
+   "measured": true,
+   "error_ms": null,
+   "ok": true
+  },
+  {
+   "metric": "agent that ignores 'hmm' is reported as carrying on",
+   "expected": false,
+   "measured": false,
+   "error_ms": null,
+   "ok": true
+  },
+  {
+   "metric": "silent agent is reported as not responding",
+   "expected": false,
+   "measured": false,
+   "error_ms": null,
+   "ok": true
+  }
+ ]
+}

@@ -1,0 +1,20 @@
+{
+ "scenarios": 30,
+ "invalid": 0,
+ "scenario_set_version": "ea2ee3631ac1",
+ "by_family": {
+  "backchannel": 4,
+  "background_noise": 4,
+  "barge_in": 5,
+  "change_of_mind": 3,
+  "long_silence": 3,
+  "mid_thought_pause": 5,
+  "numbers_details": 6
+ },
+ "by_language": {
+  "en-IN": 10,
+  "hi": 10,
+  "hinglish": 10
+ },
+ "errors": {}
+}
