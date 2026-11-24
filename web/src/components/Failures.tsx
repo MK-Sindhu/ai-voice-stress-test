@@ -3,7 +3,8 @@
 // The list of recorded failures, one agent at a time, optionally one kind of scenario.
 import { useEffect, useMemo, useState } from "react";
 import type { Agent, Failure } from "@/lib/arena";
-import { CallPlayer, Legend } from "./CallPlayer";
+import { CallPlayer } from "./CallPlayer";
+import { WaveKey } from "./Wave";
 
 const STEP = 6;
 
@@ -51,7 +52,7 @@ export function Failures({ failures, agents, families }: {
                   onClick={() => pick(() => setFamily(f.key))}>{f.name}</button>
         ))}
       </div>
-      <Legend />
+      <WaveKey />
       <p className="showing" aria-live="polite">
         Showing {Math.min(limit, shown.length)} of {shown.length} failures for this agent · {failures.length} recorded in all
       </p>
@@ -59,7 +60,7 @@ export function Failures({ failures, agents, families }: {
         {shown.slice(0, limit).map((f) => <FailureCard key={f.id} call={f} families={families} />)}
       </div>
       {shown.length > limit && (
-        <button type="button" className="btn btn-line more" onClick={() => setLimit(limit + STEP)}>
+        <button type="button" className="btn btn-soft more" onClick={() => setLimit(limit + STEP)}>
           Show {Math.min(STEP, shown.length - limit)} more
         </button>
       )}

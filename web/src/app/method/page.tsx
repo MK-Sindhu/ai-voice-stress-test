@@ -34,7 +34,7 @@ export default function MethodPage() {
         ))}
       </div>
       <nav className="next-links" aria-label="Related pages">
-        <Link href="/calibration">The calibration agents&apos; full results <span aria-hidden="true">→</span></Link>
+        <Link href="/calibration">The calibration agents&apos; full results</Link>
       </nav>
 
       <div className="two">

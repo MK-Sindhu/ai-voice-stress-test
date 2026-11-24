@@ -23,8 +23,8 @@ export default function LeaderboardPage() {
         been tested yet: the connections for ElevenLabs, Vapi, Retell and smallest.ai are written but have never been run.
       </p>
       <nav className="next-links" aria-label="Related pages">
-        <Link href="/scenarios">Results scenario by scenario <span aria-hidden="true">→</span></Link>
-        <Link href="/method">What each measurement means <span aria-hidden="true">→</span></Link>
+        <Link href="/scenarios">Results scenario by scenario</Link>
+        <Link href="/method">What each measurement means</Link>
       </nav>
     </div>
   );

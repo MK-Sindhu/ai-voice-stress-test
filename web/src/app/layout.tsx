@@ -1,15 +1,13 @@
 import type { Metadata } from "next";
-import { Hind, JetBrains_Mono, Teko } from "next/font/google";
+import { Poppins } from "next/font/google";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { arena } from "@/lib/arena";
 import "./globals.css";
 
-// Teko and Hind come from the same foundry and both carry Devanagari, so
-// Hindi and English are set in matching letterforms.
-const display = Teko({ variable: "--font-display", subsets: ["latin", "devanagari"], weight: ["400", "500", "600"] });
-const body = Hind({ variable: "--font-body", subsets: ["latin", "devanagari"], weight: ["400", "500", "600"] });
-const mono = JetBrains_Mono({ variable: "--font-mono", subsets: ["latin"], weight: ["400", "500", "700"] });
+// Poppins carries Devanagari as well as Latin, so Hindi and English are set
+// in the same letterforms.
+const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin", "devanagari"], weight: ["400", "500", "600", "700"] });
 
 const { site } = arena;
 const description =
@@ -24,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    <html lang="en" className={poppins.variable}>
       <body>
         <a className="skip" href="#main">Skip to content</a>
         <SiteHeader name={site.name} repo={site.repo_url} />

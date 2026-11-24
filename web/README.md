@@ -22,7 +22,7 @@ npm run lint
 
 | Address | File | What it shows |
 |---|---|---|
-| `/` | `src/app/page.tsx` | Short landing page: headline, a replay of one real call, the standings, and links to the rest |
+| `/` | `src/app/page.tsx` | Short landing page: headline, a replay of one real call between two summary cards, the standings, and links to the rest |
 | `/leaderboard` | `src/app/leaderboard/page.tsx` | Every measurement for every agent |
 | `/scenarios` | `src/app/scenarios/page.tsx` | What the caller does in each kind of scenario, and results scenario by scenario |
 | `/failures` | `src/app/failures/page.tsx` | Every failed call with its recording. `/failures#<agent>--<scenario>` opens one call |
@@ -37,12 +37,13 @@ npm run lint
 | File | What it is |
 |---|---|
 | `src/app/globals.css` | The whole look: colours, type, layout, motion |
-| `src/components/Replay.tsx` | The screen on the landing page that replays one call with captions and a flag |
-| `src/components/CallPlayer.tsx` | A call drawn as two lanes, with playback |
+| `src/components/Replay.tsx` | The card on the landing page that replays one call: waveform, the caller's words, and a flag |
+| `src/components/Wave.tsx` | A call drawn as a waveform: caller above the line, agent below |
+| `src/components/CallPlayer.tsx` | A call's waveform with playback |
 | `src/components/Failures.tsx` | The filterable list of failures |
 | `src/components/Board.tsx` | The standings, the full leaderboard and the scenario table |
 | `src/components/SiteHeader.tsx`, `SiteFooter.tsx`, `PageHead.tsx` | Shared page furniture |
-| `src/lib/arena.ts`, `src/lib/timeline.ts` | Types for `arena.json`; geometry for drawing a call |
+| `src/lib/arena.ts` | Types for `arena.json` |
 
 The site name, its public address, the "Source" link and the contact address come from `site:` in the repository's `params.yaml`.
 

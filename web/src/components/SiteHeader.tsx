@@ -15,7 +15,7 @@ export function SiteHeader({ name, repo }: { name: string; repo: string }) {
             <Link key={p.href} href={p.href} aria-current={pathname.startsWith(p.href) ? "page" : undefined}>{p.label}</Link>
           ))}
         </nav>
-        {repo && <a className="header-source" href={repo}>Source <span aria-hidden="true">↗</span></a>}
+        {repo && <a className="header-source" href={repo}>Source</a>}
       </div>
     </header>
   );
