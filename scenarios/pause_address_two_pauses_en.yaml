@@ -1,0 +1,25 @@
+id: pause_address_two_pauses_en
+family: mid_thought_pause
+language: en-IN
+title: Two pauses while giving an address
+description: The caller dictates a delivery address in three parts with a pause after each of the first two, as people do when reading an address aloud.
+steps:
+- say: Please deliver it to
+  id: first
+- pause: 1.5
+- say: flat 12, Lake View Apartments,
+  id: second
+- pause: 2.0
+- say: Indira Nagar, in Bangalore.
+  id: rest
+- listen:
+    oracle: Got it. I will deliver it to flat 12, Lake View Apartments, Indira Nagar, Bangalore.
+checks:
+- type: no_false_interruption
+- type: mentions
+  reply_to: rest
+  mentions:
+  - - Indiranagar
+    - Indira Nagar
+    - इंदिरानगर
+    - इंदिरा नगर

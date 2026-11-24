@@ -1,0 +1,17 @@
+id: backchannel_mmhmm_en
+family: backchannel
+language: en-IN
+title: Saying mm-hmm while the agent explains
+description: While the agent explains the refund process the caller says a short mm-hmm to show they are listening. The agent should carry on talking.
+steps:
+- say: Can you explain in detail how the refund process works?
+  id: ask
+- wait_agent_speech:
+    for: 2.0
+    oracle: Of course. Let me walk you through it step by step. First, you raise a request from your account page or on this call. Then we verify the details of your order and confirm them with you. After that, our team reviews the request, which usually takes one to two working days. Once it is approved, you get a confirmation message on your phone, and the next steps are shared by email. If anything is unclear at any point, you can call us back and we will help you.
+- say: Mm-hmm.
+  id: filler
+  kind: backchannel
+- listen: {}
+checks:
+- type: backchannel_ignored

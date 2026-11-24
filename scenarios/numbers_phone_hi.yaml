@@ -1,0 +1,15 @@
+id: numbers_phone_hi
+family: numbers_details
+language: hi
+title: हिंदी में मोबाइल नंबर
+description: The caller says a ten-digit mobile number in Hindi, in the usual groups. The agent must read back 9876543210.
+steps:
+- say: मेरा मोबाइल नंबर है नौ आठ सात छह, पाँच चार, तीन दो एक शून्य।
+  id: number
+- listen:
+    oracle: धन्यवाद। आपका मोबाइल नंबर 9 8 7 6 5 4 3 2 1 0 है।
+    wrong: धन्यवाद। आपका मोबाइल नंबर 9 8 7 6 5 4 3 2 0 1 है।
+checks:
+- type: detail
+  reply_to: number
+  digits: '9876543210'

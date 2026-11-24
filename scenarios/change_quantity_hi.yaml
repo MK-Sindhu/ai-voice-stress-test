@@ -1,0 +1,16 @@
+id: change_quantity_hi
+family: change_of_mind
+language: hi
+title: दो किलो, नहीं, पाँच किलो
+description: The caller orders two kilos and immediately changes it to five. The agent must confirm five.
+steps:
+- say: मुझे दो किलो चावल चाहिए। नहीं नहीं, रुकिए, पाँच किलो कर दीजिए।
+  id: request
+- listen:
+    oracle: ठीक है, 5 किलो चावल का ऑर्डर ले लिया है।
+    wrong: ठीक है, 2 किलो चावल का ऑर्डर ले लिया है।
+checks:
+- type: mentions
+  reply_to: request
+  mentions:
+  - - '5'

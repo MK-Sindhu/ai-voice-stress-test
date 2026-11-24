@@ -1,0 +1,15 @@
+id: numbers_order_double_en
+family: numbers_details
+language: en-IN
+title: Order number with a double digit
+description: The caller reads out an order number using 'double nine', the usual Indian way. The agent must read back 47993.
+steps:
+- say: My order number is 4 7 double 9 3.
+  id: number
+- listen:
+    oracle: Thank you. Your order number is 4 7 9 9 3. Let me check that for you.
+    wrong: Thank you. Your order number is 4 7 9 3 3. Let me check that for you.
+checks:
+- type: detail
+  reply_to: number
+  digits: '47993'

@@ -1,0 +1,17 @@
+id: numbers_email_spelled_en
+family: numbers_details
+language: en-IN
+title: Email address spelled out
+description: The caller spells an email address letter by letter. The agent must read it back correctly.
+steps:
+- say: My email is r, a, v, i, dot k, at gmail dot com.
+  id: email
+- listen:
+    oracle: I have your email as r, a, v, i, dot k, at gmail dot com.
+    wrong: I have your email as r, a, j, i, dot k, at gmail dot com.
+checks:
+- type: detail
+  reply_to: email
+  mentions:
+  - - ravi
+  - - gmail

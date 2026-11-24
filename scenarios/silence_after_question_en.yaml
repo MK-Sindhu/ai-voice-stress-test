@@ -1,0 +1,19 @@
+id: silence_after_question_en
+family: long_silence
+language: en-IN
+title: Going quiet after the agent's question
+description: After the agent's first reply the caller says nothing for twelve seconds, as if looking for a document, then comes back. The agent should check in during the silence and still be there afterwards.
+steps:
+- say: Hi, I need help with my internet connection.
+  id: open
+- listen:
+    oracle: Sure, I can help with that. Can you tell me your registered mobile number?
+- silence: 12
+  id: quiet
+- say: Sorry, I was looking for it. Are you still there?
+  id: back
+- listen:
+    oracle: Yes, I am here. Please go ahead.
+checks:
+- type: checks_in
+  during: quiet

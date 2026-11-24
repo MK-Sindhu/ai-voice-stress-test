@@ -1,0 +1,21 @@
+id: pause_long_new_address_hi
+family: mid_thought_pause
+language: hi
+title: नया पता बताने से पहले लंबा विराम
+description: The caller pauses for three seconds, the longest pause in the set, before giving a new address.
+steps:
+- say: मुझे अपना पता बदलना है, नया पता है
+  id: first
+- pause: 3.0
+- say: सेक्टर पंद्रह, नोएडा।
+  id: rest
+- listen:
+    oracle: ठीक है, आपका नया पता सेक्टर 15, नोएडा दर्ज कर लिया है।
+checks:
+- type: no_false_interruption
+- type: mentions
+  reply_to: rest
+  mentions:
+  - - नोएडा
+    - Noida
+    - नोइडा

@@ -1,0 +1,22 @@
+id: noise_street_order_en
+family: background_noise
+language: en-IN
+title: Order number over street noise
+description: The call opens with four seconds of traffic noise and nothing else, then the caller gives an order number over the noise. The agent must stay quiet during the noise and then read back 61205.
+noise:
+  kind: street
+  snr_db: 10
+steps:
+- silence: 4
+  id: lead_in
+- say: Hi, I want to check my order. The number is 6 1 2 0 5.
+  id: number
+- listen:
+    oracle: Your order number is 6 1 2 0 5. It is out for delivery.
+    wrong: Your order number is 6 1 2 5 0. It is out for delivery.
+checks:
+- type: silent_during
+  during: lead_in
+- type: detail
+  reply_to: number
+  digits: '61205'

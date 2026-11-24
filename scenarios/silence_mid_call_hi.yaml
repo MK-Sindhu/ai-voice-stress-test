@@ -1,0 +1,19 @@
+id: silence_mid_call_hi
+family: long_silence
+language: hi
+title: कॉल के बीच में चुप हो जाना
+description: The caller goes silent for twelve seconds after the agent's reply, then asks whether the agent is listening.
+steps:
+- say: नमस्ते, मुझे अपने बिल के बारे में जानकारी चाहिए।
+  id: open
+- listen:
+    oracle: जी ज़रूर। कृपया अपना ग्राहक नंबर बताइए।
+- silence: 12
+  id: quiet
+- say: हेलो? क्या आप सुन रहे हैं?
+  id: back
+- listen:
+    oracle: जी हाँ, मैं सुन रहा हूँ। बताइए।
+checks:
+- type: checks_in
+  during: quiet

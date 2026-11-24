@@ -1,0 +1,21 @@
+id: silence_long_hinglish
+family: long_silence
+language: hinglish
+title: Pandrah second ki chuppi
+description: 'The longest silence in the set: fifteen seconds of nothing after the agent''s reply, then the caller carries on.'
+steps:
+- say: Hello, mujhe apna flight ticket reschedule karna hai.
+  spoken: हेलो, मुझे अपना फ़्लाइट टिकट रीशेड्यूल करना है।
+  id: open
+- listen:
+    oracle: ठीक है, कृपया अपना बुकिंग नंबर बताइए।
+- silence: 15
+  id: quiet
+- say: Haan, ab bataiye, aage kya karna hoga?
+  spoken: हाँ, अब बताइए, आगे क्या करना होगा?
+  id: back
+- listen:
+    oracle: जी, कृपया अपना बुकिंग नंबर बताइए।
+checks:
+- type: checks_in
+  during: quiet

@@ -1,0 +1,23 @@
+id: noise_crowd_refund_hinglish
+family: background_noise
+language: hinglish
+title: Bheed ke shor mein refund maangna
+description: The caller is in a crowded place. The agent must stay quiet during the opening noise and then read back order number 3381.
+noise:
+  kind: crowd
+  snr_db: 10
+steps:
+- silence: 4
+  id: lead_in
+- say: Mujhe apne order ka refund chahiye, order number hai three three eight one.
+  spoken: मुझे अपने ऑर्डर का रिफंड चाहिए, ऑर्डर नंबर है थ्री थ्री एट वन।
+  id: number
+- listen:
+    oracle: आपका ऑर्डर नंबर 3 3 8 1 है। रिफंड शुरू कर दिया है।
+    wrong: आपका ऑर्डर नंबर 3 3 1 8 है। रिफंड शुरू कर दिया है।
+checks:
+- type: silent_during
+  during: lead_in
+- type: detail
+  reply_to: number
+  digits: '3381'

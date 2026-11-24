@@ -1,0 +1,21 @@
+id: pause_table_booking_en
+family: mid_thought_pause
+language: en-IN
+title: Pause while booking a table
+description: The caller stops for two seconds in the middle of a booking request, then finishes it. The agent must wait and not answer the half sentence.
+steps:
+- say: I'd like to book a table for
+  id: first
+- pause: 2.0
+- say: four people on Friday evening.
+  id: rest
+- listen:
+    oracle: Sure, a table for four people on Friday evening. What time would you like?
+checks:
+- type: no_false_interruption
+- type: mentions
+  reply_to: rest
+  mentions:
+  - - Friday
+    - फ्राइडे
+    - शुक्रवार

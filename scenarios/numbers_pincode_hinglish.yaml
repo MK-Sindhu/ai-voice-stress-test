@@ -1,0 +1,16 @@
+id: numbers_pincode_hinglish
+family: numbers_details
+language: hinglish
+title: Pin code English digits mein
+description: A Hinglish caller gives a PIN code with English digit names inside a Hindi sentence. The agent must read back 560038.
+steps:
+- say: Mera pin code hai five six zero, zero three eight.
+  spoken: मेरा पिन कोड है फ़ाइव सिक्स ज़ीरो, ज़ीरो थ्री एट।
+  id: number
+- listen:
+    oracle: आपका पिन कोड 5 6 0 0 3 8 है।
+    wrong: आपका पिन कोड 5 6 0 0 8 3 है।
+checks:
+- type: detail
+  reply_to: number
+  digits: '560038'

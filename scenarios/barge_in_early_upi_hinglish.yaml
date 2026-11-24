@@ -1,0 +1,27 @@
+id: barge_in_early_upi_hinglish
+family: barge_in
+language: hinglish
+title: Jawab shuru hote hi tokna
+description: The caller interrupts only one second into the agent's answer, the earliest barge-in in the set.
+steps:
+- say: Mujhe bill pay karne ke saare tareeke detail mein batao.
+  spoken: मुझे बिल पे करने के सारे तरीके डिटेल में बताओ।
+  id: ask
+- wait_agent_speech:
+    for: 1.0
+    oracle: जी बिल्कुल। मैं आपको पूरी जानकारी एक एक करके देता हूँ। सबसे पहले आपको अपने खाते से या इसी कॉल पर एक अनुरोध दर्ज करना होता है। उसके बाद हम आपके ऑर्डर की जानकारी जाँचते हैं और आपसे उसकी पुष्टि करते हैं। फिर हमारी टीम उस अनुरोध को देखती है, जिसमें आम तौर पर एक से दो दिन लगते हैं। मंज़ूरी मिलने के बाद आपके फ़ोन पर एक संदेश आता है, और आगे की जानकारी ईमेल से भेजी जाती है। अगर कहीं भी कोई दिक्कत हो, तो आप हमें दोबारा कॉल कर सकते हैं।
+- say: Sorry, actually, kya main UPI se pay kar sakti hoon?
+  spoken: सॉरी, एक्चुअली, क्या मैं यू पी आई से पे कर सकती हूँ?
+  id: cut
+  kind: barge_in
+- listen:
+    oracle: जी हाँ, आप यू पी आई से पे कर सकती हैं।
+checks:
+- type: barge_in_stops
+- type: recovery
+  reply_to: cut
+  mentions:
+  - - UPI
+    - यूपीआई
+    - यू पी आई
+    - यूपीआइ

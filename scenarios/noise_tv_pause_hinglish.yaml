@@ -1,0 +1,27 @@
+id: noise_tv_pause_hinglish
+family: background_noise
+language: hinglish
+title: TV ke shor mein beech mein rukna
+description: A television fills the caller's two-second pause with other people's speech. The agent must still wait for the caller to finish.
+noise:
+  kind: tv
+  snr_db: 12
+steps:
+- say: Mujhe apna delivery slot change karna hai,
+  spoken: मुझे अपना डिलीवरी स्लॉट चेंज करना है,
+  id: first
+- pause: 2.0
+- say: kal subah ka kar do.
+  spoken: कल सुबह का कर दो।
+  id: rest
+- listen:
+    oracle: ठीक है, आपकी डिलीवरी कल सुबह के लिए कर दी है।
+checks:
+- type: no_false_interruption
+- type: mentions
+  reply_to: rest
+  mentions:
+  - - कल
+    - tomorrow
+    - सुबह
+    - morning

@@ -1,0 +1,18 @@
+id: change_item_hinglish
+family: change_of_mind
+language: hinglish
+title: Veg burger nahi, paneer wrap
+description: The caller orders one item and switches to another. The agent must confirm the second.
+steps:
+- say: Mujhe ek veg burger order karna hai. Sorry, veg burger nahi, paneer wrap kar do.
+  spoken: मुझे एक वेज बर्गर ऑर्डर करना है। सॉरी, वेज बर्गर नहीं, पनीर रैप कर दो।
+  id: request
+- listen:
+    oracle: ठीक है, एक पनीर रैप का ऑर्डर कन्फर्म है।
+    wrong: ठीक है, एक वेज बर्गर का ऑर्डर कन्फर्म है।
+checks:
+- type: mentions
+  reply_to: request
+  mentions:
+  - - पनीर
+    - paneer

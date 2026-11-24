@@ -1,0 +1,19 @@
+id: numbers_refund_amount_hi
+family: numbers_details
+language: hi
+title: रिफंड की रकम
+description: The caller states two amounts in Hindi number words. The agent must confirm both 2500 and 1500.
+steps:
+- say: मुझे दो हज़ार पाँच सौ रुपये का रिफंड मिलना था, लेकिन सिर्फ़ एक हज़ार पाँच सौ रुपये आए हैं।
+  id: amount
+- listen:
+    oracle: आपको 2500 रुपये मिलने थे और 1500 रुपये आए हैं। बाकी रकम मैं अभी भेज देता हूँ।
+    wrong: आपको 3500 रुपये मिलने थे और 1500 रुपये आए हैं। बाकी रकम मैं अभी भेज देता हूँ।
+checks:
+- type: detail
+  reply_to: amount
+  mentions:
+  - - '2500'
+    - ढाई हज़ार
+  - - '1500'
+    - डेढ़ हज़ार

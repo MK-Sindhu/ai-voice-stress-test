@@ -1,0 +1,23 @@
+id: pause_cancel_order_hi
+family: mid_thought_pause
+language: hi
+title: ऑर्डर कैंसल करते हुए रुकना
+description: The caller pauses for two and a half seconds before saying what they want done with a late order. The agent must wait for the request.
+steps:
+- say: मेरा ऑर्डर अभी तक नहीं आया है, और मैं चाहती हूँ कि
+  id: first
+- pause: 2.5
+- say: आप उसे कैंसल कर दें।
+  id: rest
+- listen:
+    oracle: ठीक है, मैं आपका ऑर्डर कैंसल कर देता हूँ। कृपया अपना ऑर्डर नंबर बताइए।
+checks:
+- type: no_false_interruption
+- type: mentions
+  reply_to: rest
+  mentions:
+  - - कैंसल
+    - रद्द
+    - cancel
+    - कैंसिल
+    - कैन्सल

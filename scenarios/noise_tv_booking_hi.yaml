@@ -1,0 +1,26 @@
+id: noise_tv_booking_hi
+family: background_noise
+language: hi
+title: टीवी की आवाज़ के बीच टेबल बुकिंग
+description: A television is talking in the background. The agent must not answer the television, and must get the day and time of the booking right.
+noise:
+  kind: tv
+  snr_db: 12
+steps:
+- silence: 4
+  id: lead_in
+- say: मुझे शनिवार रात आठ बजे के लिए दो लोगों की टेबल बुक करनी है।
+  id: booking
+- listen:
+    oracle: ठीक है, शनिवार रात 8 बजे दो लोगों के लिए टेबल बुक कर दी है।
+    wrong: ठीक है, रविवार रात 9 बजे दो लोगों के लिए टेबल बुक कर दी है।
+checks:
+- type: silent_during
+  during: lead_in
+- type: detail
+  reply_to: booking
+  mentions:
+  - - शनिवार
+    - Saturday
+    - सैटरडे
+  - - '8'

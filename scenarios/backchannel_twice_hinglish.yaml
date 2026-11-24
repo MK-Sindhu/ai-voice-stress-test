@@ -1,0 +1,26 @@
+id: backchannel_twice_hinglish
+family: backchannel
+language: hinglish
+title: Do baar haan-hoon karna
+description: The caller gives two short acknowledgements, okay and then hmm, during one long answer. The agent should carry on through both.
+steps:
+- say: Mujhe detail mein samjhao ki naya account kaise khulta hai.
+  spoken: मुझे डिटेल में समझाओ कि नया अकाउंट कैसे खुलता है।
+  id: ask
+- wait_agent_speech:
+    for: 1.5
+    oracle: जी बिल्कुल। मैं आपको पूरी जानकारी एक एक करके देता हूँ। सबसे पहले आपको अपने खाते से या इसी कॉल पर एक अनुरोध दर्ज करना होता है। उसके बाद हम आपके ऑर्डर की जानकारी जाँचते हैं और आपसे उसकी पुष्टि करते हैं। फिर हमारी टीम उस अनुरोध को देखती है, जिसमें आम तौर पर एक से दो दिन लगते हैं। मंज़ूरी मिलने के बाद आपके फ़ोन पर एक संदेश आता है, और आगे की जानकारी ईमेल से भेजी जाती है। अगर कहीं भी कोई दिक्कत हो, तो आप हमें दोबारा कॉल कर सकते हैं।
+- say: Okay.
+  spoken: ओके।
+  id: filler_one
+  kind: backchannel
+- wait_agent_speech:
+    for: 2.0
+    oracle: जी बिल्कुल। मैं आपको पूरी जानकारी एक एक करके देता हूँ। सबसे पहले आपको अपने खाते से या इसी कॉल पर एक अनुरोध दर्ज करना होता है। उसके बाद हम आपके ऑर्डर की जानकारी जाँचते हैं और आपसे उसकी पुष्टि करते हैं। फिर हमारी टीम उस अनुरोध को देखती है, जिसमें आम तौर पर एक से दो दिन लगते हैं। मंज़ूरी मिलने के बाद आपके फ़ोन पर एक संदेश आता है, और आगे की जानकारी ईमेल से भेजी जाती है। अगर कहीं भी कोई दिक्कत हो, तो आप हमें दोबारा कॉल कर सकते हैं।
+- say: Hmm.
+  spoken: हम्म।
+  id: filler_two
+  kind: backchannel
+- listen: {}
+checks:
+- type: backchannel_ignored

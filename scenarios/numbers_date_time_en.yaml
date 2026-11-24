@@ -1,0 +1,18 @@
+id: numbers_date_time_en
+family: numbers_details
+language: en-IN
+title: Rescheduling to a date and time
+description: The caller gives a new date and time for an appointment. The agent must confirm the 23rd of March.
+steps:
+- say: I want to reschedule my appointment to the 23rd of March at 4 30 pm.
+  id: date
+- listen:
+    oracle: Done. Your appointment is moved to the 23rd of March at 4 30 pm.
+    wrong: Done. Your appointment is moved to the 26th of March at 4 30 pm.
+checks:
+- type: detail
+  reply_to: date
+  mentions:
+  - - '23'
+  - - March
+    - मार्च

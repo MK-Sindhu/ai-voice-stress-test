@@ -1,0 +1,18 @@
+id: change_day_en
+family: change_of_mind
+language: en-IN
+title: Friday, no, Saturday
+description: The caller asks for Friday and corrects it to Saturday in the same breath. The agent must confirm Saturday.
+steps:
+- say: Book a table for two on Friday at 8 pm. No, actually, make it Saturday.
+  id: request
+- listen:
+    oracle: Done. A table for two on Saturday at 8 pm.
+    wrong: Done. A table for two on Friday at 8 pm.
+checks:
+- type: mentions
+  reply_to: request
+  mentions:
+  - - Saturday
+    - शनिवार
+    - सैटरडे
