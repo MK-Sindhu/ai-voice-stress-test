@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { Agent, Cell, Column, Scenario } from "@/lib/arena";
 
 // One row per agent: the headline score, then every other measurement as a tile.
@@ -46,9 +47,45 @@ export function Leaderboard({ agents, columns, ranked = true }: { agents: Agent[
   );
 }
 
-export function Matrix({ agents, scenarios, matrix, families, link = true }: {
+// A compact ranking for the home page: position, name and the few numbers that matter most.
+const KEY_STATS = [
+  { key: "response_delay_ms", title: "Response delay" },
+  { key: "false_interruptions", title: "Talked over a pause" },
+  { key: "backchannel_ignored", title: "Kept talking through 'hmm'" },
+  { key: "detail_accuracy", title: "Details right" },
+];
+
+export function Standings({ agents }: { agents: Agent[] }) {
+  return (
+    <div className="table-scroll standings-scroll">
+      <table className="standings">
+        <thead>
+          <tr><th>Pos</th><th>Agent</th><th>Scenarios passed</th>{KEY_STATS.map((s) => <th key={s.key}>{s.title}</th>)}</tr>
+        </thead>
+        <tbody>
+          {agents.map((agent, i) => {
+            const score = agent.metrics.task_completion;
+            return (
+              <tr key={agent.id}>
+                <td className="pos">{i + 1}</td>
+                <th scope="row">{agent.label}<span className="meta">{agent.calls} calls</span></th>
+                <td className="passed">
+                  <b>{score.value}</b>
+                  {score.share !== null && <span className="meter meter-big"><i style={{ width: `${score.share * 100}%` }} /></span>}
+                </td>
+                {KEY_STATS.map((s) => <td key={s.key}>{agent.metrics[s.key].value.split(" / ")[0]}</td>)}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+export function Matrix({ agents, scenarios, matrix, families, linkTo = "/failures" }: {
   agents: Agent[]; scenarios: Scenario[]; matrix: Record<string, Record<string, Cell>>;
-  families: { key: string; name: string }[]; link?: boolean;
+  families: { key: string; name: string }[]; linkTo?: string | null;
 }) {
   return (
     <div className="table-scroll">
@@ -72,7 +109,7 @@ export function Matrix({ agents, scenarios, matrix, families, link = true }: {
                     const text = `${cell.passed}/${cell.total}${cell.untestable && !cell.passed ? " untestable" : ""}`;
                     return (
                       <td key={a.id} className={`m-${cell.kind}`}>
-                        {cell.kind === "pass" || !link ? <span>{text}</span> : <a href={`#${a.id}--${s.id}`}>{text}</a>}
+                        {cell.kind === "pass" || linkTo === null ? <span>{text}</span> : <Link href={`${linkTo}#${a.id}--${s.id}`}>{text}</Link>}
                       </td>
                     );
                   })}

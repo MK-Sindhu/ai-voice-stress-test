@@ -4,15 +4,13 @@
 // play button. A line moves across the drawing as the recording plays.
 import { useEffect, useRef, useState } from "react";
 import type { Failure } from "@/lib/arena";
+import { L, LANE, W, clock, scale, ticks as tickMarks } from "@/lib/timeline";
 
-const W = 1000, L = 74, R = 10, LANE = W - L - R;
 let current: HTMLAudioElement | null = null;   // only one recording plays at a time
 
-const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
-
-export function CallPlayer({ call, animate = false }: { call: Failure; animate?: boolean }) {
+export function CallPlayer({ call }: { call: Failure }) {
   const duration = Math.max(call.duration, 1);
-  const x = (t: number) => L + (t / duration) * LANE;
+  const x = scale(duration);
   const audio = useRef<HTMLAudioElement | null>(null);
   const frame = useRef(0);
   const [playing, setPlaying] = useState(false);
@@ -52,8 +50,7 @@ export function CallPlayer({ call, animate = false }: { call: Failure; animate?:
     play();
   };
 
-  const step = duration <= 60 ? 5 : 10;
-  const ticks = Array.from({ length: Math.floor(duration / step) + 1 }, (_, i) => i * step);
+  const ticks = tickMarks(duration);
   // The same label twice close together is drawn once.
   const labelled: { at: number; label: string }[] = [];
   const marks = call.marks.map((m) => {
@@ -63,18 +60,14 @@ export function CallPlayer({ call, animate = false }: { call: Failure; animate?:
   });
 
   return (
-    <div className={`call${playing ? " is-playing" : ""}${animate ? " call-animate" : ""}`}>
+    <div className={`call${playing ? " is-playing" : ""}`}>
       <div className="lanes">
         <svg viewBox={`0 0 ${W} 126`} role="img" aria-label="Timeline of the call" onClick={seek}
              className={call.audio ? "seekable" : undefined}>
-          <defs>
-            <linearGradient id="g-caller" x1="0" x2="1"><stop offset="0" stopColor="#b9c0ff" /><stop offset="1" stopColor="#8a96ff" /></linearGradient>
-            <linearGradient id="g-agent" x1="0" x2="1"><stop offset="0" stopColor="#ffc45c" /><stop offset="1" stopColor="#f08a2b" /></linearGradient>
-          </defs>
           <text className="t-label" x="0" y="48">CALLER</text>
           <text className="t-label" x="0" y="86">AGENT</text>
-          <rect className="t-track" x={L} y="30" width={LANE} height="26" rx="8" />
-          <rect className="t-track" x={L} y="68" width={LANE} height="26" rx="8" />
+          <rect className="t-track" x={L} y="30" width={LANE} height="26" />
+          <rect className="t-track" x={L} y="68" width={LANE} height="26" />
           {ticks.map((t) => (
             <g key={t}>
               <line className="t-axis" x1={x(t)} y1="100" x2={x(t)} y2="105" />
@@ -82,8 +75,8 @@ export function CallPlayer({ call, animate = false }: { call: Failure; animate?:
             </g>
           ))}
           {call.spans.map((s, i) => (
-            <rect key={i} className={`t-span t-${s.lane === 1 ? "agent" : s.kind}`} style={{ ["--i" as string]: i }}
-                  x={x(s.start)} y={s.lane === 1 ? 68 : 30} width={Math.max(x(s.end) - x(s.start), 3)} height="26" rx="8">
+            <rect key={i} className={`t-span t-${s.lane === 1 ? "agent" : s.kind}`}
+                  x={x(s.start)} y={s.lane === 1 ? 68 : 30} width={Math.max(x(s.end) - x(s.start), 3)} height="26">
               <title>{s.title}</title>
             </rect>
           ))}

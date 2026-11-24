@@ -415,7 +415,7 @@ FAVICON = ("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect wi
 
 
 def site_settings(params: dict) -> dict:
-    return {"name": "Arena", "repo_url": "", "contact_email": "", **(params.get("site") or {})}
+    return {"name": "Arena", "url": "", "repo_url": "", "contact_email": "", **(params.get("site") or {})}
 
 
 def page(title: str, body: str, params: dict | None = None, nav: list[tuple[str, str]] | None = None,

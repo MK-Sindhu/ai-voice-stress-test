@@ -186,13 +186,13 @@ A run against a live agent is not perfectly repeatable: the language model's wor
 
 ## The website
 
-The site is a Next.js app in [web/](web/). It contains no numbers of its own: `arena report` writes the results to `web/src/content/arena.json` and the failure recordings to `web/public/audio/`, and the site renders those. It has the leaderboard, results by scenario, every failure with a playable recording drawn as a timeline, and a calibration page.
+The site is a Next.js app in [web/](web/). It contains no numbers of its own: `arena report` writes the results to `web/src/content/arena.json` and the failure recordings to `web/public/audio/`, and the site renders those. It has a short landing page and separate pages for the leaderboard, the scenarios, every failure with a playable recording drawn as a timeline, the method, and the calibration agents.
 
 ```
 cd web && npm install && npm run dev
 ```
 
-To deploy on Vercel, import the repository and set the Root Directory to `web`. The site name, the "Source" link and an optional contact address are set under `site:` in [params.yaml](params.yaml). See [web/README.md](web/README.md).
+To deploy on Vercel, import the repository and set the Root Directory to `web`. The site name, its public address (`url`, used for the sitemap and link previews), the "Source" link and an optional contact address are set under `site:` in [params.yaml](params.yaml). See [web/README.md](web/README.md).
 
 `arena report` also still writes a plain-HTML copy of the same results to [docs/](docs/), which needs no build and opens straight from disk. The worker's per-job results page uses that same HTML.
 

@@ -140,5 +140,6 @@ agents:
 # The generated website (docs/).
 site:
   name: Arena             # the name shown in the header and the page title
+  url: ""                 # the public address, e.g. https://arena.example.com; used for the sitemap and link previews
   repo_url: https://github.com/MK-Sindhu/ai-voice-stress-test   # the "Source" button; empty hides it
   contact_email: ""       # if set, the closing section gets an "Ask about testing your agent" button

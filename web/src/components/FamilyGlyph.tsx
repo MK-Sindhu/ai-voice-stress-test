@@ -17,13 +17,13 @@ export function FamilyGlyph({ family }: { family: string }) {
   if (!glyph) return null;
   return (
     <svg className="glyph" viewBox="0 0 200 44" aria-hidden="true">
-      <rect className="g-track" x="0" y="4" width="200" height="14" rx="5" />
-      <rect className="g-track" x="0" y="26" width="200" height="14" rx="5" />
+      <rect className="g-track" x="0" y="4" width="200" height="14" />
+      <rect className="g-track" x="0" y="26" width="200" height="14" />
       {glyph.noise && Array.from({ length: 40 }, (_, i) => 3 + i * 5).map((x) => (
         <line key={x} className="g-noise" x1={x} y1={7 + ((x * 7) % 5)} x2={x} y2={15 - ((x * 3) % 4)} />
       ))}
       {glyph.bars.map(([cls, x, w, lane], i) => (
-        <rect key={i} className={`g-${cls}`} x={x} y={lane === 0 ? 4 : 26} width={w} height="14" rx="5" />
+        <rect key={i} className={`g-${cls}`} x={x} y={lane === 0 ? 4 : 26} width={w} height="14" />
       ))}
       {glyph.mark !== undefined && <line className="g-mark" x1={glyph.mark} y1="0" x2={glyph.mark} y2="44" />}
     </svg>

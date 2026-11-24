@@ -59,7 +59,7 @@ export function Failures({ failures, agents, families }: {
         {shown.slice(0, limit).map((f) => <FailureCard key={f.id} call={f} families={families} />)}
       </div>
       {shown.length > limit && (
-        <button type="button" className="btn btn-glass more" onClick={() => setLimit(limit + STEP)}>
+        <button type="button" className="btn btn-line more" onClick={() => setLimit(limit + STEP)}>
           Show {Math.min(STEP, shown.length - limit)} more
         </button>
       )}

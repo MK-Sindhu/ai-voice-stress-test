@@ -22,7 +22,7 @@ export type Column = { key: string; title: string; better: "higher" | "lower" };
 export type Group = { agents: Agent[]; matrix: Record<string, Record<string, Cell>>; failures: Failure[] };
 
 export type Arena = Group & {
-  site: { name: string; repo_url: string; contact_email: string };
+  site: { name: string; url: string; repo_url: string; contact_email: string };
   stamp: { scenarioSet: string; code: string; callsPlaced: string };
   facts: { scenarios: number; languages: number; calls: number; failures: number };
   columns: Column[];
