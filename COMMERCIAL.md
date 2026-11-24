@@ -50,6 +50,9 @@ uv run arena score --agent <name>
 uv run arena report
 ```
 
+To have `dvc repro` run the platform and rebuild the site along with everything else, also add `<name>` to the
+`pipeline_agents` list at the top of `params.yaml`. The report only ever shows agents that have a scored run.
+
 After the first run, listen to two or three recordings and open a timeline: the adapter's notes are saved under
 `agent_events` (connection details, the platform's transcripts, interruptions). If the agent channel is silent,
 garbled or plays at the wrong speed, the adapter needs fixing before any number means anything.
