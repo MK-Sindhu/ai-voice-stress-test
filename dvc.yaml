@@ -1,0 +1,129 @@
+# The pipeline. Each stage lists its command, what it depends on (deps, params)
+# and what it produces (outs). `dvc repro` runs a stage only if one of its
+# dependencies changed since the last run.
+
+stages:
+  validate_scenarios:
+    cmd: arena validate
+    deps:
+      - scenarios
+      - src/arena/scenario.py
+      - src/arena/schema/scenario.schema.json
+    metrics:
+      - results/validation.json:
+          cache: false
+
+  check_metrics:
+    cmd: arena check-metrics
+    deps:
+      - src/arena/validation.py
+      - src/arena/metrics.py
+      - src/arena/audio.py
+      - src/arena/caller.py
+      - src/arena/engine.py
+      - src/arena/agents/fake.py
+    params:
+      - metrics
+      - tolerance
+    metrics:
+      - results/metric_validation.json:
+          cache: false
+
+  noise:
+    cmd: arena noise
+    deps:
+      - src/arena/noise.py
+    params:
+      - noise
+    outs:
+      - data/noise
+
+  render:
+    cmd: arena render
+    deps:
+      - results/validation.json
+      - scenarios
+      - src/arena/voices.py
+    params:
+      - caller.voice
+      - agent_voice
+      - checkin_text
+    outs:
+      # Each line is a file named by a hash of its text and voice settings.
+      # `persist` keeps the folder between runs, so editing one scenario
+      # renders only the lines that changed.
+      - data/caller_audio:
+          persist: true
+      - data/agent_audio:
+          persist: true
+    metrics:
+      - results/render.json:
+          cache: false
+
+  check_audio:
+    cmd: arena check-audio
+    deps:
+      - data/caller_audio
+      - results/render.json
+      - src/arena/content.py
+      - src/arena/transcribe.py
+    params:
+      - intelligibility
+    metrics:
+      - results/intelligibility.json:
+          cache: false
+
+  run:
+    foreach: ${pipeline_agents}
+    do:
+      cmd: arena run --agent ${item}
+      deps:
+        - results/intelligibility.json
+        - results/metric_validation.json
+        - scenarios
+        - data/caller_audio
+        - data/agent_audio
+        - data/noise
+        - prompts
+        - src/arena/caller.py
+        - src/arena/engine.py
+        - src/arena/runner.py
+        - src/arena/agents/base.py
+        - src/arena/agents/fake.py
+        - src/arena/agents/local.py
+      params:
+        - caller
+        - agents.${item}
+      outs:
+        - results/runs/${item}
+
+  score:
+    foreach: ${pipeline_agents}
+    do:
+      cmd: arena score --agent ${item}
+      deps:
+        - results/runs/${item}
+        - scenarios
+        - src/arena/metrics.py
+        - src/arena/content.py
+        - src/arena/score.py
+        - src/arena/transcribe.py
+      params:
+        - metrics
+      metrics:
+        - results/scores/${item}.json:
+            cache: false
+
+  report:
+    cmd: arena report
+    deps:
+      - results/scores
+      - results/runs
+      - scenarios
+      - src/arena/report.py
+    outs:
+      - docs:
+          cache: false
+    metrics:
+      - results/leaderboard.json:
+          cache: false

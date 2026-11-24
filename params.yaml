@@ -1,6 +1,18 @@
 # Every setting lives here. The code reads this file; nothing is hard-coded.
 # DVC watches it, so changing a value re-runs only the stages that use it.
 
+# Which agents the pipeline runs and puts in the report. Commercial platforms
+# are added here once their adapter has been run with the owner's keys.
+pipeline_agents:
+  - fake-delay-500
+  - fake-delay-1000-never-stops
+  - oracle
+  - oracle-wrong
+  - local-silence-500
+  - local-silence-1000
+  - local-detector
+  - local-turbo-1000
+
 caller:
   voice:
     engine: kokoro        # open text-to-speech model, runs locally
@@ -30,10 +42,10 @@ metrics:
     min_speech_ms: 60     # shorter sounds are clicks, not speech
     merge_gap_ms: 500     # sound separated by less than this is one stretch of speech
   barge_in:
-    stop_silence_ms: 400  # the agent has stopped once it is quiet for this long
+    stop_silence_ms: 700  # the agent has stopped once it is quiet for this long (speech has pauses of up to ~500 ms)
     max_stop_ms: 1500     # stopping later than this counts as not stopping
   backchannel:
-    stop_silence_ms: 400  # going quiet this long after a "hmm" counts as wrongly stopping
+    stop_silence_ms: 700  # going quiet this long after a "hmm" counts as wrongly stopping
     window_after_ms: 1000 # ... if it begins within this long of the "hmm" ending
   transcriber:
     model: large-v3-turbo # speech recogniser used to read the agent's replies
@@ -94,13 +106,15 @@ agents:
     variant: wrong
 
   # --- local baseline agents: real leaderboard entries -------------------------
+  # All four share one pipeline (Silero VAD, faster-whisper, Ollama, Kokoro) and
+  # differ only in how they decide the caller has finished, or in the recogniser.
   local-silence-500: &local
     type: local
     label: "Local baseline, 500 ms silence timeout"
     repeats: 2
     endpointing: {type: silence, timeout_ms: 500}
     asr: {model: small, device: auto, compute_type: default, beam_size: 1}
-    llm: {model: "gemma3:4b", temperature: 0.0, max_tokens: 160}
+    llm: {model: "llama3.2:3b", temperature: 0.0, max_tokens: 160}
     voice: {voice: hm_omega, english_accent: b}
     interrupt_min_ms: 250     # caller speech this long stops the agent
     idle_checkin_s: 6         # asks "are you there?" after this much silence
@@ -108,3 +122,17 @@ agents:
     <<: *local
     label: "Local baseline, 1000 ms silence timeout"
     endpointing: {type: silence, timeout_ms: 1000}
+  local-detector:
+    <<: *local
+    label: "Local baseline, end-of-turn detector (Hindi audio model, threshold 0.9)"
+    endpointing:
+      type: detector
+      repo: ../End-of-turn-detector   # the sibling project; its model is loaded from there
+      threshold: 0.9                  # reply at once if P(turn complete) is at least this
+      ask_after_ms: 200               # ask the model after this much quiet
+      fallback_ms: 1500               # reply anyway after this much quiet
+  local-turbo-1000:
+    <<: *local
+    label: "Local baseline, 1000 ms silence timeout, larger recogniser"
+    endpointing: {type: silence, timeout_ms: 1000}
+    asr: {model: large-v3-turbo, device: auto, compute_type: default, beam_size: 1}
