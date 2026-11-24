@@ -12,12 +12,26 @@ from arena.audio import to_float
 LANGUAGES = ("hi", "en")  # the arena only deals with Hindi and English
 
 
+def pick_device(device: str = "auto") -> str:
+    """"auto" means the Apple GPU when this build supports it, otherwise
+    whatever faster-whisper would choose itself (CUDA or CPU)."""
+    if device != "auto":
+        return device
+    try:
+        import ctranslate2
+
+        ctranslate2.get_supported_compute_types("mps")
+        return "mps"
+    except Exception:
+        return "auto"
+
+
 class Transcriber:
     def __init__(self, model: str = "large-v3-turbo", device: str = "auto", compute_type: str = "default"):
         from faster_whisper import WhisperModel
 
         self.model_name = model
-        self.model = WhisperModel(model, device=device, compute_type=compute_type)
+        self.model = WhisperModel(model, device=pick_device(device), compute_type=compute_type)
 
     def detect_language(self, audio: np.ndarray) -> tuple[str, float]:
         """Hindi or English, whichever the model finds more likely."""

@@ -32,11 +32,17 @@ import numpy as np
 from arena.agents.base import Agent
 from arena.audio import FRAME, SR, to_float
 from arena.config import REPO_ROOT
+from arena.transcribe import pick_device
 from arena.voices import KokoroVoice
 
 VAD_WINDOW = 512  # samples per voice-activity decision (32 ms), fixed by Silero
 VAD_MS = VAD_WINDOW * 1000 / SR
 SENTENCE_END = re.compile(r"(?<=[.!?।])\s+|\n+")
+CLAUSE_END = re.compile(r"(?<=[,;:])\s+")
+LANGUAGE_RULE = {
+    "en": "The caller is speaking English. Reply only in English.",
+    "hi": "The caller is speaking Hindi or Hinglish. Reply only in Hindi, written in Devanagari script.",
+}
 LANGUAGE_NAMES = {"hi": "hinglish", "en": "en-IN"}  # recogniser language -> voice language
 
 
@@ -128,7 +134,7 @@ class LocalAgent(Agent):
         self.torch = torch
         self.vad = load_silero_vad(onnx=True)
         self.asr_config = asr
-        self.whisper = WhisperModel(asr["model"], device=asr.get("device", "auto"),
+        self.whisper = WhisperModel(asr["model"], device=pick_device(asr.get("device", "auto")),
                                     compute_type=asr.get("compute_type", "default"))
         self.llm = llm
         self.http = httpx.Client(timeout=60)
@@ -284,6 +290,8 @@ class LocalAgent(Agent):
     def _start_recognising(self) -> None:
         """Begin speech recognition early, while still waiting to be sure the
         caller has finished. If they carry on, the result is thrown away."""
+        if self._utt_start is None:
+            self._utt_start = max(0, len(self._audio) - 8 * SR)
         job = {"kind": "asr", "audio": self._audio[self._utt_start :].copy(),
                "cancel": self._cancel, "done": threading.Event(), "text": None}
         self._asr_job = job
@@ -366,20 +374,24 @@ class LocalAgent(Agent):
             return
         if self._language is None:
             self._language = asr["language"]
-        messages = [{"role": "system", "content": self.system_prompt}, *self._history,
+        system = f"{self.system_prompt}\n{LANGUAGE_RULE[self._language]}"
+        messages = [{"role": "system", "content": system}, *self._history,
                     {"role": "user", "content": text}]
         spoken: list[str] = []
         t0 = time.perf_counter()
 
         def on_sentence(sentence: str) -> None:
-            if not spoken:
+            first = not spoken
+            if first:
                 self._note("first_sentence_ready", llm_ms=round((time.perf_counter() - t0) * 1000))
-                # From here the caller's turn is answered: start a fresh utterance.
+            self._say(sentence, cancel)  # raises Cancelled if the caller spoke first
+            if first:
+                # Audio is now playing, so the caller's turn counts as answered:
+                # remember the exchange and start a fresh utterance.
                 self._history.append({"role": "user", "content": text})
                 self._history.append({"role": "assistant", "content": ""})
                 self._utt_start = None
                 self._asr_job = None
-            self._say(sentence, cancel)
             spoken.append(sentence)
             self._history[-1]["content"] = " ".join(spoken)
 
@@ -416,6 +428,10 @@ class LocalAgent(Agent):
                     continue
                 buffer += json.loads(line).get("message", {}).get("content", "")
                 parts = SENTENCE_END.split(buffer)
+                if len(parts) == 1 and len(buffer) > 60:
+                    # A long sentence: start speaking at the first comma
+                    # rather than waiting for the full stop.
+                    parts = CLAUSE_END.split(buffer, maxsplit=1)
                 for sentence in parts[:-1]:
                     if sentence.strip():
                         on_sentence(sentence.strip())

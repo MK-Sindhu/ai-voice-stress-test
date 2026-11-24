@@ -44,6 +44,18 @@ def git_commit() -> str:
         return "unknown"
 
 
+def detector_commit(config: dict) -> str | None:
+    """Which version of the sibling detector project an agent used, if any."""
+    repo = config.get("endpointing", {}).get("repo")
+    if not repo:
+        return None
+    try:
+        return subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=REPO_ROOT / repo,
+                              capture_output=True, text=True, check=True).stdout.strip()
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return "unknown"
+
+
 def caller_clips(scenario: dict, voice) -> dict[int, np.ndarray]:
     """Audio for every say step, keyed by step index."""
     return {
@@ -121,6 +133,7 @@ def run_agent(
         "scenarios": [s["id"] for s in scenarios],
         "scenario_set_version": scenario_set_version(scenarios),
         "git_commit": git_commit(),
+        "detector_commit": detector_commit(config),
         "started_at": started,
         "finished_at": datetime.now(UTC).isoformat(timespec="seconds"),
     }
